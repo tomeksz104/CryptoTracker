@@ -1,0 +1,23 @@
+.table-paginate li:not(.previous, .next) {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.table-paginate li:not(.previous, .next) a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-paginate li:hover:not(.previous, .next, .selected) {
+  background-color: rgb(237 237 237);
+}
+
+.table-paginate li.selected {
+  background-color: rgb(59 130 246);
+  color: white;
+}

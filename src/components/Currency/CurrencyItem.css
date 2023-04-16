@@ -1,0 +1,31 @@
+.anim-up-entering {
+  background: rgba(0, 128, 0, 0.1);
+}
+
+.anim-up-entered {
+  background: rgba(0, 128, 0, 0);
+}
+
+.anim-up-exiting {
+  background: rgba(0, 128, 0, 0.1);
+}
+
+.anim-up-exited {
+  background: rgba(0, 128, 0, 0);
+}
+
+.anim-down-entering {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.anim-down-entered {
+  background: rgba(255, 0, 0, 0);
+}
+
+.anim-down-exiting {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.anim-down-exited {
+  background: rgba(255, 0, 0, 0);
+}
