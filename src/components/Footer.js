@@ -1,3 +1,5 @@
+import logo from "../assets/logo.jpg";
+
 const Footer = () => {
   return (
     <footer className="relative z-10 bg-white pt-20 pb-10 lg:pt-[120px] lg:pb-20">
@@ -5,19 +7,16 @@ const Footer = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
             <div className="mb-10 w-full">
-              <a
-                href="javascript:void(0)"
-                className="mb-6 inline-block max-w-[160px]"
-              >
+              <a href="#" className="mb-6 inline-block">
                 <img
-                  src="https://cdn.tailgrids.com/2.0/image/assets/images/logo/logo.svg"
-                  alt="logo"
-                  className="max-w-full"
+                  className="h-10 object-cover"
+                  src={logo}
+                  alt="Crypto Currency App Logo"
                 />
               </a>
               <p className="text-body-color mb-7 text-base">
-                Sed ut perspiciatis undmnis is iste natus error sit amet
-                voluptatem totam rem aperiam.
+                What are the current cryptocurrency prices? Access all your
+                favorite live crypto charts, quotes, and market caps!
               </p>
               <p className="text-dark flex items-center text-sm font-medium">
                 <span className="text-blue-500 mr-3">
@@ -216,7 +215,9 @@ const Footer = () => {
                   </svg>
                 </a>
               </div>
-              <p className="text-body-color text-base">&copy; 2023 TailGrids</p>
+              <p className="text-body-color text-base">
+                &copy; 2023 CryptoPriceApp
+              </p>
             </div>
           </div>
         </div>

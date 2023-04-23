@@ -8,7 +8,11 @@ const MainNavigation = () => {
       <div className="flex items-center">
         <a className="mr-5 cursor-pointer">
           <h3 className="text-2xl font-medium text-blue-500">
-            <img className="h-12 object-cover" src={logo} alt="Store Logo" />
+            <img
+              className="h-10 object-cover"
+              src={logo}
+              alt="Crypto Currency App Logo"
+            />
           </h3>
         </a>
 
