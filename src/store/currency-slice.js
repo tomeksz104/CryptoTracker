@@ -9,11 +9,33 @@ const currencySlice = createSlice({
     pageNumber: 0,
     perPage: 100,
     totalPages: 0,
+    sortField: "",
+    sortOrder: "asc",
   },
   reducers: {
     replaceCurrencyList(state, action) {
       state.items = action.payload.items;
-      state.filteredCurrencies = action.payload.items;
+
+      if (state.filteredCurrencies.length > 0) {
+        const filteredIds = state.filteredCurrencies.map(
+          (currency) => currency.id
+        );
+        const filteredItems = state.items.filter((currency) =>
+          filteredIds.includes(currency.id)
+        );
+
+        state.filteredCurrencies = filteredItems;
+
+        const filteredItemsLength = filteredItems.length;
+
+        state.totalItems = filteredItemsLength;
+
+        state.totalPages = filteredItems
+          ? Math.ceil(filteredItemsLength / state.perPage)
+          : 0;
+
+        return;
+      }
 
       state.totalItems = action.payload.items.length;
 
@@ -47,6 +69,56 @@ const currencySlice = createSlice({
         ? Math.ceil(filteredCurrencies.length / state.perPage)
         : 0;
     },
+    sortCurrencies: (state, action) => {
+      const sortField = action.payload;
+      const sortOrder = state.sortOrder === "asc" ? "desc" : "asc"; // zmiana kierunku sortowania
+
+      const sortedCurrencies = [...state.filteredCurrencies].sort((a, b) => {
+        let fieldA = a[sortField].replace(/[$%"',[\]\s]/g, "");
+        let fieldB = b[sortField].replace(/[$%"',[\]\s]/g, "");
+        if (typeof fieldA === "string") {
+          fieldA = fieldA.toLowerCase();
+          fieldB = fieldB.toLowerCase();
+        }
+
+        if (!isNaN(fieldA) && !isNaN(fieldB)) {
+          fieldA = Number(fieldA);
+          fieldB = Number(fieldB);
+        }
+
+        if (fieldA < fieldB) {
+          return sortOrder === "asc" ? -1 : 1;
+        }
+        if (fieldA > fieldB) {
+          return sortOrder === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+
+      state.sortField = sortField;
+      state.sortOrder = sortOrder;
+      state.filteredCurrencies = sortedCurrencies;
+    },
+    // sortCurrencies: (state, action) => {
+    //   const sortField = action.payload.field;
+
+    //   const sortedCurrencies = state.filteredCurrencies;
+
+    //   sortedCurrencies.sort(function (a, b) {
+    //     const nameA = a.name.toLowerCase(),
+    //       nameB = b.name.toLowerCase();
+    //     if (nameA < nameB) {
+    //       return -1;
+    //     }
+    //     if (nameB > nameB) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   });
+
+    //   state.sortField = sortField
+    //   state.filteredCurrencies = sortedCurrencies;
+    // },
   },
 });
 

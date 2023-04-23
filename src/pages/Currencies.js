@@ -4,12 +4,14 @@ import CurrencyList from "../components/Currency/CurrencyList";
 import store from "../store";
 import Pagination from "../components/Currency/Pagination";
 import Filters from "../components/Currency/Filters";
+import Header from "../components/Currency/Header";
 
 function CurrenciesPage() {
   return (
     <Provider store={store}>
       <div className="container mx-auto not-prose">
-        <div className="relative rounded-xl shadow-sm overflow-visible">
+        <div className="relative shadow-sm overflow-visible">
+          <Header />
           <Filters />
           <CurrencyList />
           <Pagination />

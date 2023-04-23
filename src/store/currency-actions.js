@@ -15,15 +15,15 @@ export const fetchCurrencyData = () => {
       const { data } = await response.json();
 
       const currencyPromises = data.map(async (item) => {
-        const formattedPrice = formatCurrency(
-          item.priceUsd,
-          "USD",
-          "en",
-          false,
-          {
+        let formattedPrice;
+        if (item.priceUsd < 1) {
+          formattedPrice = Number.parseFloat(item.priceUsd).toFixed(8);
+        } else {
+          formattedPrice = formatCurrency(item.priceUsd, "USD", "en", false, {
             decimalPlaces: 2,
-          }
-        );
+          });
+        }
+
         const formattedMarketCap = formatCurrency(
           item.marketCapUsd,
           "USD",
@@ -36,13 +36,14 @@ export const fetchCurrencyData = () => {
           "en",
           false
         );
+        const changePercent24Hr = parseFloat(item.changePercent24Hr).toFixed(2);
         return {
           id: item.id,
           rank: item.rank,
           name: item.name,
           symbol: item.symbol,
           priceUsd: formattedPrice,
-          changePercent24Hr: parseFloat(item.changePercent24Hr).toFixed(2),
+          changePercent24Hr: changePercent24Hr,
           marketCapUsd: formattedMarketCap,
           volumeUsd24Hr: formattedVolume,
         };
@@ -66,7 +67,7 @@ export const fetchCurrencyData = () => {
       //   uiActions.showNotification({
       //     status: "error",
       //     title: "Error!",
-      //     message: "Fetching cart data failed!",
+      //     message: "Fetching data failed!",
       //   })
       // );
     }

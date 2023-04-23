@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { currencyActions } from "../../store/currency-slice";
 import PerPageSelect from "../UI/PerPageSelect";

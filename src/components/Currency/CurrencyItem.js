@@ -56,6 +56,16 @@ const CurrencyItem = React.memo((props) => {
     }, DURATION);
   };
 
+  const getChangePercentIcon = (changePercent24Hr) => {
+    if (isNaN(changePercent24Hr)) {
+      return "-";
+    } else if (changePercent24Hr > 0) {
+      return <CaretUp className="fill-green-500 w-4 h-4" />;
+    } else {
+      return <CaretDown className="fill-red-500 w-4 h-4" />;
+    }
+  };
+
   return (
     <Fragment>
       <Transition in={show} timeout={DURATION}>
@@ -93,12 +103,9 @@ const CurrencyItem = React.memo((props) => {
             >
               {" "}
               <div className="flex items-center">
-                {props.changePercent24Hr > 0 ? (
-                  <CaretUp className="fill-green-500 w-4 h-4" />
-                ) : (
-                  <CaretDown className="fill-red-500 w-4 h-4" />
-                )}
-                {props.changePercent24Hr}%
+                {getChangePercentIcon(props.changePercent24Hr)}
+                {!isNaN(props.changePercent24Hr) &&
+                  props.changePercent24Hr + "%"}
               </div>
             </td>
             <td className="border-b border-slate-200 dark:border-slate-600 p-4 pr-8 text-slate-500 dark:text-slate-400">

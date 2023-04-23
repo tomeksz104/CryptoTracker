@@ -20,7 +20,7 @@ const PerPageSelect = (props) => {
 
   return (
     <div className={props.classes}>
-      Pokaż wierszy
+      Show rows
       <Tippy
         content={
           <ul className="font-semibold space-y-3">

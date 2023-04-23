@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
 import currencySlice from "./currency-slice";
 
 const store = configureStore({
