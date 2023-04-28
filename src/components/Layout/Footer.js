@@ -250,7 +250,7 @@ const Footer = () => {
                 y2="1.22829e-05"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#3056D3" stopOpacity="0.08" />
+                <stop stopColor="#0ea5e9" stopOpacity="0.08" />
                 <stop offset="1" stopColor="#C4C4C4" stopOpacity="0" />
               </linearGradient>
             </defs>
@@ -277,7 +277,7 @@ const Footer = () => {
                 y2="37.5"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#13C296" stopOpacity="0.31" />
+                <stop stopColor="#0ea5e9" stopOpacity="0.31" />
                 <stop offset="1" stopColor="#C4C4C4" stopOpacity="0" />
               </linearGradient>
             </defs>
