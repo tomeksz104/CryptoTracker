@@ -5,7 +5,10 @@ import { formatCurrency } from "@coingecko/cryptoformat";
 
 import CurrencyItem from "./CurrencyItem";
 import { currencyActions } from "../../store/currency-slice";
-import { fetchCurrencyData } from "../../store/currency-actions";
+import {
+  fetchCryptocurrencyPrices,
+  fetchWatchlistData,
+} from "../../store/currency-actions";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
@@ -13,38 +16,33 @@ const SOCKET_URL = "wss://ws.coincap.io/prices?assets=ALL";
 
 const CurrencyList = React.memo(() => {
   const dispatch = useDispatch();
-  const currenciesInitialData = useSelector((state) => state.currency.items);
-  const currenciesData = useSelector(
-    (state) => state.currency.filteredCurrencies
+  const currenciesInitialData = useSelector(
+    (state) => state.currency.cryptocurrencies
   );
-  const pageNumber = useSelector((state) => state.currency.pageNumber);
+  const currenciesData = useSelector(
+    (state) => state.currency.filteredCryptocurrencies
+  );
+  const currentPage = useSelector((state) => state.currency.currentPage);
   const perPage = useSelector((state) => state.currency.perPage);
   const sortField = useSelector((state) => state.currency.sortField);
   const sortOrder = useSelector((state) => state.currency.sortOrder);
 
-  const { lastMessage } = useWebSocket(SOCKET_URL, {
-    onOpen: () => {
-      console.log("WebSocket connected");
-    },
-    onClose: () => {
-      console.log("WebSocket disconnected");
-    },
-    shouldReconnect: () => {
-      console.log("WebSocket will try to reconnect");
-      return true;
-    },
-  });
+  const { lastMessage } = useWebSocket(SOCKET_URL);
 
   useEffect(() => {
-    dispatch(fetchCurrencyData());
+    dispatch(fetchCryptocurrencyPrices());
+    dispatch(fetchWatchlistData());
   }, [dispatch]);
 
-  const pagesVisited = pageNumber * perPage;
+  const pagesVisited = currentPage * perPage;
 
   const handleUpdateCurrencies = useCallback(() => {
     if (lastMessage !== null) {
-      const updatedCurrencies = currenciesInitialData.map((currency) => {
-        if (JSON.parse(lastMessage.data).hasOwnProperty(currency.id)) {
+      const updatedCurrencies = currenciesInitialData
+        .filter((currency) =>
+          JSON.parse(lastMessage.data).hasOwnProperty(currency.id)
+        )
+        .map((currency) => {
           const updatedPrice = JSON.parse(lastMessage.data)[currency.id];
           return {
             ...currency,
@@ -52,12 +50,10 @@ const CurrencyList = React.memo(() => {
               decimalPlaces: 2,
             }),
           };
-        }
-        return currency;
-      });
+        });
 
       dispatch(
-        currencyActions.replaceCurrencyList({
+        currencyActions.updateCurrencyList({
           items: updatedCurrencies,
         })
       );
@@ -68,7 +64,7 @@ const CurrencyList = React.memo(() => {
     let timerId = setTimeout(() => {
       handleUpdateCurrencies();
       timerId = null;
-    }, 500);
+    }, 100);
     return () => clearTimeout(timerId);
   }, [handleUpdateCurrencies]);
 
@@ -86,10 +82,13 @@ const CurrencyList = React.memo(() => {
             rank={currency.rank}
             symbol={currency.symbol}
             name={currency.name}
-            price={currency.priceUsd}
             changePercent24Hr={currency.changePercent24Hr}
+            priceUsd={currency.priceUsd}
             marketCapUsd={currency.marketCapUsd}
             volumeUsd24Hr={currency.volumeUsd24Hr}
+            price={currency.price ? currency.price : null}
+            marketCap={currency.marketCap ? currency.marketCap : null}
+            volume24Hr={currency.volume24Hr ? currency.volume24Hr : null}
           />
         )),
     [currenciesData, pagesVisited, perPage]
@@ -98,19 +97,20 @@ const CurrencyList = React.memo(() => {
   const getSortIcon = (field) => {
     if (sortField === field) {
       return sortOrder === "asc" ? (
-        <CaretUp className="w-3 h-3 mr-1" />
+        <CaretUp className="w-3 h-3 mr-1 dark:fill-slate-200" />
       ) : (
-        <CaretDown className="w-3 h-3 mr-1" />
+        <CaretDown className="w-3 h-3 mr-1 dark:fill-slate-200" />
       );
     }
     return null;
   };
 
   return (
-    <table className="border-t border-slate-200 dark:border-slate-600 table-auto w-full text-sm">
+    <table className="border-t border-slate-200 dark:border-slate-700 table-auto w-full text-sm">
       <thead>
         <tr>
-          <th className="border-b dark:border-slate-600 font-medium p-4 text-slate-500 dark:text-slate-200 text-left">
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium py-4 text-slate-600 dark:text-slate-300 text-left"></th>
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4text-slate-600 dark:text-slate-300 text-left">
             <span
               onClick={() => handleSort("rank")}
               className="flex items-center cursor-pointer"
@@ -118,7 +118,7 @@ const CurrencyList = React.memo(() => {
               {getSortIcon("rank")}#
             </span>
           </th>
-          <th className="border-b dark:border-slate-600 font-medium p-4 text-slate-500 dark:text-slate-200 text-left">
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
             <span
               onClick={() => handleSort("name")}
               className="flex items-center cursor-pointer"
@@ -127,7 +127,7 @@ const CurrencyList = React.memo(() => {
               Nazwa
             </span>
           </th>
-          <th className="border-b dark:border-slate-600 font-medium p-4 text-slate-500 dark:text-slate-200 text-left">
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
             <span
               onClick={() => handleSort("priceUsd")}
               className="flex items-center cursor-pointer"
@@ -136,7 +136,7 @@ const CurrencyList = React.memo(() => {
               Cena
             </span>
           </th>
-          <th className="border-b dark:border-slate-600 font-medium p-4 text-slate-500 dark:text-slate-200 text-left">
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
             <span
               onClick={() => handleSort("changePercent24Hr")}
               className="flex items-center cursor-pointer"
@@ -145,7 +145,7 @@ const CurrencyList = React.memo(() => {
               24h %
             </span>
           </th>
-          <th className="border-b dark:border-slate-600 font-medium p-4 text-slate-500 dark:text-slate-200 text-left">
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
             <span
               onClick={() => handleSort("marketCapUsd")}
               className="flex items-center cursor-pointer"
@@ -154,7 +154,7 @@ const CurrencyList = React.memo(() => {
               Kapitalizacja rynkowa
             </span>
           </th>
-          <th className="border-b dark:border-slate-600 font-medium p-4 text-slate-500 dark:text-slate-200 text-left">
+          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
             <span
               onClick={() => handleSort("volumeUsd24Hr")}
               className="flex items-center cursor-pointer"
@@ -165,7 +165,7 @@ const CurrencyList = React.memo(() => {
           </th>
         </tr>
       </thead>
-      <tbody className="bg-white dark:bg-slate-800">{currencyList}</tbody>
+      <tbody>{currencyList}</tbody>
     </table>
   );
 });

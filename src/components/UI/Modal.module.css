@@ -1,0 +1,65 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(10, 30, 66, 0.4);
+}
+
+.modal {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  left: 0px;
+}
+
+.content {
+  max-height: 80vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: height 0.3s ease-in-out 0s;
+  width: 60vw;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .content {
+    width: 95%;
+  }
+}
+
+.ModalOpen {
+  animation: openModal 0.4s ease-out forwards;
+}
+
+.ModalClosed {
+  animation: closeModal 0.4s ease-out forwards;
+}
+
+@keyframes openModal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes closeModal {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -13,6 +13,7 @@
     "cryptocurrency-icons": "^0.18.1",
     "framer-motion": "^10.11.6",
     "react": "^18.2.0",
+    "react-currency-flags": "^0.1.2",
     "react-dom": "^18.2.0",
     "react-paginate": "^8.1.5",
     "react-redux": "^8.0.5",
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.1"

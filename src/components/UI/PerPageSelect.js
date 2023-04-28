@@ -19,11 +19,11 @@ const PerPageSelect = (props) => {
   };
 
   return (
-    <div className={props.classes}>
+    <div className={`${props.classes} font-medium dark:text-white`}>
       Show rows
       <Tippy
         content={
-          <ul className="font-semibold space-y-3">
+          <ul className="font-medium space-y-3">
             {options.map((option) => (
               <li
                 key={option}
@@ -44,7 +44,7 @@ const PerPageSelect = (props) => {
         offset={[0, 10]}
       >
         <button
-          className="bg-neutral-100 hover:bg-neutral-150 rounded-md font-semibold ml-2"
+          className="bg-slate-400/10 hover:bg-slate-400/20 dark:text-white rounded-md ml-2"
           style={{ padding: "5px 8px" }}
         >
           {perPage}

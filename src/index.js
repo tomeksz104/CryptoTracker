@@ -4,10 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { DarkmodeContextProvider } from "./store/darkmode-context";
+
 import "@fontsource/inter";
+import "@fontsource/inter/500.css"; // Weight 500.
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <DarkmodeContextProvider>
+    <App />
+  </DarkmodeContextProvider>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

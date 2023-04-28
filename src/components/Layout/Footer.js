@@ -1,8 +1,14 @@
-import logo from "../assets/logo.jpg";
+import { useContext } from "react";
+import DarkmodeContext from "../../store/darkmode-context";
+
+import logo from "../../assets/logo.png";
+import logoDark from "../../assets/logo-dark.png";
 
 const Footer = () => {
+  const darkmodeCtx = useContext(DarkmodeContext);
+
   return (
-    <footer className="relative z-10 bg-white pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+    <footer className="relative z-10 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-500 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
@@ -10,15 +16,15 @@ const Footer = () => {
               <a href="#" className="mb-6 inline-block">
                 <img
                   className="h-10 object-cover"
-                  src={logo}
+                  src={!darkmodeCtx.isDarkmode ? logo : logoDark}
                   alt="Crypto Currency App Logo"
                 />
               </a>
-              <p className="text-body-color mb-7 text-base">
+              <p className="mb-7 text-base">
                 What are the current cryptocurrency prices? Access all your
                 favorite live crypto charts, quotes, and market caps!
               </p>
-              <p className="text-dark flex items-center text-sm font-medium">
+              <p className="flex items-center text-sm font-medium">
                 <span className="text-blue-500 mr-3">
                   <svg
                     width="19"
@@ -37,38 +43,38 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div className="mb-10 w-full">
-              <h4 className="text-dark mb-9 text-lg font-semibold">
+              <h4 className="mb-9 text-lg font-medium dark:text-white">
                 Resources
               </h4>
               <ul>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     SaaS Development
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Our Products
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     User Flow
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     User Strategy
                   </a>
@@ -78,36 +84,38 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div className="mb-10 w-full">
-              <h4 className="text-dark mb-9 text-lg font-semibold">Company</h4>
+              <h4 className="mb-9 text-lg font-medium dark:text-white">
+                Company
+              </h4>
               <ul>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     About TailGrids
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Contact & Support
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Success History
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Setting & Privacy
                   </a>
@@ -117,38 +125,38 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div className="mb-10 w-full">
-              <h4 className="text-dark mb-9 text-lg font-semibold">
+              <h4 className="mb-9 text-lg font-medium dark:text-white">
                 Quick Links
               </h4>
               <ul>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Premium Support
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Our Services
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Know Our Team
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
-                    className="text-body-color hover:text-blue-500 mb-2 inline-block text-base leading-loose"
+                    href="#"
+                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
                   >
                     Download App
                   </a>
@@ -158,13 +166,13 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
             <div className="mb-10 w-full">
-              <h4 className="text-dark mb-9 text-lg font-semibold">
+              <h4 className="mb-9 text-lg font-medium dark:text-white">
                 Follow Us On
               </h4>
               <div className="mb-6 flex items-center">
                 <a
-                  href="javascript:void(0)"
-                  className="text-dark hover:bg-blue-500 hover:border-blue-500 mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
+                  href="#"
+                  className="hover:bg-[#1877f2] hover:border-[#1877f2] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
                 >
                   <svg
                     width="8"
@@ -176,8 +184,8 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="javascript:void(0)"
-                  className="text-dark hover:bg-blue-500 hover:border-blue-500 mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
+                  href="#"
+                  className="hover:bg-[#1da1f2] hover:border-[#1da1f2] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
                 >
                   <svg
                     width="16"
@@ -189,8 +197,8 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="javascript:void(0)"
-                  className="text-dark hover:bg-blue-500 hover:border-blue-500 mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
+                  href="#"
+                  className="hover:bg-[#FF0000] hover:border-[#FF0000] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
                 >
                   <svg
                     width="16"
@@ -202,22 +210,20 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a
-                  href="javascript:void(0)"
-                  className="text-dark hover:bg-blue-500 hover:border-blue-500 mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E5E5] hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
+                  href="#"
+                  className="hover:bg-[#c13584] hover:border-[#c13584] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
                 >
                   <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 256 256"
                     className="fill-current"
                   >
-                    <path d="M13.0214 0H1.02084C0.453707 0 0 0.451613 0 1.01613V12.9839C0 13.5258 0.453707 14 1.02084 14H12.976C13.5432 14 13.9969 13.5484 13.9969 12.9839V0.993548C14.0422 0.451613 13.5885 0 13.0214 0ZM4.15142 11.9H2.08705V5.23871H4.15142V11.9ZM3.10789 4.3129C2.42733 4.3129 1.90557 3.77097 1.90557 3.11613C1.90557 2.46129 2.45002 1.91935 3.10789 1.91935C3.76577 1.91935 4.31022 2.46129 4.31022 3.11613C4.31022 3.77097 3.81114 4.3129 3.10789 4.3129ZM11.9779 11.9H9.9135V8.67097C9.9135 7.90323 9.89082 6.8871 8.82461 6.8871C7.73571 6.8871 7.57691 7.74516 7.57691 8.60323V11.9H5.51254V5.23871H7.53154V6.16452H7.55423C7.84914 5.62258 8.50701 5.08065 9.52785 5.08065C11.6376 5.08065 12.0232 6.43548 12.0232 8.2871V11.9H11.9779Z" />
+                    <path d="M160,128a32,32,0,1,1-32-32A32.03667,32.03667,0,0,1,160,128Zm68-44v88a56.06353,56.06353,0,0,1-56,56H84a56.06353,56.06353,0,0,1-56-56V84A56.06353,56.06353,0,0,1,84,28h88A56.06353,56.06353,0,0,1,228,84Zm-52,44a48,48,0,1,0-48,48A48.05436,48.05436,0,0,0,176,128Zm16-52a12,12,0,1,0-12,12A12,12,0,0,0,192,76Z" />
                   </svg>
                 </a>
               </div>
-              <p className="text-body-color text-base">
-                &copy; 2023 CryptoPriceApp
-              </p>
+              <p className="text-base">&copy; 2023 CryptoPriceApp</p>
             </div>
           </div>
         </div>
@@ -244,8 +250,8 @@ const Footer = () => {
                 y2="1.22829e-05"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#3056D3" stop-opacity="0.08" />
-                <stop offset="1" stop-color="#C4C4C4" stop-opacity="0" />
+                <stop stopColor="#3056D3" stopOpacity="0.08" />
+                <stop offset="1" stopColor="#C4C4C4" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -271,8 +277,8 @@ const Footer = () => {
                 y2="37.5"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#13C296" stop-opacity="0.31" />
-                <stop offset="1" stop-color="#C4C4C4" stop-opacity="0" />
+                <stop stopColor="#13C296" stopOpacity="0.31" />
+                <stop offset="1" stopColor="#C4C4C4" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>

@@ -14,10 +14,9 @@
 }
 
 .table-paginate li:hover:not(.previous, .next, .selected) {
-  background-color: rgb(237 237 237);
+  background-color: rgb(148 163 184 / 0.1);
 }
 
 .table-paginate li.selected {
-  background-color: rgb(59 130 246);
-  color: white;
+  background-color: rgb(14 165 233);
 }

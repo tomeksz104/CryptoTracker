@@ -2,14 +2,14 @@ import { currencyActions } from "./currency-slice";
 
 import { formatCurrency } from "@coingecko/cryptoformat";
 
-export const fetchCurrencyData = () => {
+export const fetchCryptocurrencyPrices = () => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
         "https://api.coincap.io/v2/assets?limit=1000"
       );
       if (!response.ok) {
-        throw new Error("Could not fetch currency data!");
+        throw new Error("Could not fetch cryptocurrency data!");
       }
 
       const { data } = await response.json();
@@ -70,6 +70,22 @@ export const fetchCurrencyData = () => {
       //     message: "Fetching data failed!",
       //   })
       // );
+    }
+  };
+};
+
+export const fetchWatchlistData = () => {
+  return async (dispatch) => {
+    const favoriteCurrencies = JSON.parse(
+      localStorage.getItem("favoriteCurrencies")
+    );
+
+    if (favoriteCurrencies.length > 0) {
+      dispatch(
+        currencyActions.replaceWatchlist({
+          watchlist: favoriteCurrencies,
+        })
+      );
     }
   };
 };
