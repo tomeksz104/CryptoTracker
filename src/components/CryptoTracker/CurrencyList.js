@@ -79,6 +79,7 @@ const CurrencyList = React.memo(() => {
         .map((currency) => (
           <CurrencyItem
             key={currency.id}
+            id={currency.id}
             rank={currency.rank}
             symbol={currency.symbol}
             name={currency.name}
