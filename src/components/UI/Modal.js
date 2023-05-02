@@ -15,7 +15,7 @@ const ModalOverlay = (props) => {
   return (
     <div onClick={props.onClose} className={classes.modal}>
       <div
-        className={`${classes.content} bg-white dark:bg-slate-900`}
+        className={`${classes.content} bg-white dark:bg-slate-800`}
         onClick={stopPropagation}
       >
         {props.children}

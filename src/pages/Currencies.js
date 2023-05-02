@@ -1,22 +1,21 @@
 import { Provider } from "react-redux";
 
-import CurrencyList from "../components/Currency/CurrencyList";
+import CurrencyList from "../components/CryptoTracker/CurrencyList";
 import store from "../store";
-import Pagination from "../components/Currency/Pagination";
-import Filters from "../components/Currency/Filters";
-import Header from "../components/Currency/Header";
+import Pagination from "../components/CryptoTracker/Pagination";
+import Filters from "../components/CryptoTracker/Filters";
+import Header from "../components/CryptoTracker/Header";
+import PageContent from "../components/Layout/PageContent";
 
 function CurrenciesPage() {
   return (
     <Provider store={store}>
-      <div className="container mx-auto">
-        <div className="relative overflow-visible">
-          <Header />
-          <Filters />
-          <CurrencyList />
-          <Pagination />
-        </div>
-      </div>
+      <PageContent>
+        <Header />
+        <Filters />
+        <CurrencyList />
+        <Pagination />
+      </PageContent>
     </Provider>
   );
   // return (
