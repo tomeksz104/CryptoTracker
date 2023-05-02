@@ -12,6 +12,19 @@ export function updateCryptocurrencyInNewCurrency(
   const volumeUsd24Hr = parseFloat(
     cryptocurrency.volumeUsd24Hr.replace(/[$,]/g, "")
   );
+  const changePercent24Hr = parseFloat(
+    cryptocurrency.changePercent24Hr
+  ).toFixed(2);
+
+  const supply = parseFloat(cryptocurrency.supply).toLocaleString("en-US", {
+    maximumFractionDigits: 0,
+  });
+  const maxSupply = parseFloat(cryptocurrency.maxSupply).toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits: 0,
+    }
+  );
 
   if (rateUsd !== 0) {
     const priceInNewCurrency = priceUsd / rateUsd;
@@ -42,6 +55,9 @@ export function updateCryptocurrencyInNewCurrency(
       volumeUsd24Hr: formatCurrency(volumeUsd24Hr, symbol, "en", false, {
         decimalPlaces: 2,
       }),
+      changePercent24Hr: changePercent24Hr,
+      supply,
+      maxSupply,
     };
   }
 }
