@@ -8,7 +8,7 @@ const Footer = () => {
   const darkmodeCtx = useContext(DarkmodeContext);
 
   return (
-    <footer className="relative z-10 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-500 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+    <footer className="relative z-10 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-500 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium dark:text-white">
+              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
                 Resources
               </h4>
               <ul>
@@ -84,7 +84,7 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium dark:text-white">
+              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
                 Company
               </h4>
               <ul>
@@ -125,7 +125,7 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium dark:text-white">
+              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
                 Quick Links
               </h4>
               <ul>
@@ -166,7 +166,7 @@ const Footer = () => {
           </div>
           <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
             <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium dark:text-white">
+              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
                 Follow Us On
               </h4>
               <div className="mb-6 flex items-center">
@@ -223,7 +223,7 @@ const Footer = () => {
                   </svg>
                 </a>
               </div>
-              <p className="text-base">&copy; 2023 CryptoPriceApp</p>
+              <p className="text-sm">&copy; 2023 CryptoPriceApp</p>
             </div>
           </div>
         </div>
