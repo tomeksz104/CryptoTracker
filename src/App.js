@@ -4,24 +4,25 @@ import RootLayout from "./pages/Root";
 
 import "./App.css";
 import CurrenciesPage from "./pages/Currencies";
+import CryptocurrencyDetailPage, {
+  loader as cryptocurrencyLoader,
+} from "./pages/CryptocurrencyDetail";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    children: [{ index: true, element: <CurrenciesPage /> }],
+    children: [
+      { index: true, element: <CurrenciesPage /> },
+      {
+        path: "cryptocurrency/:currencyId",
+        id: "cryptocurrency-detail",
+        element: <CryptocurrencyDetailPage />,
+        loader: cryptocurrencyLoader,
+      },
+    ],
   },
 ]);
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <RootLayout />,
-//     children: [
-//       { index: true, element: <CurrenciesPage />, loader: currenciesLoader },
-//     ],
-//   },
-// ]);
 
 function App() {
   return <RouterProvider router={router} />;
