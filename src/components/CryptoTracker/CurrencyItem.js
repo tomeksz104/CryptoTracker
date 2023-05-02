@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import usePrevious from "../../hooks/usePrevious";
 import { Transition } from "react-transition-group";
 import { currencyActions } from "../../store/currency-slice";
+import { Link } from "react-router-dom";
 
 import empty from "../../assets/cryptocurrency-icons/empty.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
@@ -129,7 +130,10 @@ const CurrencyItem = React.memo((props) => {
               {props.rank}
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 pr-8 text-slate-600 dark:text-slate-300">
-              <div className="flex items-center space-x-2">
+              <Link
+                to={`/cryptocurrency/${props.id}`}
+                className="flex items-center space-x-2"
+              >
                 <img
                   ref={imgRef}
                   src={empty}
@@ -143,7 +147,7 @@ const CurrencyItem = React.memo((props) => {
                   {" "}
                   {props.symbol}{" "}
                 </span>
-              </div>
+              </Link>
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 pr-8 text-slate-600 dark:text-slate-300">
               {currentCurrency === "USD" ? props.priceUsd : props.price}
