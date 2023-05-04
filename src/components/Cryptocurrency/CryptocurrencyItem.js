@@ -8,6 +8,8 @@ import { ReactComponent as PlusSvg } from "../../assets/svg/plus.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
+import Chart from "./Chart";
+
 const CryptocurrencyItem = (props) => {
   const imgRef = useRef(null);
   const { currentCurrency, currentCurrencyRate } = useSelector(
@@ -177,6 +179,7 @@ const CryptocurrencyItem = (props) => {
           </div>
         </div>
       </div>
+      <Chart symbol={cryptocurrency.symbol} />
     </>
   );
 };
