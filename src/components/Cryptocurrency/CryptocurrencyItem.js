@@ -8,6 +8,8 @@ import { ReactComponent as PlusSvg } from "../../assets/svg/plus.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
+import Chart from "./Chart";
+
 const CryptocurrencyItem = (props) => {
   const imgRef = useRef(null);
   const { currentCurrency, currentCurrencyRate } = useSelector(
@@ -48,12 +50,12 @@ const CryptocurrencyItem = (props) => {
   const changePercent24hButton = isNaN(cryptocurrency.changePercent24Hr) ? (
     "-"
   ) : cryptocurrency.changePercent24Hr > 0 ? (
-    <span className="text-white bg-green-500 font-medium rounded-md text-xs px-3 py-1.5 text-center inline-flex items-center ml-3">
+    <span class="text-white bg-green-500 font-medium rounded-md text-xs px-3 py-1.5 text-center inline-flex items-center ml-3">
       <CaretUp className="fill-white w-3 h-3" />
       {cryptocurrency.changePercent24Hr}%
     </span>
   ) : (
-    <span className="text-white bg-red-500 font-medium rounded-md text-xs px-3 py-1.5 text-center inline-flex items-center ml-3">
+    <span class="text-white bg-red-500 font-medium rounded-md text-xs px-3 py-1.5 text-center inline-flex items-center ml-3">
       <CaretDown className="fill-white w-3 h-3" />
       {cryptocurrency.changePercent24Hr}%
     </span>
@@ -93,7 +95,7 @@ const CryptocurrencyItem = (props) => {
       </div>
       <div className="flex items-center mt-3">
         <span
-          className="bg-slate-400/30 font-medium rounded-md text-xs dark:text-white"
+          class="bg-slate-400/30 font-medium rounded-md text-xs dark:text-white"
           style={{ padding: "5px 8px" }}
         >
           Rank #{cryptocurrency.rank}
@@ -101,7 +103,7 @@ const CryptocurrencyItem = (props) => {
         <Link
           to={cryptocurrency.explorer}
           target="_blank"
-          className="bg-slate-400/10 hover:bg-slate-400/20 font-medium rounded-md text-xs text-center inline-flex items-center ml-3 dark:text-white"
+          class="bg-slate-400/10 hover:bg-slate-400/20 font-medium rounded-md text-xs text-center inline-flex items-center ml-3 dark:text-white"
           style={{ padding: "5px 8px" }}
         >
           Explorer
@@ -109,21 +111,21 @@ const CryptocurrencyItem = (props) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
+            stroke-width="1.5"
             stroke="currentColor"
-            className="w-4 h-4 ml-1"
+            class="w-4 h-4 ml-1"
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              stroke-linecap="round"
+              stroke-linejoin="round"
               d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
             />
           </svg>
         </Link>
       </div>
 
-      <div className="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 border-y border-gray-100 dark:border-gray-700 py-5">
-        <div className="border-r border-gray-100 dark:border-gray-700">
+      <div class="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 border-y border-gray-100 dark:border-gray-700 py-5">
+        <div class="border-r border-gray-100 dark:border-gray-700">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">
             {cryptocurrency.name} Price ({cryptocurrency.symbol})
           </h3>
@@ -132,7 +134,7 @@ const CryptocurrencyItem = (props) => {
             {changePercent24hButton}
           </span>
         </div>
-        <div className="border-r border-gray-100 dark:border-gray-700">
+        <div class="border-r border-gray-100 dark:border-gray-700">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">
             Market Cap
           </h3>
@@ -140,7 +142,7 @@ const CryptocurrencyItem = (props) => {
             {cryptocurrency.marketCapUsd}
           </span>
         </div>
-        <div className="border-r border-gray-100 dark:border-gray-700">
+        <div class="border-r border-gray-100 dark:border-gray-700">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">Volume</h3>
           <span className="text-sm font-semibold text-slate-700 dark:text-white">
             {cryptocurrency.volumeUsd24Hr}
@@ -158,9 +160,9 @@ const CryptocurrencyItem = (props) => {
               {circulatingSupplyPercentage}
             </span>
           </div>
-          <div className="w-full h-2 bg-slate-400/10 rounded-full mt-3">
+          <div class="w-full h-2 bg-slate-400/10 rounded-full mt-3">
             <div
-              className="h-full text-center text-xs text-white bg-slate-400/30 rounded-full"
+              class="h-full text-center text-xs text-white bg-slate-400/30 rounded-full"
               style={{ width: circulatingSupplyPercentage }}
             ></div>
           </div>
@@ -177,6 +179,7 @@ const CryptocurrencyItem = (props) => {
           </div>
         </div>
       </div>
+      <Chart symbol={cryptocurrency.symbol} />
     </>
   );
 };

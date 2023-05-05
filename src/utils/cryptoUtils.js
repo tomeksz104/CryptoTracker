@@ -42,9 +42,6 @@ export function updateCryptocurrencyInNewCurrency(
       volume24Hr: formatCurrency(volume24HrInNewCurrency, symbol, "en", false, {
         decimalPlaces: 2,
       }),
-      changePercent24Hr: changePercent24Hr,
-      supply,
-      maxSupply,
     };
   } else {
     return {

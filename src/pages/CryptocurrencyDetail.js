@@ -1,16 +1,12 @@
-import { defer, useLoaderData, Link, Await } from "react-router-dom";
+import { defer, useLoaderData, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import Chart from "../components/Cryptocurrency/Chart";
 import store from "../store";
 import PageContent from "../components/Layout/PageContent";
 import CryptocurrencyItem from "../components/Cryptocurrency/CryptocurrencyItem";
-import { Suspense } from "react";
 
 const CryptocurrencyDetailPage = () => {
-  const { cryptocurrency, historicalData } = useLoaderData(
-    "cryptocurrency-detail"
-  );
+  const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
 
   return (
     <Provider store={store}>
@@ -49,17 +45,6 @@ const CryptocurrencyDetailPage = () => {
           </ol>
         </nav>
         <CryptocurrencyItem cryptocurrency={cryptocurrency} />
-        <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
-          <Await resolve={historicalData}>
-            {(loadedHistoricalData) => (
-              <Chart
-                data={loadedHistoricalData}
-                id={cryptocurrency.id}
-                symbol={cryptocurrency.symbol}
-              />
-            )}
-          </Await>
-        </Suspense>
       </PageContent>
     </Provider>
   );
@@ -75,22 +60,10 @@ const loadCryptocurrency = async (id) => {
   return data;
 };
 
-const loadHistoricalData = async (id) => {
-  const response = await fetch(
-    `https://api.coincap.io/v2/assets/${id}/history?interval=d1`
-  );
-  const { data } = await response.json();
-
-  const mappedData = data.map((item) => [item.time, +item.priceUsd]);
-
-  return mappedData;
-};
-
 export async function loader({ request, params }) {
   const id = params.currencyId;
 
   return defer({
     cryptocurrency: await loadCryptocurrency(id),
-    historicalData: loadHistoricalData(id),
   });
 }
