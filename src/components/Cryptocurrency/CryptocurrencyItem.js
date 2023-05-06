@@ -8,8 +8,6 @@ import { ReactComponent as PlusSvg } from "../../assets/svg/plus.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
-import Chart from "./Chart";
-
 const CryptocurrencyItem = (props) => {
   const imgRef = useRef(null);
   const { currentCurrency, currentCurrencyRate } = useSelector(
@@ -30,8 +28,6 @@ const CryptocurrencyItem = (props) => {
     currentCurrency,
     currentCurrencyRate
   );
-
-  console.log(cryptocurrency);
 
   useEffect(() => {
     const fetchSvg = async () => {
@@ -124,7 +120,7 @@ const CryptocurrencyItem = (props) => {
         </Link>
       </div>
 
-      <div class="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 border-y border-gray-100 dark:border-gray-700 py-5">
+      <div class="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 border-t border-gray-100 dark:border-gray-700 py-5">
         <div class="border-r border-gray-100 dark:border-gray-700">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">
             {cryptocurrency.name} Price ({cryptocurrency.symbol})
@@ -179,7 +175,6 @@ const CryptocurrencyItem = (props) => {
           </div>
         </div>
       </div>
-      <Chart symbol={cryptocurrency.symbol} />
     </>
   );
 };

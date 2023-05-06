@@ -4,13 +4,14 @@ import { Provider } from "react-redux";
 import store from "../store";
 import PageContent from "../components/Layout/PageContent";
 import CryptocurrencyItem from "../components/Cryptocurrency/CryptocurrencyItem";
+import Tabs from "../components/Cryptocurrency/Tabs";
 
 const CryptocurrencyDetailPage = () => {
   const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
 
   return (
     <Provider store={store}>
-      <PageContent>
+      <PageContent classes="mt-8">
         <nav to={"/"} className="flex" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
             <li className="inline-flex items-center">
@@ -46,6 +47,7 @@ const CryptocurrencyDetailPage = () => {
         </nav>
         <CryptocurrencyItem cryptocurrency={cryptocurrency} />
       </PageContent>
+      <Tabs symbol={cryptocurrency.symbol} price={cryptocurrency.price} />
     </Provider>
   );
 };
