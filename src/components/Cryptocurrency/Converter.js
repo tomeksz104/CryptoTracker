@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useLoaderData } from "react-router";
 
 function roundToDecimals(n, decimals) {
@@ -10,6 +12,9 @@ function roundToDecimals(n, decimals) {
 
 const Converter = () => {
   const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
+  const { currentCurrency, currentCurrencyRate } = useSelector(
+    (state) => state.currency
+  );
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(
     roundToDecimals(cryptocurrency.priceUsd, 2)
