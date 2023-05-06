@@ -36,7 +36,7 @@ const Tabs = (props) => {
                 Overview
               </span>
             </li>
-            <li class="mr-2">
+            <li className="mr-2">
               <span
                 onClick={handleChangeTab("tab2")}
                 className={activeTab === "tab2" ? activeTabClasses : tabClasses}
