@@ -4,12 +4,14 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  useContext,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import usePrevious from "../../hooks/usePrevious";
 import { Transition } from "react-transition-group";
 import { currencyActions } from "../../store/currency-slice";
 import { Link } from "react-router-dom";
+import CurrencyContext from "../../store/currecy-context";
 
 import empty from "../../assets/cryptocurrency-icons/empty.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
@@ -20,9 +22,10 @@ import "./CurrencyItem.css";
 const DURATION = 300;
 
 const CurrencyItem = React.memo((props) => {
+  const currencyCtx = useContext(CurrencyContext);
   const dispatch = useDispatch();
   const prevData = usePrevious(props);
-  const { watchlist, currentCurrency } = useSelector((state) => state.currency);
+  const watchlist = useSelector((state) => state.currency.watchlist);
   const [animation, setAnimation] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -32,7 +35,7 @@ const CurrencyItem = React.memo((props) => {
     const fetchSvg = async () => {
       try {
         const importedIcon = await import(
-          `../../../node_modules/cryptocurrency-icons/svg/color/${props.symbol.toLowerCase()}.svg`
+          `../../../node_modules/cryptocurrency-icons/svg/color/${props.cryptocurrency.symbol.toLowerCase()}.svg`
         );
         imgRef.current.src = importedIcon.default;
       } catch (error) {
@@ -40,18 +43,20 @@ const CurrencyItem = React.memo((props) => {
       }
     };
     fetchSvg();
-  }, [props.symbol]);
+  }, [props.cryptocurrency.symbol]);
 
   useEffect(() => {
     let animate = animation;
     let shouldShow = false;
 
     if (prevData) {
-      if (props.priceUsd > prevData.priceUsd) {
+      if (props.cryptocurrency.priceUsd > prevData.cryptocurrency.priceUsd) {
         shouldShow = true;
         animate = "up";
         resetAnimation();
-      } else if (props.priceUsd < prevData.priceUsd) {
+      } else if (
+        props.cryptocurrency.priceUsd < prevData.cryptocurrency.priceUsd
+      ) {
         shouldShow = true;
         animate = "down";
         resetAnimation();
@@ -60,7 +65,7 @@ const CurrencyItem = React.memo((props) => {
 
     setAnimation(animate);
     setShow(shouldShow);
-  }, [props.priceUsd, prevData, animation]);
+  }, [props.cryptocurrency.priceUsd, prevData, animation]);
 
   const resetAnimation = useCallback(() => {
     setTimeout(() => {
@@ -81,11 +86,11 @@ const CurrencyItem = React.memo((props) => {
   }, []);
 
   const handleToggleWatchlist = useCallback(() => {
-    if (watchlist.includes(props.symbol)) {
+    if (watchlist.includes(props.cryptocurrency.symbol)) {
       dispatch(
         currencyActions.removeFromWatchlist({
           currency: {
-            symbol: props.symbol,
+            symbol: props.cryptocurrency.symbol,
           },
         })
       );
@@ -93,12 +98,12 @@ const CurrencyItem = React.memo((props) => {
       dispatch(
         currencyActions.addToWatchlist({
           currency: {
-            symbol: props.symbol,
+            symbol: props.cryptocurrency.symbol,
           },
         })
       );
     }
-  }, [dispatch, watchlist, props.symbol]);
+  }, [dispatch, watchlist, props.cryptocurrency.symbol]);
 
   return (
     <>
@@ -116,7 +121,9 @@ const CurrencyItem = React.memo((props) => {
                 strokeWidth="1.5"
                 stroke="currentColor"
                 className={`w-4 h-4 hover:text-amber-500 outline-0 ${
-                  watchlist.includes(props.symbol) ? "text-amber-500" : ""
+                  watchlist.includes(props.cryptocurrency.symbol)
+                    ? "text-amber-500"
+                    : ""
                 } cursor-pointer transition-colors duration-300`}
               >
                 <path
@@ -127,52 +134,50 @@ const CurrencyItem = React.memo((props) => {
               </svg>
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 text-slate-600 dark:text-slate-300">
-              {props.rank}
+              {props.cryptocurrency.rank}
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 pr-8 text-slate-600 dark:text-slate-300">
               <Link
-                to={`/cryptocurrency/${props.id}`}
+                to={`/cryptocurrency/${props.cryptocurrency.id}`}
                 className="flex items-center space-x-2"
               >
                 <img
                   ref={imgRef}
                   src={empty}
-                  alt={`Logo ${props.name}`}
+                  alt={`Logo ${props.cryptocurrency.name}`}
                   width={32}
                   height={32}
                   className="mr-2"
                 />
-                {props.name}
+                {props.cryptocurrency.name}
                 <span className="text-slate-300 dark:text-slate-600">
                   {" "}
-                  {props.symbol}{" "}
+                  {props.cryptocurrency.symbol}{" "}
                 </span>
               </Link>
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 pr-8 text-slate-600 dark:text-slate-300">
-              {currentCurrency === "USD" ? props.priceUsd : props.price}
+              {props.cryptocurrency.price}
             </td>
             <td
               className={`${
-                props.changePercent24Hr > 0
+                props.cryptocurrency.changePercent24Hr > 0
                   ? "text-green-500 "
                   : "text-red-500 "
               } border-b border-slate-200 dark:border-slate-800 p-4 pr-8 dark:text-slate-400`}
             >
               {" "}
               <div className="flex items-center">
-                {getChangePercentIcon(props.changePercent24Hr)}
-                {!isNaN(props.changePercent24Hr) &&
-                  props.changePercent24Hr + "%"}
+                {getChangePercentIcon(props.cryptocurrency.changePercent24Hr)}
+                {!isNaN(props.cryptocurrency.changePercent24Hr) &&
+                  props.cryptocurrency.changePercent24Hr + "%"}
               </div>
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 pr-8 text-slate-600 dark:text-slate-300">
-              {currentCurrency === "USD" ? props.marketCapUsd : props.marketCap}
+              {props.cryptocurrency.marketCap}
             </td>
             <td className="border-b border-slate-200 dark:border-slate-800 p-4 pr-8 text-slate-600 dark:text-slate-300">
-              {currentCurrency === "USD"
-                ? props.volumeUsd24Hr
-                : props.volume24Hr}
+              {props.cryptocurrency.volume24Hr}
             </td>
           </tr>
         )}

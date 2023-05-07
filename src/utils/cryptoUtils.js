@@ -6,12 +6,15 @@ export function updateCryptocurrencyInNewCurrency(
   rateUsd
 ) {
   const priceUsd = parseFloat(cryptocurrency.priceUsd.replace(/[$,]/g, ""));
+
   const marketCapUsd = parseFloat(
     cryptocurrency.marketCapUsd.replace(/[$,]/g, "")
   );
+
   const volumeUsd24Hr = parseFloat(
     cryptocurrency.volumeUsd24Hr.replace(/[$,]/g, "")
   );
+
   const changePercent24Hr = parseFloat(
     cryptocurrency.changePercent24Hr
   ).toFixed(2);
@@ -27,34 +30,65 @@ export function updateCryptocurrencyInNewCurrency(
   );
 
   if (rateUsd !== 0) {
-    const priceInNewCurrency = priceUsd / rateUsd;
-    const marketCapInNewCurrency = marketCapUsd / rateUsd;
-    const volume24HrInNewCurrency = volumeUsd24Hr / rateUsd;
+    const priceInNewCurrency = formatCurrency(
+      priceUsd / rateUsd,
+      symbol,
+      "en",
+      false,
+      {
+        decimalPlaces: 2,
+      }
+    );
+    const priceWithoutSymbol = priceUsd / rateUsd;
+    const marketCapInNewCurrency = formatCurrency(
+      marketCapUsd / rateUsd,
+      symbol,
+      "en",
+      false,
+      {
+        decimalPlaces: 2,
+      }
+    );
+    const volume24HrInNewCurrency = formatCurrency(
+      volumeUsd24Hr / rateUsd,
+      symbol,
+      "en",
+      false,
+      {
+        decimalPlaces: 2,
+      }
+    );
 
     return {
       ...cryptocurrency,
-      price: formatCurrency(priceInNewCurrency, symbol, "en", false, {
-        decimalPlaces: 2,
-      }),
-      marketCap: formatCurrency(marketCapInNewCurrency, symbol, "en", false, {
-        decimalPlaces: 2,
-      }),
-      volume24Hr: formatCurrency(volume24HrInNewCurrency, symbol, "en", false, {
-        decimalPlaces: 2,
-      }),
+      price: priceInNewCurrency,
+      priceWithoutSymbol,
+      marketCap: marketCapInNewCurrency,
+      volume24Hr: volume24HrInNewCurrency,
+      changePercent24Hr: changePercent24Hr,
+      supply,
+      maxSupply,
     };
   } else {
+    const price = formatCurrency(priceUsd, symbol, "en", false, {
+      decimalPlaces: 2,
+    });
+    const marketCap = formatCurrency(marketCapUsd, symbol, "en", false, {
+      decimalPlaces: 2,
+    });
+    const volume24Hr = formatCurrency(volumeUsd24Hr, symbol, "en", false, {
+      decimalPlaces: 2,
+    });
+
     return {
       ...cryptocurrency,
-      priceUsd: formatCurrency(priceUsd, symbol, "en", false, {
-        decimalPlaces: 2,
-      }),
-      marketCapUsd: formatCurrency(marketCapUsd, symbol, "en", false, {
-        decimalPlaces: 2,
-      }),
-      volumeUsd24Hr: formatCurrency(volumeUsd24Hr, symbol, "en", false, {
-        decimalPlaces: 2,
-      }),
+      price,
+      priceUsd: price,
+      priceWithoutSymbol: priceUsd,
+      marketCap,
+      marketCapUsd: marketCap,
+      volume24Hr,
+      volumeUsd24Hr: volume24Hr,
       changePercent24Hr: changePercent24Hr,
       supply,
       maxSupply,

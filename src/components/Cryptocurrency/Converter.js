@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
+import CurrencyContext from "../../store/currecy-context";
 
 function roundToDecimals(n, decimals) {
   const log10 = n ? Math.floor(Math.log10(n)) : 0,
@@ -10,21 +10,19 @@ function roundToDecimals(n, decimals) {
   return Math.round(n * div) / div;
 }
 
-const Converter = () => {
-  const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
-  const { currentCurrency, currentCurrencyRate } = useSelector(
-    (state) => state.currency
-  );
+const Converter = (props) => {
+  const currencyCtx = useContext(CurrencyContext);
   const [fromAmount, setFromAmount] = useState(1);
   const [toAmount, setToAmount] = useState(
-    roundToDecimals(cryptocurrency.priceUsd, 2)
+    roundToDecimals(props.cryptocurrency.priceWithoutSymbol, 2)
   );
 
   const handleChangeFromAmount = (event) => {
     setFromAmount(event.target.value);
 
     const result =
-      event.target.value.replace(",", ".") * cryptocurrency.priceUsd;
+      event.target.value.replace(",", ".") *
+      props.cryptocurrency.priceWithoutSymbol;
 
     setToAmount(roundToDecimals(result, 2));
   };
@@ -33,7 +31,8 @@ const Converter = () => {
     setToAmount(event.target.value);
 
     const result =
-      event.target.value.replace(",", ".") / cryptocurrency.priceUsd;
+      event.target.value.replace(",", ".") /
+      props.cryptocurrency.priceWithoutSymbol;
 
     setFromAmount(roundToDecimals(result, 2));
   };
@@ -41,7 +40,7 @@ const Converter = () => {
   return (
     <div className="border border-slate-100 dark:border-slate-700 rounded-2xl p-3 space-y-5">
       <h3 className="text-md font-semibold text-slate-800 dark:text-white">
-        {cryptocurrency.symbol} to {currentCurrency} converter
+        {props.cryptocurrency.symbol} to {currencyCtx.currentCurrency} converter
       </h3>
       <div className="relative">
         <input
@@ -53,7 +52,7 @@ const Converter = () => {
         />
 
         <span className="absolute inset-y-0 end-3 grid w-10 place-content-center text-slate-500 dark:text-slate-400 select-none">
-          {cryptocurrency.symbol}
+          {props.cryptocurrency.symbol}
         </span>
       </div>
       <div className="relative">
@@ -66,7 +65,7 @@ const Converter = () => {
         />
 
         <span className="absolute inset-y-0 end-3 grid w-10 place-content-center text-slate-500 dark:text-slate-400 select-none">
-          {currentCurrency}
+          {currencyCtx.currentCurrency}
         </span>
       </div>
     </div>

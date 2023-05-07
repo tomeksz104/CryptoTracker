@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { updateCryptocurrencyInNewCurrency } from "../..//utils/cryptoUtils";
 import empty from "../../assets/cryptocurrency-icons/empty.svg";
 import { ReactComponent as PlusSvg } from "../../assets/svg/plus.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
@@ -10,9 +8,6 @@ import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
 const CryptocurrencyItem = (props) => {
   const imgRef = useRef(null);
-  const { currentCurrency, currentCurrencyRate } = useSelector(
-    (state) => state.currency
-  );
 
   const circulatingSupplyPercentage = isFinite(
     props.cryptocurrency.supply / props.cryptocurrency.maxSupply
@@ -22,14 +17,6 @@ const CryptocurrencyItem = (props) => {
         100
       ).toFixed() + "%"
     : "-";
-
-  const cryptocurrency = updateCryptocurrencyInNewCurrency(
-    props.cryptocurrency,
-    currentCurrency,
-    currentCurrencyRate
-  );
-
-  console.log(cryptocurrency);
 
   useEffect(() => {
     const fetchSvg = async () => {
@@ -45,17 +32,19 @@ const CryptocurrencyItem = (props) => {
     fetchSvg();
   }, [props.cryptocurrency.symbol]);
 
-  const changePercent24hButton = isNaN(cryptocurrency.changePercent24Hr) ? (
+  const changePercent24hButton = isNaN(
+    props.cryptocurrency.changePercent24Hr
+  ) ? (
     "-"
-  ) : cryptocurrency.changePercent24Hr > 0 ? (
+  ) : props.cryptocurrency.changePercent24Hr > 0 ? (
     <span className="text-white bg-green-500 font-medium rounded-md text-xs px-3 py-1.5 text-center inline-flex items-center ml-3">
       <CaretUp className="fill-white w-3 h-3" />
-      {cryptocurrency.changePercent24Hr}%
+      {props.cryptocurrency.changePercent24Hr}%
     </span>
   ) : (
     <span className="text-white bg-red-500 font-medium rounded-md text-xs px-3 py-1.5 text-center inline-flex items-center ml-3">
       <CaretDown className="fill-white w-3 h-3" />
-      {cryptocurrency.changePercent24Hr}%
+      {props.cryptocurrency.changePercent24Hr}%
     </span>
   );
 
@@ -66,18 +55,18 @@ const CryptocurrencyItem = (props) => {
           <img
             ref={imgRef}
             src={empty}
-            alt={`Logo ${cryptocurrency.name}`}
+            alt={`Logo ${props.cryptocurrency.name}`}
             width={32}
             height={32}
           />
           <h2 className="text-4xl font-semibold leading-none sm:text-4xl xl:max-w-3xl text-slate-700 dark:text-white">
-            {cryptocurrency.name}
+            {props.cryptocurrency.name}
           </h2>
           <span
             className="flex items-center text-xs font-medium bg-slate-400/10 rounded-md text-neutral-800 dark:text-neutral-300"
             style={{ padding: "5px 8px" }}
           >
-            {cryptocurrency.symbol}
+            {props.cryptocurrency.symbol}
           </span>
         </div>
         <a
@@ -96,10 +85,10 @@ const CryptocurrencyItem = (props) => {
           className="bg-slate-400/30 font-medium rounded-md text-xs dark:text-white"
           style={{ padding: "5px 8px" }}
         >
-          Rank #{cryptocurrency.rank}
+          Rank #{props.cryptocurrency.rank}
         </span>
         <Link
-          to={cryptocurrency.explorer}
+          to={props.cryptocurrency.explorer}
           target="_blank"
           className="bg-slate-400/10 hover:bg-slate-400/20 font-medium rounded-md text-xs text-center inline-flex items-center ml-3 dark:text-white"
           style={{ padding: "5px 8px" }}
@@ -125,10 +114,10 @@ const CryptocurrencyItem = (props) => {
       <div className="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 border-t border-gray-100 dark:border-gray-700 py-5">
         <div className="border-r border-gray-100 dark:border-gray-700">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">
-            {cryptocurrency.name} Price ({cryptocurrency.symbol})
+            {props.cryptocurrency.name} Price ({props.cryptocurrency.symbol})
           </h3>
           <span className="text-sm font-semibold text-slate-700 dark:text-white">
-            {cryptocurrency.priceUsd}
+            {props.cryptocurrency.price}
             {changePercent24hButton}
           </span>
         </div>
@@ -137,13 +126,13 @@ const CryptocurrencyItem = (props) => {
             Market Cap
           </h3>
           <span className="text-sm font-semibold text-slate-700 dark:text-white">
-            {cryptocurrency.marketCapUsd}
+            {props.cryptocurrency.marketCap}
           </span>
         </div>
         <div className="border-r border-gray-100 dark:border-gray-700">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">Volume</h3>
           <span className="text-sm font-semibold text-slate-700 dark:text-white">
-            {cryptocurrency.volumeUsd24Hr}
+            {props.cryptocurrency.volume24Hr}
           </span>
         </div>
         <div>
@@ -152,7 +141,7 @@ const CryptocurrencyItem = (props) => {
           </h3>
           <div className="flex justify-between text-sm">
             <span className="font-semibold text-slate-700 dark:text-white">
-              {cryptocurrency.supply}
+              {props.cryptocurrency.supply}
             </span>
             <span className="text-slate-500 dark:text-slate-400">
               {circulatingSupplyPercentage}
@@ -170,8 +159,8 @@ const CryptocurrencyItem = (props) => {
               Max supply:
             </span>
             <span className="font-semibold text-slate-700 dark:text-white">
-              {!isNaN(parseFloat(cryptocurrency.maxSupply))
-                ? cryptocurrency.maxSupply
+              {!isNaN(parseFloat(props.cryptocurrency.maxSupply))
+                ? props.cryptocurrency.maxSupply
                 : "-"}
             </span>
           </div>

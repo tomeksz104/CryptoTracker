@@ -5,9 +5,19 @@ import store from "../store";
 import PageContent from "../components/Layout/PageContent";
 import CryptocurrencyItem from "../components/Cryptocurrency/CryptocurrencyItem";
 import Tabs from "../components/Cryptocurrency/Tabs";
+import { useContext } from "react";
+import CurrencyContext from "../store/currecy-context";
+import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
 
 const CryptocurrencyDetailPage = () => {
+  const currencyCtx = useContext(CurrencyContext);
   const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
+
+  const updatedCryptocurrency = updateCryptocurrencyInNewCurrency(
+    cryptocurrency,
+    currencyCtx.currentCurrency,
+    currencyCtx.currentCurrencyRate
+  );
 
   return (
     <Provider store={store}>
@@ -45,9 +55,9 @@ const CryptocurrencyDetailPage = () => {
             </li>
           </ol>
         </nav>
-        <CryptocurrencyItem cryptocurrency={cryptocurrency} />
+        <CryptocurrencyItem cryptocurrency={updatedCryptocurrency} />
       </PageContent>
-      <Tabs symbol={cryptocurrency.symbol} price={cryptocurrency.price} />
+      <Tabs cryptocurrency={updatedCryptocurrency} />
     </Provider>
   );
 };

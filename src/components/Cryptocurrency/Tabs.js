@@ -12,7 +12,7 @@ const Tabs = (props) => {
 
   let tab;
   if (activeTab === "tab1") {
-    tab = <Chart />;
+    tab = <Chart cryptocurrency={props.cryptocurrency} />;
   } else if (activeTab === "tab2") {
     tab = "markets";
   }

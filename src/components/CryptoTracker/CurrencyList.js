@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useCallback } from "react";
+import React, { useEffect, useMemo, useCallback, useContext } from "react";
 import useWebSocket from "react-use-websocket";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "@coingecko/cryptoformat";
+import CurrencyContext from "../../store/currecy-context";
 
 import CurrencyItem from "./CurrencyItem";
 import { currencyActions } from "../../store/currency-slice";
@@ -16,6 +17,7 @@ const SOCKET_URL = "wss://ws.coincap.io/prices?assets=ALL";
 
 const CurrencyList = React.memo(() => {
   const dispatch = useDispatch();
+  const currencyCtx = useContext(CurrencyContext);
   const currenciesInitialData = useSelector(
     (state) => state.currency.cryptocurrencies
   );
@@ -30,8 +32,15 @@ const CurrencyList = React.memo(() => {
   const { lastMessage } = useWebSocket(SOCKET_URL);
 
   useEffect(() => {
-    dispatch(fetchCryptocurrencyPrices());
-    dispatch(fetchWatchlistData());
+    if (currenciesData.length === 0) {
+      dispatch(
+        fetchCryptocurrencyPrices(
+          currencyCtx.currentCurrency,
+          currencyCtx.currentCurrencyRate
+        )
+      );
+      dispatch(fetchWatchlistData());
+    }
   }, [dispatch]);
 
   const pagesVisited = currentPage * perPage;
@@ -55,10 +64,12 @@ const CurrencyList = React.memo(() => {
       dispatch(
         currencyActions.updateCurrencyList({
           items: updatedCurrencies,
+          currentCurrency: currencyCtx.currentCurrency,
+          currentCurrencyRate: currencyCtx.currentCurrencyRate,
         })
       );
     }
-  }, [dispatch, lastMessage, currenciesInitialData]);
+  }, [dispatch, lastMessage, currenciesInitialData, currencyCtx]);
 
   useEffect(() => {
     let timerId = setTimeout(() => {
@@ -76,20 +87,10 @@ const CurrencyList = React.memo(() => {
     () =>
       currenciesData
         .slice(pagesVisited, pagesVisited + perPage)
-        .map((currency) => (
+        .map((cryptocurrency) => (
           <CurrencyItem
-            key={currency.id}
-            id={currency.id}
-            rank={currency.rank}
-            symbol={currency.symbol}
-            name={currency.name}
-            changePercent24Hr={currency.changePercent24Hr}
-            priceUsd={currency.priceUsd}
-            marketCapUsd={currency.marketCapUsd}
-            volumeUsd24Hr={currency.volumeUsd24Hr}
-            price={currency.price ? currency.price : null}
-            marketCap={currency.marketCap ? currency.marketCap : null}
-            volume24Hr={currency.volume24Hr ? currency.volume24Hr : null}
+            key={cryptocurrency.id}
+            cryptocurrency={cryptocurrency}
           />
         )),
     [currenciesData, pagesVisited, perPage]

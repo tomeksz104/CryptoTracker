@@ -15,8 +15,6 @@ const currencySlice = createSlice({
     sortOrder: "asc",
     showWatchlist: false,
     watchlist: [],
-    currentCurrency: "USD",
-    currentCurrencyRate: 0,
   },
   reducers: {
     replaceCurrencyList(state, action) {
@@ -30,6 +28,8 @@ const currencySlice = createSlice({
     },
     updateCurrencyList(state, action) {
       const updatedCurrencies = action.payload.items;
+      const currentCurrency = action.payload.currentCurrency;
+      const currentCurrencyRate = action.payload.currentCurrencyRate;
 
       state.cryptocurrencies = state.cryptocurrencies.map((currency) => {
         const updatedCurrency = updatedCurrencies.find(
@@ -37,14 +37,11 @@ const currencySlice = createSlice({
         );
 
         if (updatedCurrency) {
-          return state.currentCurrency !== "USD" &&
-            state.currentCurrencyRate !== 0
-            ? updateCryptocurrencyInNewCurrency(
-                updatedCurrency,
-                state.currentCurrency,
-                state.currentCurrencyRate
-              )
-            : updatedCurrency;
+          return updateCryptocurrencyInNewCurrency(
+            updatedCurrency,
+            currentCurrency,
+            currentCurrencyRate
+          );
         }
 
         return currency;
@@ -57,14 +54,11 @@ const currencySlice = createSlice({
           );
 
           if (updatedCurrency) {
-            return state.currentCurrency !== "USD" &&
-              state.currentCurrencyRate !== 0
-              ? updateCryptocurrencyInNewCurrency(
-                  updatedCurrency,
-                  state.currentCurrency,
-                  state.currentCurrencyRate
-                )
-              : updatedCurrency;
+            return updateCryptocurrencyInNewCurrency(
+              updatedCurrency,
+              currentCurrency,
+              currentCurrencyRate
+            );
           }
 
           return currency;
@@ -200,23 +194,23 @@ const currencySlice = createSlice({
       state.watchlist = watchlist;
     },
     changeCurrentCurrency(state, action) {
-      state.currentCurrency = action.payload.symbol;
-      state.currentCurrencyRate = action.payload.rateUsd;
+      const currentCurrency = action.payload.symbol;
+      const currentCurrencyRate = action.payload.rate;
 
       const updatedListWithNewCurrency = state.cryptocurrencies.map(
         (cryptocurrency) =>
           updateCryptocurrencyInNewCurrency(
             cryptocurrency,
-            action.payload.symbol,
-            action.payload.rateUsd
+            currentCurrency,
+            currentCurrencyRate
           )
       );
       const updatedFilteredListWithNewCurrency =
         state.filteredCryptocurrencies.map((cryptocurrency) =>
           updateCryptocurrencyInNewCurrency(
             cryptocurrency,
-            action.payload.symbol,
-            action.payload.rateUsd
+            currentCurrency,
+            currentCurrencyRate
           )
         );
 

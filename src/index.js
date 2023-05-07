@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { DarkmodeContextProvider } from "./store/darkmode-context";
+import { CurrencyContextProvider } from "./store/currecy-context";
 
 import "@fontsource/inter";
 import "@fontsource/inter/500.css"; // Weight 500.
@@ -12,7 +13,9 @@ import "@fontsource/inter/500.css"; // Weight 500.
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <DarkmodeContextProvider>
-    <App />
+    <CurrencyContextProvider>
+      <App />
+    </CurrencyContextProvider>
   </DarkmodeContextProvider>
 );
 

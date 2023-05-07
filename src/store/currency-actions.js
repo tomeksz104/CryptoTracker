@@ -1,8 +1,12 @@
 import { currencyActions } from "./currency-slice";
 
 import { formatCurrency } from "@coingecko/cryptoformat";
+import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
 
-export const fetchCryptocurrencyPrices = () => {
+export const fetchCryptocurrencyPrices = (
+  currentCurrency,
+  currentCurrencyRate
+) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
@@ -14,40 +18,48 @@ export const fetchCryptocurrencyPrices = () => {
 
       const { data } = await response.json();
 
-      const currencyPromises = data.map(async (item) => {
-        let formattedPrice;
-        if (item.priceUsd < 1) {
-          formattedPrice = Number.parseFloat(item.priceUsd).toFixed(8);
-        } else {
-          formattedPrice = formatCurrency(item.priceUsd, "USD", "en", false, {
-            decimalPlaces: 2,
-          });
-        }
+      const currencyPromises = data.map((cryptocurrency) =>
+        updateCryptocurrencyInNewCurrency(
+          cryptocurrency,
+          currentCurrency,
+          currentCurrencyRate
+        )
+      );
 
-        const formattedMarketCap = formatCurrency(
-          item.marketCapUsd,
-          "USD",
-          "en",
-          false
-        );
-        const formattedVolume = formatCurrency(
-          item.volumeUsd24Hr,
-          "USD",
-          "en",
-          false
-        );
-        const changePercent24Hr = parseFloat(item.changePercent24Hr).toFixed(2);
-        return {
-          id: item.id,
-          rank: item.rank,
-          name: item.name,
-          symbol: item.symbol,
-          priceUsd: formattedPrice,
-          changePercent24Hr: changePercent24Hr,
-          marketCapUsd: formattedMarketCap,
-          volumeUsd24Hr: formattedVolume,
-        };
-      });
+      // const currencyPromises = data.map(async (item) => {
+      //   let formattedPrice;
+      //   if (item.priceUsd < 1) {
+      //     formattedPrice = Number.parseFloat(item.priceUsd).toFixed(8);
+      //   } else {
+      //     formattedPrice = formatCurrency(item.priceUsd, "USD", "en", false, {
+      //       decimalPlaces: 2,
+      //     });
+      //   }
+
+      //   const formattedMarketCap = formatCurrency(
+      //     item.marketCapUsd,
+      //     "USD",
+      //     "en",
+      //     false
+      //   );
+      //   const formattedVolume = formatCurrency(
+      //     item.volumeUsd24Hr,
+      //     "USD",
+      //     "en",
+      //     false
+      //   );
+      //   const changePercent24Hr = parseFloat(item.changePercent24Hr).toFixed(2);
+      //   return {
+      //     id: item.id,
+      //     rank: item.rank,
+      //     name: item.name,
+      //     symbol: item.symbol,
+      //     priceUsd: formattedPrice,
+      //     changePercent24Hr: changePercent24Hr,
+      //     marketCapUsd: formattedMarketCap,
+      //     volumeUsd24Hr: formattedVolume,
+      //   };
+      // });
 
       const loadedCurrencies = await Promise.all(currencyPromises);
 

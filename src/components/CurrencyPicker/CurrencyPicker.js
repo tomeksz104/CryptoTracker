@@ -1,16 +1,15 @@
-import { useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useRef, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { currencyActions } from "../../store/currency-slice";
+import CurrencyContext from "../../store/currecy-context";
 
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import Modal from "../UI/Modal";
 import CurrencyFlag from "react-currency-flags";
-import { currencyActions } from "../../store/currency-slice";
 
 const CurrencyPicker = () => {
   const dispatch = useDispatch();
-  const currentCurrency = useSelector(
-    (state) => state.currency.currentCurrency
-  );
+  const currencyCtx = useContext(CurrencyContext);
   const [enteredFilter, setEnteredFilter] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currenciesData, setCurrenciesData] = useState([]);
@@ -72,11 +71,13 @@ const CurrencyPicker = () => {
     setModalIsOpen(false);
   };
 
-  const selectCurrencyHandler = (symbol, rateUsd) => {
+  const selectCurrencyHandler = (symbol, rate) => {
+    currencyCtx.onChangeCurrentCurrency(symbol, rate);
+
     dispatch(
       currencyActions.changeCurrentCurrency({
         symbol,
-        rateUsd,
+        rate,
       })
     );
   };
@@ -88,7 +89,9 @@ const CurrencyPicker = () => {
         className="flex items-center bg-slate-400/10 hover:bg-slate-400/20 dark:text-slate-200 rounded-md cursor-pointer"
         style={{ padding: "5px 8px" }}
       >
-        <span className="text-xs font-medium">{currentCurrency}</span>
+        <span className="text-xs font-medium">
+          {currencyCtx.currentCurrency}
+        </span>
         <CaretDown className="w-3 h-3 ml-1 dark:fill-slate-200" />
       </div>
 
@@ -154,7 +157,7 @@ const CurrencyPicker = () => {
                   selectCurrencyHandler(currency.symbol, currency.rateUsd)
                 }
                 className={`flex items-center text-sm rounded-md px-3 py-1 cursor-pointer ${
-                  currentCurrency === currency.symbol
+                  currencyCtx.currentCurrency === currency.symbol
                     ? "bg-slate-400/10"
                     : "hover:bg-slate-400/10"
                 }`}
@@ -168,7 +171,7 @@ const CurrencyPicker = () => {
                     {currency.symbol} - {currency.currencySymbol}
                   </span>
                 </div>
-                {currentCurrency === currency.symbol && (
+                {currencyCtx.currentCurrency === currency.symbol && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"

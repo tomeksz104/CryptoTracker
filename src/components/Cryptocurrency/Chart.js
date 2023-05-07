@@ -7,17 +7,12 @@ import HighchartsReact from "highcharts-react-official";
 import { updateCryptocurrencyInNewCurrency } from "../../utils/cryptoUtils";
 import Converter from "./Converter";
 
-const Chart = () => {
-  const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
+require("highcharts/modules/accessibility")(Highcharts);
+
+const Chart = (props) => {
   const [historyData, setHistoryData] = useState([]);
   const { currentCurrency, currentCurrencyRate } = useSelector(
     (state) => state.currency
-  );
-
-  const cryptocurrency_item = updateCryptocurrencyInNewCurrency(
-    cryptocurrency,
-    currentCurrency,
-    currentCurrencyRate
   );
 
   const options = {
@@ -36,7 +31,7 @@ const Chart = () => {
       {
         //type: "candlestick",
         showInLegend: false,
-        name: cryptocurrency.symbol,
+        name: props.cryptocurrency.symbol,
         data: historyData,
       },
     ],
@@ -57,7 +52,7 @@ const Chart = () => {
   }, []);
 
   return (
-    <div class="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 py-5">
+    <div className="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 py-5">
       <div className="col-span-3">
         {historyData.length !== 0 && (
           <HighchartsReact
@@ -67,7 +62,7 @@ const Chart = () => {
           />
         )}
       </div>
-      <Converter />
+      <Converter cryptocurrency={props.cryptocurrency} />
     </div>
   );
 };
