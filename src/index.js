@@ -4,8 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { DarkmodeContextProvider } from "./store/darkmode-context";
-import { CurrencyContextProvider } from "./store/currecy-context";
+import { DarkmodeContextProvider } from "./context/darkmode-context";
+import { CurrencyContextProvider } from "./context/currecy-context";
 
 import "@fontsource/inter";
 import "@fontsource/inter/500.css"; // Weight 500.

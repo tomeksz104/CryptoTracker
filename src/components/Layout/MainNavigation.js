@@ -1,14 +1,13 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Provider } from "react-redux";
+import DarkmodeContext from "../../context/darkmode-context";
 
 import store from "../../store";
 import logo from "../../assets/logo.png";
 import logoDarkmode from "../../assets/logo-dark.png";
 import CurrencyPicker from "../CurrencyPicker/CurrencyPicker";
 import ToggleDarkModeButton from "../UI/ToggleDarkModeButton";
-
-import DarkmodeContext from "../../store/darkmode-context";
 
 const MainNavigation = () => {
   const darkmodeCtx = useContext(DarkmodeContext);

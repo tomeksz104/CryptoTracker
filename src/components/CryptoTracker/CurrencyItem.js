@@ -9,9 +9,9 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import usePrevious from "../../hooks/usePrevious";
 import { Transition } from "react-transition-group";
-import { currencyActions } from "../../store/currency-slice";
+import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import { Link } from "react-router-dom";
-import CurrencyContext from "../../store/currecy-context";
+import CurrencyContext from "../../context/currecy-context";
 
 import empty from "../../assets/cryptocurrency-icons/empty.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
@@ -88,7 +88,7 @@ const CurrencyItem = React.memo((props) => {
   const handleToggleWatchlist = useCallback(() => {
     if (watchlist.includes(props.cryptocurrency.symbol)) {
       dispatch(
-        currencyActions.removeFromWatchlist({
+        cryptocurrencyActions.removeFromWatchlist({
           currency: {
             symbol: props.cryptocurrency.symbol,
           },
@@ -96,7 +96,7 @@ const CurrencyItem = React.memo((props) => {
       );
     } else {
       dispatch(
-        currencyActions.addToWatchlist({
+        cryptocurrencyActions.addToWatchlist({
           currency: {
             symbol: props.cryptocurrency.symbol,
           },

@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
-import { currencyActions } from "../../store/currency-slice";
+import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 
 import "./Pagination.css";
 import PerPageSelect from "../UI/PerPageSelect";
@@ -19,7 +19,7 @@ const Pagination = React.memo(() => {
 
   const changePageHandler = useCallback(
     ({ selected }) => {
-      dispatch(currencyActions.changePage({ page: selected }));
+      dispatch(cryptocurrencyActions.changePage({ page: selected }));
     },
     [dispatch]
   );

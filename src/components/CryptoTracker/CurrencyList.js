@@ -2,14 +2,14 @@ import React, { useEffect, useMemo, useCallback, useContext } from "react";
 import useWebSocket from "react-use-websocket";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "@coingecko/cryptoformat";
-import CurrencyContext from "../../store/currecy-context";
+import CurrencyContext from "../../context/currecy-context";
 
 import CurrencyItem from "./CurrencyItem";
-import { currencyActions } from "../../store/currency-slice";
+import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import {
   fetchCryptocurrencyPrices,
   fetchWatchlistData,
-} from "../../store/currency-actions";
+} from "../../store/cryptocurrency-actions";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
@@ -62,7 +62,7 @@ const CurrencyList = React.memo(() => {
         });
 
       dispatch(
-        currencyActions.updateCurrencyList({
+        cryptocurrencyActions.updateCurrencyList({
           items: updatedCurrencies,
           currentCurrency: currencyCtx.currentCurrency,
           currentCurrencyRate: currencyCtx.currentCurrencyRate,
@@ -80,7 +80,7 @@ const CurrencyList = React.memo(() => {
   }, [handleUpdateCurrencies]);
 
   const handleSort = (field) => {
-    dispatch(currencyActions.sortCurrencies(field));
+    dispatch(cryptocurrencyActions.sortCurrencies(field));
   };
 
   const currencyList = useMemo(

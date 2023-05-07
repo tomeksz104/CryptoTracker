@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
-import CurrencyContext from "../../store/currecy-context";
+import CurrencyContext from "../../context/currecy-context";
 
 function roundToDecimals(n, decimals) {
   const log10 = n ? Math.floor(Math.log10(n)) : 0,

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import DarkmodeContext from "../../store/darkmode-context";
+import DarkmodeContext from "../../context/darkmode-context";
 
 import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-dark.png";

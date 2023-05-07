@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import { useDispatch } from "react-redux";
-import { currencyActions } from "../../store/currency-slice";
-import CurrencyContext from "../../store/currecy-context";
+import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
+import CurrencyContext from "../../context/currecy-context";
 
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import Modal from "../UI/Modal";
@@ -75,7 +75,7 @@ const CurrencyPicker = () => {
     currencyCtx.onChangeCurrentCurrency(symbol, rate);
 
     dispatch(
-      currencyActions.changeCurrentCurrency({
+      cryptocurrencyActions.changeCurrentCurrency({
         symbol,
         rate,
       })

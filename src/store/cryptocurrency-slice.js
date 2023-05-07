@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
 
-const currencySlice = createSlice({
-  name: "currency",
+const cryptocurrencySlice = createSlice({
+  name: "cryptocurrency",
   initialState: {
     cryptocurrencies: [],
     filteredCryptocurrencies: [],
@@ -220,6 +220,6 @@ const currencySlice = createSlice({
   },
 });
 
-export const currencyActions = currencySlice.actions;
+export const cryptocurrencyActions = cryptocurrencySlice.actions;
 
-export default currencySlice;
+export default cryptocurrencySlice;

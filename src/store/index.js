@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import currencySlice from "./currency-slice";
+import cryptocurrencySlice from "./cryptocurrency-slice";
 
 const store = configureStore({
   reducer: {
-    currency: currencySlice.reducer,
+    cryptocurrency: cryptocurrencySlice.reducer,
   },
 });
 

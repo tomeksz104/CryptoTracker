@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { currencyActions } from "../../store/currency-slice";
+import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 
 import Tippy from "@tippyjs/react";
 import "./PerPageSelect.css";
@@ -12,7 +12,7 @@ const PerPageSelect = (props) => {
 
   const handleChangeRowsPerPage = (number) => {
     dispatch(
-      currencyActions.changeRowsPerPage({
+      cryptocurrencyActions.changeRowsPerPage({
         perPage: number,
       })
     );

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { currencyActions } from "../../store/currency-slice";
+import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import PerPageSelect from "../UI/PerPageSelect";
 
 const Filters = () => {
@@ -13,7 +13,7 @@ const Filters = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
-        dispatch(currencyActions.searchByName(enteredFilter));
+        dispatch(cryptocurrencyActions.searchByName(enteredFilter));
       }
     }, 500);
     return () => {
@@ -22,7 +22,7 @@ const Filters = () => {
   }, [enteredFilter, inputRef, dispatch]);
 
   const handleToggleShowWatchlist = () => {
-    dispatch(currencyActions.toggleWatchlist());
+    dispatch(cryptocurrencyActions.toggleWatchlist());
   };
 
   return (

@@ -1,4 +1,4 @@
-import { currencyActions } from "./currency-slice";
+import { cryptocurrencyActions } from "./cryptocurrency-slice";
 
 import { formatCurrency } from "@coingecko/cryptoformat";
 import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
@@ -69,7 +69,7 @@ export const fetchCryptocurrencyPrices = (
     try {
       const currencyData = await fetchData();
       dispatch(
-        currencyActions.replaceCurrencyList({
+        cryptocurrencyActions.replaceCurrencyList({
           items: currencyData || [],
         })
       );
@@ -94,7 +94,7 @@ export const fetchWatchlistData = () => {
 
     if (favoriteCurrencies.length > 0) {
       dispatch(
-        currencyActions.replaceWatchlist({
+        cryptocurrencyActions.replaceWatchlist({
           watchlist: favoriteCurrencies,
         })
       );

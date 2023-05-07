@@ -6,7 +6,7 @@ import PageContent from "../components/Layout/PageContent";
 import CryptocurrencyItem from "../components/Cryptocurrency/CryptocurrencyItem";
 import Tabs from "../components/Cryptocurrency/Tabs";
 import { useContext } from "react";
-import CurrencyContext from "../store/currecy-context";
+import CurrencyContext from "../context/currecy-context";
 import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
 
 const CryptocurrencyDetailPage = () => {
