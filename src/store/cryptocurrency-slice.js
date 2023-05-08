@@ -101,7 +101,13 @@ const cryptocurrencySlice = createSlice({
     },
     sortCurrencies: (state, action) => {
       const sortField = action.payload;
-      const sortOrder = state.sortOrder === "asc" ? "desc" : "asc"; // zmiana kierunku sortowania
+
+      let updatedSortOrder;
+      if (sortField === state.sortField) {
+        updatedSortOrder = state.sortOrder === "asc" ? "desc" : "asc";
+      } else {
+        updatedSortOrder = "asc";
+      }
 
       const sortedCurrencies = [...state.filteredCryptocurrencies].sort(
         (a, b) => {
@@ -118,18 +124,21 @@ const cryptocurrencySlice = createSlice({
           }
 
           if (fieldA < fieldB) {
-            return sortOrder === "asc" ? -1 : 1;
+            return updatedSortOrder === "asc" ? -1 : 1;
           }
           if (fieldA > fieldB) {
-            return sortOrder === "asc" ? 1 : -1;
+            return updatedSortOrder === "asc" ? 1 : -1;
           }
           return 0;
         }
       );
 
-      state.sortField = sortField;
-      state.sortOrder = sortOrder;
-      state.filteredCryptocurrencies = sortedCurrencies;
+      return {
+        ...state,
+        sortField,
+        sortOrder: updatedSortOrder,
+        filteredCryptocurrencies: sortedCurrencies,
+      };
     },
     toggleWatchlist(state, action) {
       state.showWatchlist = !state.showWatchlist;
