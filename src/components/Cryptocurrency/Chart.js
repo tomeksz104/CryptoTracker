@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import CurrencyContext from "../../context/currecy-context";
 
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import Converter from "./Converter";
+import { roundToDecimals } from "../../utils/cryptoUtils";
 
 require("highcharts/modules/accessibility")(Highcharts);
 
 const Chart = (props) => {
+  const currencyCtx = useContext(CurrencyContext);
   const [historyData, setHistoryData] = useState([]);
 
   const options = {
@@ -25,7 +28,7 @@ const Chart = (props) => {
       {
         //type: "candlestick",
         showInLegend: false,
-        name: props.cryptocurrency.symbol,
+        name: currencyCtx.currentCurrency,
         data: historyData,
       },
     ],
@@ -34,16 +37,28 @@ const Chart = (props) => {
   useEffect(() => {
     const fetchChartData = async () => {
       const response = await fetch(
-        "https://api.coincap.io/v2/assets/bitcoin/history?interval=d1"
+        `https://api.coincap.io/v2/assets/${props.cryptocurrency.name.toLowerCase()}/history?interval=d1`
       );
       const { data } = await response.json();
 
-      const mappedData = data.map((item) => [item.time, +item.priceUsd]);
+      const mappedData = data.map((item) => {
+        if (currencyCtx.currentCurrencyRate === 0) {
+          return [item.time, roundToDecimals(+item.priceUsd, 2)];
+        } else {
+          return [
+            item.time,
+            roundToDecimals(
+              +item.priceUsd / currencyCtx.currentCurrencyRate,
+              2
+            ),
+          ];
+        }
+      });
 
       setHistoryData(mappedData);
     };
     fetchChartData();
-  }, []);
+  }, [currencyCtx.currentCurrencyRate]);
 
   return (
     <div className="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 py-5">
