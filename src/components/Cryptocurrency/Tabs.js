@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Chart from "./Chart";
 import PageContent from "../Layout/PageContent";
+import Markets from "./Markets";
 
 const Tabs = (props) => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -14,7 +15,7 @@ const Tabs = (props) => {
   if (activeTab === "tab1") {
     tab = <Chart cryptocurrency={props.cryptocurrency} />;
   } else if (activeTab === "tab2") {
-    tab = "markets";
+    tab = <Markets name={props.cryptocurrency.name} />;
   }
 
   const activeTabClasses =
