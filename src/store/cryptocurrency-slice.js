@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
+import { formatCryptocurrency } from "../utils/cryptoUtils";
 
 const cryptocurrencySlice = createSlice({
   name: "cryptocurrency",
@@ -37,7 +37,7 @@ const cryptocurrencySlice = createSlice({
         );
 
         if (updatedCurrency) {
-          return updateCryptocurrencyInNewCurrency(
+          return formatCryptocurrency(
             updatedCurrency,
             currentCurrency,
             currentCurrencyRate
@@ -54,7 +54,7 @@ const cryptocurrencySlice = createSlice({
           );
 
           if (updatedCurrency) {
-            return updateCryptocurrencyInNewCurrency(
+            return formatCryptocurrency(
               updatedCurrency,
               currentCurrency,
               currentCurrencyRate
@@ -199,7 +199,7 @@ const cryptocurrencySlice = createSlice({
 
       const updatedListWithNewCurrency = state.cryptocurrencies.map(
         (cryptocurrency) =>
-          updateCryptocurrencyInNewCurrency(
+          formatCryptocurrency(
             cryptocurrency,
             currentCurrency,
             currentCurrencyRate
@@ -207,7 +207,7 @@ const cryptocurrencySlice = createSlice({
       );
       const updatedFilteredListWithNewCurrency =
         state.filteredCryptocurrencies.map((cryptocurrency) =>
-          updateCryptocurrencyInNewCurrency(
+          formatCryptocurrency(
             cryptocurrency,
             currentCurrency,
             currentCurrencyRate

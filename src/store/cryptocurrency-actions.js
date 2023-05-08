@@ -1,7 +1,6 @@
 import { cryptocurrencyActions } from "./cryptocurrency-slice";
 
-import { formatCurrency } from "@coingecko/cryptoformat";
-import { updateCryptocurrencyInNewCurrency } from "../utils/cryptoUtils";
+import { formatCryptocurrency } from "../utils/cryptoUtils";
 
 export const fetchCryptocurrencyPrices = (
   currentCurrency,
@@ -19,7 +18,7 @@ export const fetchCryptocurrencyPrices = (
       const { data } = await response.json();
 
       const currencyPromises = data.map((cryptocurrency) =>
-        updateCryptocurrencyInNewCurrency(
+        formatCryptocurrency(
           cryptocurrency,
           currentCurrency,
           currentCurrencyRate

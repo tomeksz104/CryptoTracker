@@ -1,20 +1,46 @@
 import { formatCurrency } from "@coingecko/cryptoformat";
 
-export function updateCryptocurrencyInNewCurrency(
+export function formatPrice(price, currentCurrencySymbol, currentCurrencyRate) {
+  let formattedPrice = parseFloat(price.replace(/[$,]/g, ""));
+
+  if (currentCurrencyRate === 0) {
+    return formatCurrency(formattedPrice, currentCurrencySymbol, "en", false, {
+      decimalPlaces: 2,
+    });
+  } else {
+    return formatCurrency(
+      formattedPrice / currentCurrencyRate,
+      currentCurrencySymbol,
+      "en",
+      false,
+      {
+        decimalPlaces: 2,
+      }
+    );
+  }
+}
+
+export function formatCryptocurrency(
   cryptocurrency,
-  symbol,
-  rateUsd
+  currentCurrencySymbol,
+  currentCurrencyRate
 ) {
-  const priceUsd = parseFloat(cryptocurrency.priceUsd.replace(/[$,]/g, ""));
-
-  const marketCapUsd = parseFloat(
-    cryptocurrency.marketCapUsd.replace(/[$,]/g, "")
+  const price = formatPrice(
+    cryptocurrency.priceUsd,
+    currentCurrencySymbol,
+    currentCurrencyRate
   );
-
-  const volumeUsd24Hr = parseFloat(
-    cryptocurrency.volumeUsd24Hr.replace(/[$,]/g, "")
+  const priceWithoutSymbol = cryptocurrency.priceUsd / currentCurrencyRate;
+  const marketCap = formatPrice(
+    cryptocurrency.priceUsd,
+    currentCurrencySymbol,
+    currentCurrencyRate
   );
-
+  const volume24Hr = formatPrice(
+    cryptocurrency.volumeUsd24Hr,
+    currentCurrencySymbol,
+    currentCurrencyRate
+  );
   const changePercent24Hr = parseFloat(
     cryptocurrency.changePercent24Hr
   ).toFixed(2);
@@ -29,69 +55,22 @@ export function updateCryptocurrencyInNewCurrency(
     }
   );
 
-  if (rateUsd !== 0) {
-    const priceInNewCurrency = formatCurrency(
-      priceUsd / rateUsd,
-      symbol,
-      "en",
-      false,
-      {
-        decimalPlaces: 2,
-      }
-    );
-    const priceWithoutSymbol = priceUsd / rateUsd;
-    const marketCapInNewCurrency = formatCurrency(
-      marketCapUsd / rateUsd,
-      symbol,
-      "en",
-      false,
-      {
-        decimalPlaces: 2,
-      }
-    );
-    const volume24HrInNewCurrency = formatCurrency(
-      volumeUsd24Hr / rateUsd,
-      symbol,
-      "en",
-      false,
-      {
-        decimalPlaces: 2,
-      }
-    );
+  const updatedCryptocurrency = {
+    ...cryptocurrency,
+    price,
+    priceWithoutSymbol,
+    marketCap,
+    volume24Hr,
+    changePercent24Hr,
+    supply,
+    maxSupply,
+  };
 
-    return {
-      ...cryptocurrency,
-      price: priceInNewCurrency,
-      priceWithoutSymbol,
-      marketCap: marketCapInNewCurrency,
-      volume24Hr: volume24HrInNewCurrency,
-      changePercent24Hr: changePercent24Hr,
-      supply,
-      maxSupply,
-    };
-  } else {
-    const price = formatCurrency(priceUsd, symbol, "en", false, {
-      decimalPlaces: 2,
-    });
-    const marketCap = formatCurrency(marketCapUsd, symbol, "en", false, {
-      decimalPlaces: 2,
-    });
-    const volume24Hr = formatCurrency(volumeUsd24Hr, symbol, "en", false, {
-      decimalPlaces: 2,
-    });
-
-    return {
-      ...cryptocurrency,
-      price,
-      priceUsd: price,
-      priceWithoutSymbol: priceUsd,
-      marketCap,
-      marketCapUsd: marketCap,
-      volume24Hr,
-      volumeUsd24Hr: volume24Hr,
-      changePercent24Hr: changePercent24Hr,
-      supply,
-      maxSupply,
-    };
+  if (currentCurrencyRate === 0) {
+    updatedCryptocurrency.priceUsd = cryptocurrency.priceUsd;
+    updatedCryptocurrency.marketCapUsd = marketCap;
+    updatedCryptocurrency.volumeUsd24Hr = volume24Hr;
   }
+
+  return updatedCryptocurrency;
 }
