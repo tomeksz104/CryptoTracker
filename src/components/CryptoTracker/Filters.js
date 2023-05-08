@@ -7,7 +7,9 @@ import PerPageSelect from "../UI/PerPageSelect";
 const Filters = () => {
   const dispatch = useDispatch();
   const [enteredFilter, setEnteredFilter] = useState("");
-  const showWatchlist = useSelector((state) => state.currency.showWatchlist);
+  const showWatchlist = useSelector(
+    (state) => state.cryptocurrency.showWatchlist
+  );
   const inputRef = useRef();
 
   useEffect(() => {

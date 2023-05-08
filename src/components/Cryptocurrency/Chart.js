@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLoaderData } from "react-router";
 
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import { updateCryptocurrencyInNewCurrency } from "../../utils/cryptoUtils";
 import Converter from "./Converter";
 
 require("highcharts/modules/accessibility")(Highcharts);
 
 const Chart = (props) => {
   const [historyData, setHistoryData] = useState([]);
-  const { currentCurrency, currentCurrencyRate } = useSelector(
-    (state) => state.currency
-  );
 
   const options = {
     rangeSelector: {

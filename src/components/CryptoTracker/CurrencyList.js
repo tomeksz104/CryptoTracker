@@ -19,15 +19,15 @@ const CurrencyList = React.memo(() => {
   const dispatch = useDispatch();
   const currencyCtx = useContext(CurrencyContext);
   const currenciesInitialData = useSelector(
-    (state) => state.currency.cryptocurrencies
+    (state) => state.cryptocurrency.cryptocurrencies
   );
   const currenciesData = useSelector(
-    (state) => state.currency.filteredCryptocurrencies
+    (state) => state.cryptocurrency.filteredCryptocurrencies
   );
-  const currentPage = useSelector((state) => state.currency.currentPage);
-  const perPage = useSelector((state) => state.currency.perPage);
-  const sortField = useSelector((state) => state.currency.sortField);
-  const sortOrder = useSelector((state) => state.currency.sortOrder);
+  const currentPage = useSelector((state) => state.cryptocurrency.currentPage);
+  const perPage = useSelector((state) => state.cryptocurrency.perPage);
+  const sortField = useSelector((state) => state.cryptocurrency.sortField);
+  const sortOrder = useSelector((state) => state.cryptocurrency.sortOrder);
 
   const { lastMessage } = useWebSocket(SOCKET_URL);
 

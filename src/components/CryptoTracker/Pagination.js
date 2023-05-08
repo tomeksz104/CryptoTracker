@@ -10,10 +10,10 @@ import { ReactComponent as ChevronRight } from "../../assets/svg/chevron-right.s
 
 const Pagination = React.memo(() => {
   const dispatch = useDispatch();
-  const pageCount = useSelector((state) => state.currency.totalPages);
-  const currentPage = useSelector((state) => state.currency.currentPage);
-  const perPage = useSelector((state) => state.currency.perPage);
-  const totalItems = useSelector((state) => state.currency.totalItems);
+  const pageCount = useSelector((state) => state.cryptocurrency.totalPages);
+  const currentPage = useSelector((state) => state.cryptocurrency.currentPage);
+  const perPage = useSelector((state) => state.cryptocurrency.perPage);
+  const totalItems = useSelector((state) => state.cryptocurrency.totalItems);
 
   const pagesVisited = currentPage * perPage;
 

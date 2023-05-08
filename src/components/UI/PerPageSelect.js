@@ -8,7 +8,7 @@ const options = [100, 50, 20];
 
 const PerPageSelect = (props) => {
   const dispatch = useDispatch();
-  const perPage = useSelector((state) => state.currency.perPage);
+  const perPage = useSelector((state) => state.cryptocurrency.perPage);
 
   const handleChangeRowsPerPage = (number) => {
     dispatch(

@@ -4,14 +4,12 @@ import React, {
   useRef,
   useMemo,
   useCallback,
-  useContext,
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import usePrevious from "../../hooks/usePrevious";
 import { Transition } from "react-transition-group";
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import { Link } from "react-router-dom";
-import CurrencyContext from "../../context/currecy-context";
 
 import empty from "../../assets/cryptocurrency-icons/empty.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
@@ -22,10 +20,9 @@ import "./CurrencyItem.css";
 const DURATION = 300;
 
 const CurrencyItem = React.memo((props) => {
-  const currencyCtx = useContext(CurrencyContext);
   const dispatch = useDispatch();
   const prevData = usePrevious(props);
-  const watchlist = useSelector((state) => state.currency.watchlist);
+  const watchlist = useSelector((state) => state.cryptocurrency.watchlist);
   const [animation, setAnimation] = useState(null);
   const [show, setShow] = useState(false);
 
