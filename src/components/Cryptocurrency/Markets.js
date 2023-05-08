@@ -185,7 +185,7 @@ const Markets = (props) => {
       <div className="mt-5 flex justify-center">
         <button
           onClick={handleLoadMore}
-          className="flex text-neutral-800 dark:text-neutral-300 font-semibold bg-slate-400/20 hover:bg-slate-400/30 rounded-md py-2 px-16
+          className="flex text-neutral-800 dark:text-neutral-300 font-medium bg-slate-400/20 hover:bg-slate-400/30 rounded-md py-2 px-16
 cursor-pointer transition-colors duration-300"
         >
           Load More
