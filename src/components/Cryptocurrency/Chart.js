@@ -34,10 +34,12 @@ const Chart = (props) => {
     ],
   };
 
+  console.log(props.cryptocurrency);
+
   useEffect(() => {
     const fetchChartData = async () => {
       const response = await fetch(
-        `https://api.coincap.io/v2/assets/${props.cryptocurrency.name.toLowerCase()}/history?interval=d1`
+        `https://api.coincap.io/v2/assets/${props.cryptocurrency.id.toLowerCase()}/history?interval=d1`
       );
       const { data } = await response.json();
 
