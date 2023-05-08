@@ -106,7 +106,7 @@ const cryptocurrencySlice = createSlice({
       if (sortField === state.sortField) {
         updatedSortOrder = state.sortOrder === "asc" ? "desc" : "asc";
       } else {
-        updatedSortOrder = "asc";
+        updatedSortOrder = "desc";
       }
 
       const sortedCurrencies = [...state.filteredCryptocurrencies].sort(
