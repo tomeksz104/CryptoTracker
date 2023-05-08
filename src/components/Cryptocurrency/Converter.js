@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import CurrencyContext from "../../context/currecy-context";
 
-function roundToDecimals(n, decimals) {
-  const log10 = n ? Math.floor(Math.log10(n)) : 0,
+function roundToDecimals(number, decimals) {
+  const log10 = number ? Math.floor(Math.log10(number)) : 0,
     div =
       log10 < 0 ? Math.pow(10, decimals - log10 - 1) : Math.pow(10, decimals);
 
-  return Math.round(n * div) / div;
+  return Math.round(number * div) / div;
 }
 
 const Converter = (props) => {
