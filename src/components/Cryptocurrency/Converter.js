@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router";
 import CurrencyContext from "../../context/currecy-context";
 
 function roundToDecimals(number, decimals) {
