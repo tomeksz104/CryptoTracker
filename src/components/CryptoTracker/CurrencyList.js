@@ -18,21 +18,19 @@ const SOCKET_URL = "wss://ws.coincap.io/prices?assets=ALL";
 const CurrencyList = React.memo(() => {
   const dispatch = useDispatch();
   const currencyCtx = useContext(CurrencyContext);
-  const currenciesInitialData = useSelector(
-    (state) => state.cryptocurrency.cryptocurrencies
-  );
-  const currenciesData = useSelector(
-    (state) => state.cryptocurrency.filteredCryptocurrencies
-  );
-  const currentPage = useSelector((state) => state.cryptocurrency.currentPage);
-  const perPage = useSelector((state) => state.cryptocurrency.perPage);
-  const sortField = useSelector((state) => state.cryptocurrency.sortField);
-  const sortOrder = useSelector((state) => state.cryptocurrency.sortOrder);
+  const {
+    cryptocurrencies,
+    filteredCryptocurrencies,
+    currentPage,
+    perPage,
+    sortField,
+    sortOrder,
+  } = useSelector((state) => state.cryptocurrency);
 
   const { lastMessage } = useWebSocket(SOCKET_URL);
 
   useEffect(() => {
-    if (currenciesData.length === 0) {
+    if (filteredCryptocurrencies.length === 0) {
       dispatch(
         fetchCryptocurrencyPrices(
           currencyCtx.currentCurrency,
@@ -47,7 +45,7 @@ const CurrencyList = React.memo(() => {
 
   const handleUpdateCurrencies = useCallback(() => {
     if (lastMessage !== null) {
-      const updatedCurrencies = currenciesInitialData
+      const updatedCurrencies = cryptocurrencies
         .filter((currency) =>
           JSON.parse(lastMessage.data).hasOwnProperty(currency.id)
         )
@@ -69,7 +67,7 @@ const CurrencyList = React.memo(() => {
         })
       );
     }
-  }, [dispatch, lastMessage, currenciesInitialData, currencyCtx]);
+  }, [dispatch, lastMessage, cryptocurrencies, currencyCtx]);
 
   useEffect(() => {
     let timerId = setTimeout(() => {
@@ -85,7 +83,7 @@ const CurrencyList = React.memo(() => {
 
   const currencyList = useMemo(
     () =>
-      currenciesData
+      filteredCryptocurrencies
         .slice(pagesVisited, pagesVisited + perPage)
         .map((cryptocurrency) => (
           <CurrencyItem
@@ -93,7 +91,7 @@ const CurrencyList = React.memo(() => {
             cryptocurrency={cryptocurrency}
           />
         )),
-    [currenciesData, pagesVisited, perPage]
+    [filteredCryptocurrencies, pagesVisited, perPage]
   );
 
   const getSortIcon = (field) => {

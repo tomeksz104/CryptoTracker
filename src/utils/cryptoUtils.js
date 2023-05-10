@@ -70,7 +70,16 @@ export function formatCryptocurrency(
     updatedCryptocurrency.priceUsd = cryptocurrency.priceUsd;
     updatedCryptocurrency.marketCapUsd = marketCap;
     updatedCryptocurrency.volumeUsd24Hr = volume24Hr;
+    updatedCryptocurrency.priceWithoutSymbol = cryptocurrency.priceUsd;
   }
 
   return updatedCryptocurrency;
+}
+
+export function roundToDecimals(number, decimals) {
+  const log10 = number ? Math.floor(Math.log10(number)) : 0,
+    div =
+      log10 < 0 ? Math.pow(10, decimals - log10 - 1) : Math.pow(10, decimals);
+
+  return Math.round(number * div) / div;
 }

@@ -34,8 +34,6 @@ const Chart = (props) => {
     ],
   };
 
-  console.log(props.cryptocurrency);
-
   useEffect(() => {
     const fetchChartData = async () => {
       const response = await fetch(
