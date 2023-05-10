@@ -32,7 +32,7 @@ export function formatCryptocurrency(
   );
   const priceWithoutSymbol = cryptocurrency.priceUsd / currentCurrencyRate;
   const marketCap = formatPrice(
-    cryptocurrency.priceUsd,
+    cryptocurrency.marketCapUsd,
     currentCurrencySymbol,
     currentCurrencyRate
   );
@@ -60,7 +60,9 @@ export function formatCryptocurrency(
     price,
     priceWithoutSymbol,
     marketCap,
+    //marketCapWithoutSymbol,
     volume24Hr,
+    //volume24HrWithoutSymbol,
     changePercent24Hr,
     supply,
     maxSupply,
