@@ -1,10 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { WatchlistContext } from "../../context/watchlist-context";
 
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import PerPageSelect from "../UI/PerPageSelect";
 
 const Filters = () => {
+  const watchlistCtx = useContext(WatchlistContext);
   const dispatch = useDispatch();
   const [enteredFilter, setEnteredFilter] = useState("");
   const showWatchlist = useSelector(
@@ -24,7 +26,7 @@ const Filters = () => {
   }, [enteredFilter, inputRef, dispatch]);
 
   const handleToggleShowWatchlist = () => {
-    dispatch(cryptocurrencyActions.toggleWatchlist());
+    dispatch(cryptocurrencyActions.toggleWatchlist(watchlistCtx.watchlist));
   };
 
   return (

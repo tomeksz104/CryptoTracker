@@ -14,7 +14,6 @@ const cryptocurrencySlice = createSlice({
     sortField: "",
     sortOrder: "asc",
     showWatchlist: false,
-    watchlist: [],
   },
   reducers: {
     replaceCurrencyList(state, action) {
@@ -141,18 +140,19 @@ const cryptocurrencySlice = createSlice({
       };
     },
     toggleWatchlist(state, action) {
+      const watchlist = action.payload;
       state.showWatchlist = !state.showWatchlist;
 
       state.pageNumber = 0;
 
       if (state.showWatchlist) {
-        const watchlist = [...state.filteredCryptocurrencies].filter((curr) =>
-          state.watchlist.includes(curr.symbol)
+        const filteredCurrencies = [...state.filteredCryptocurrencies].filter(
+          (curr) => watchlist.includes(curr.symbol)
         );
-        state.filteredCryptocurrencies = watchlist;
-        state.totalItems = watchlist.length;
-        state.totalPages = watchlist
-          ? Math.ceil(watchlist.length / state.perPage)
+        state.filteredCryptocurrencies = filteredCurrencies;
+        state.totalItems = filteredCurrencies.length;
+        state.totalPages = filteredCurrencies
+          ? Math.ceil(filteredCurrencies.length / state.perPage)
           : 0;
       } else {
         state.filteredCryptocurrencies = state.cryptocurrencies;
@@ -161,46 +161,6 @@ const cryptocurrencySlice = createSlice({
           ? Math.ceil(state.filteredCryptocurrencies.length / state.perPage)
           : 0;
       }
-    },
-    addToWatchlist(state, action) {
-      const { currency } = action.payload;
-
-      state.watchlist.push(currency.symbol);
-
-      const favoriteCurrencies =
-        JSON.parse(localStorage.getItem("favoriteCurrencies")) || [];
-      const currencyIndex = favoriteCurrencies.findIndex(
-        (fav) => fav === currency.symbol
-      );
-
-      if (currencyIndex === -1) {
-        favoriteCurrencies.push(currency.symbol);
-      }
-
-      localStorage.setItem(
-        "favoriteCurrencies",
-        JSON.stringify(favoriteCurrencies)
-      );
-    },
-    removeFromWatchlist(state, action) {
-      const { currency } = action.payload;
-
-      const favoriteCurrencies =
-        JSON.parse(localStorage.getItem("favoriteCurrencies")) || [];
-      const updatedCurrencies = favoriteCurrencies.filter(
-        (fav) => fav !== currency.symbol
-      );
-      state.watchlist = updatedCurrencies;
-
-      localStorage.setItem(
-        "favoriteCurrencies",
-        JSON.stringify(updatedCurrencies)
-      );
-    },
-    replaceWatchlist(state, action) {
-      const { watchlist } = action.payload;
-
-      state.watchlist = watchlist;
     },
     changeCurrentCurrency(state, action) {
       const currentCurrency = action.payload.symbol;

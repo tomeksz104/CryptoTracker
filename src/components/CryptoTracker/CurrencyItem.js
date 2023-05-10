@@ -4,12 +4,12 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  useContext,
 } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import usePrevious from "../../hooks/usePrevious";
 import { Transition } from "react-transition-group";
-import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import { Link } from "react-router-dom";
+import { WatchlistContext } from "../../context/watchlist-context";
 
 import empty from "../../assets/cryptocurrency-icons/empty.svg";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
@@ -20,13 +20,15 @@ import "./CurrencyItem.css";
 const DURATION = 300;
 
 const CurrencyItem = React.memo((props) => {
-  const dispatch = useDispatch();
+  const watchlistCtx = useContext(WatchlistContext);
   const prevData = usePrevious(props);
-  const watchlist = useSelector((state) => state.cryptocurrency.watchlist);
   const [animation, setAnimation] = useState(null);
   const [show, setShow] = useState(false);
-
   const imgRef = useRef(null);
+
+  const isOnWatchlist = watchlistCtx.watchlist.includes(
+    props.cryptocurrency.symbol
+  );
 
   useEffect(() => {
     const fetchSvg = async () => {
@@ -82,25 +84,13 @@ const CurrencyItem = React.memo((props) => {
     };
   }, []);
 
-  const handleToggleWatchlist = useCallback(() => {
-    if (watchlist.includes(props.cryptocurrency.symbol)) {
-      dispatch(
-        cryptocurrencyActions.removeFromWatchlist({
-          currency: {
-            symbol: props.cryptocurrency.symbol,
-          },
-        })
-      );
+  const handleToggleWatchlist = () => {
+    if (watchlistCtx.watchlist.includes(props.cryptocurrency.symbol)) {
+      watchlistCtx.removeFromWatchlist(props.cryptocurrency.symbol);
     } else {
-      dispatch(
-        cryptocurrencyActions.addToWatchlist({
-          currency: {
-            symbol: props.cryptocurrency.symbol,
-          },
-        })
-      );
+      watchlistCtx.addToWatchlist(props.cryptocurrency.symbol);
     }
-  }, [dispatch, watchlist, props.cryptocurrency.symbol]);
+  };
 
   return (
     <>
@@ -118,9 +108,7 @@ const CurrencyItem = React.memo((props) => {
                 strokeWidth="1.5"
                 stroke="currentColor"
                 className={`w-4 h-4 hover:text-amber-500 outline-0 ${
-                  watchlist.includes(props.cryptocurrency.symbol)
-                    ? "text-amber-500"
-                    : ""
+                  isOnWatchlist ? "text-amber-500" : ""
                 } cursor-pointer transition-colors duration-300`}
               >
                 <path
