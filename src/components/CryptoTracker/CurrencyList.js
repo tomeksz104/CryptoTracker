@@ -6,10 +6,7 @@ import CurrencyContext from "../../context/currecy-context";
 
 import CurrencyItem from "./CurrencyItem";
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
-import {
-  fetchCryptocurrencyPrices,
-  fetchWatchlistData,
-} from "../../store/cryptocurrency-actions";
+import { fetchCryptocurrencyPrices } from "../../store/cryptocurrency-actions";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 
@@ -37,7 +34,6 @@ const CurrencyList = React.memo(() => {
           currencyCtx.currentCurrencyRate
         )
       );
-      dispatch(fetchWatchlistData());
     }
   }, [dispatch]);
 

@@ -49,19 +49,3 @@ export const fetchCryptocurrencyPrices = (
     }
   };
 };
-
-export const fetchWatchlistData = () => {
-  return async (dispatch) => {
-    const favoriteCurrencies = JSON.parse(
-      localStorage.getItem("favoriteCurrencies")
-    );
-
-    if (favoriteCurrencies.length > 0) {
-      dispatch(
-        cryptocurrencyActions.replaceWatchlist({
-          watchlist: favoriteCurrencies,
-        })
-      );
-    }
-  };
-};
