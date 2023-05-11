@@ -12,30 +12,10 @@ const Markets = (props) => {
   const [sortField, setSortField] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
 
-  const [marketsData, setMarketsData] = useState([]);
-  const [offset, setOffset] = useState(0);
-  const limit = 100;
-
-  useEffect(() => {
-    const fetchMarketsData = async () => {
-      const response = await fetch(
-        `https://api.coincap.io/v2/assets/${props.name.toLowerCase()}/markets?offset=${offset}&limit=${limit}`
-      );
-      const { data } = await response.json();
-
-      const marketsWithId = data.map((market, index) => ({
-        ...market,
-        marketId: (index + 1 + offset).toString(),
-      }));
-
-      setMarketsData((prevData) => [...prevData, ...marketsWithId]);
-    };
-
-    fetchMarketsData();
-  }, [offset]);
+  const [marketsData, setMarketsData] = useState(props.marketsData);
 
   const handleLoadMore = () => {
-    setOffset((prevOffset) => prevOffset + limit);
+    props.onHandleLoadMore();
   };
 
   const handleSort = (field) => {
@@ -74,7 +54,6 @@ const Markets = (props) => {
   };
 
   const getSortIcon = (field) => {
-    console.log(sortOrder);
     if (sortField === field) {
       return sortOrder === "asc" ? (
         <CaretUp className="w-3 h-3 mr-1 dark:fill-slate-200" />

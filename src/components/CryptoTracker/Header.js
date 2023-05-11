@@ -6,16 +6,18 @@ import { CSSTransition } from "react-transition-group";
 import { formatPrice } from "../../utils/cryptoUtils";
 import { ReactComponent as LoadingIndicatorSvg } from "../../assets/svg/loading-indicator.svg";
 
+import classes from "./Header.module.css";
+
 const Header = React.memo(() => {
   const currencyCtx = useContext(CurrencyContext);
   const cryptocurrencies = useSelector(
     (state) => state.cryptocurrency.cryptocurrencies
   );
   const [isShowStats, setIsShowStats] = useState(true);
-  const totalMarketCapRef = useRef(null);
-  const volume24HrRef = useRef(null);
-  const bitcoinDominanceRef = useRef(null);
-  const ethereumDominanceRef = useRef(null);
+  const [totalMarketCap, setTotalMarketCap] = useState(null);
+  const [volume24Hr, setVolume24Hr] = useState(null);
+  const [bitcoinDominance, setBitcoinDominance] = useState(null);
+  const [ethereumDominance, setEthereumDominance] = useState(null);
 
   const statsEl = useRef();
 
@@ -26,11 +28,12 @@ const Header = React.memo(() => {
           sum + parseFloat(currency.marketCapUsd.replace(/[$,]/g, "")),
         0
       );
-
-      totalMarketCapRef.current = formatPrice(
-        totalMarketCap.toString(),
-        currencyCtx.currentCurrency,
-        currencyCtx.currentCurrencyRate
+      setTotalMarketCap(
+        formatPrice(
+          totalMarketCap.toString(),
+          currencyCtx.currentCurrency,
+          currencyCtx.currentCurrencyRate
+        )
       );
 
       const volume24Hr = cryptocurrencies.reduce(
@@ -38,27 +41,28 @@ const Header = React.memo(() => {
           sum + parseFloat(currency.volumeUsd24Hr.replace(/[$,]/g, "")),
         0
       );
-      volume24HrRef.current = formatPrice(
-        volume24Hr.toString(),
-        currencyCtx.currentCurrency,
-        currencyCtx.currentCurrencyRate
+      setVolume24Hr(
+        formatPrice(
+          volume24Hr.toString(),
+          currencyCtx.currentCurrency,
+          currencyCtx.currentCurrencyRate
+        )
       );
 
-      if (!bitcoinDominanceRef.current && !ethereumDominanceRef.current) {
+      if (!bitcoinDominance && !ethereumDominance) {
         const bitcoin = cryptocurrencies.find((row) => row.id === "bitcoin");
         const bitcoinMarketCap = bitcoin
           ? parseFloat(bitcoin.marketCapUsd.replace(/[$,]/g, ""))
           : 0;
 
-        bitcoinDominanceRef.current = (bitcoinMarketCap / totalMarketCap) * 100;
+        setBitcoinDominance((bitcoinMarketCap / totalMarketCap) * 100);
 
         const ethereum = cryptocurrencies.find((row) => row.id === "ethereum");
         const ethereumMarketCap = ethereum
           ? parseFloat(ethereum.marketCapUsd.replace(/[$,]/g, ""))
           : 0;
 
-        ethereumDominanceRef.current =
-          (ethereumMarketCap / totalMarketCap) * 100;
+        setEthereumDominance((ethereumMarketCap / totalMarketCap) * 100);
       }
     }
   }, [cryptocurrencies.length, currencyCtx]);
@@ -75,7 +79,7 @@ const Header = React.memo(() => {
             Cryptocurrency Prices
           </h1>
           <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">
-            The global crypto market cap is {totalMarketCapRef.current}
+            The global crypto market cap is {totalMarketCap}
           </p>
         </div>
 
@@ -110,15 +114,14 @@ const Header = React.memo(() => {
             : { height: "0px" }
         }
       >
-        <div className="relative p-3 sm:p-8 rounded-md sm:rounded-3xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <div
+          className={`relative p-3 sm:p-8 rounded-md sm:rounded-3xl bg-white/90 dark:bg-slate-900/90 ${classes["card"]} ${classes["bg-green-box"]}`}
+        >
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
-              <h2 className="text-blue-900 font-medium dark:text-white">
-                {totalMarketCapRef.current ? (
-                  totalMarketCapRef.current
-                ) : (
-                  <LoadingIndicatorSvg />
-                )}
+              <h2 className="flex text-blue-900 font-medium dark:text-white">
+                {totalMarketCap ? totalMarketCap : <LoadingIndicatorSvg />}
+                &zwnj;
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 Market Capitalization
@@ -126,15 +129,13 @@ const Header = React.memo(() => {
             </div>
           </div>
         </div>
-        <div className="relative p-3 sm:p-8 rounded-md sm:rounded-3xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <div
+          className={`relative p-3 sm:p-8 rounded-md sm:rounded-3xl bg-white/90 dark:bg-slate-900/90 ${classes["card"]} ${classes["bg-purple-box"]}`}
+        >
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="text-blue-900 font-medium dark:text-white">
-                {volume24HrRef.current ? (
-                  volume24HrRef.current
-                ) : (
-                  <LoadingIndicatorSvg />
-                )}
+                {volume24Hr ? volume24Hr : <LoadingIndicatorSvg />}&zwnj;
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 24h Trading Volume
@@ -142,15 +143,18 @@ const Header = React.memo(() => {
             </div>
           </div>
         </div>
-        <div className="relative p-3 sm:p-8 rounded-md sm:rounded-3xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <div
+          className={`relative p-3 sm:p-8 rounded-md sm:rounded-3xl bg-white/90 dark:bg-slate-900/90 ${classes["card"]} ${classes["bg-yellow-box"]}`}
+        >
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="text-blue-900 font-medium dark:text-white">
-                {bitcoinDominanceRef.current ? (
-                  bitcoinDominanceRef.current.toFixed(2) + "%"
+                {bitcoinDominance ? (
+                  bitcoinDominance.toFixed(2) + "%"
                 ) : (
                   <LoadingIndicatorSvg />
                 )}
+                &zwnj;
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 Bitcoin Dominance
@@ -158,15 +162,18 @@ const Header = React.memo(() => {
             </div>
           </div>
         </div>
-        <div className="relative p-3 sm:p-8 rounded-md sm:rounded-3xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-800">
+        <div
+          className={`relative p-3 sm:p-8 rounded-md sm:rounded-3xl bg-white/90 dark:bg-slate-900/90 ${classes["card"]} ${classes["bg-blue-box"]}`}
+        >
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="text-blue-900 font-medium dark:text-white">
-                {ethereumDominanceRef.current ? (
-                  ethereumDominanceRef.current.toFixed(2) + "%"
+                {ethereumDominance ? (
+                  ethereumDominance.toFixed(2) + "%"
                 ) : (
                   <LoadingIndicatorSvg />
                 )}
+                &zwnj;
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 Ethereum Dominance

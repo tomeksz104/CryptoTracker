@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 
 import CurrencyList from "../components/CryptoTracker/CurrencyList";
 import store from "../store";
-import Pagination from "../components/CryptoTracker/Pagination";
+import PaginateWrapper from "../components/CryptoTracker/PaginateWrapper";
 import Filters from "../components/CryptoTracker/Filters";
 import Header from "../components/CryptoTracker/Header";
 import PageContent from "../components/Layout/PageContent";
@@ -14,7 +14,7 @@ function CurrenciesPage() {
         <Header />
         <Filters />
         <CurrencyList />
-        <Pagination />
+        <PaginateWrapper />
       </PageContent>
     </Provider>
   );

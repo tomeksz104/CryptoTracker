@@ -102,67 +102,69 @@ const CurrencyList = React.memo(() => {
   };
 
   return (
-    <table className="border-t border-slate-200 dark:border-slate-700 table-auto w-full text-sm">
-      <thead>
-        <tr>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium py-4 text-slate-600 dark:text-slate-300 text-left"></th>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4text-slate-600 dark:text-slate-300 text-left">
-            <span
-              onClick={() => handleSort("rank")}
-              className="flex items-center cursor-pointer"
-            >
-              {getSortIcon("rank")}#
-            </span>
-          </th>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
-            <span
-              onClick={() => handleSort("name")}
-              className="flex items-center cursor-pointer"
-            >
-              {getSortIcon("name")}
-              Nazwa
-            </span>
-          </th>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
-            <span
-              onClick={() => handleSort("priceUsd")}
-              className="flex items-center cursor-pointer"
-            >
-              {getSortIcon("priceUsd")}
-              Cena
-            </span>
-          </th>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
-            <span
-              onClick={() => handleSort("changePercent24Hr")}
-              className="flex items-center cursor-pointer"
-            >
-              {getSortIcon("changePercent24Hr")}
-              24h %
-            </span>
-          </th>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
-            <span
-              onClick={() => handleSort("marketCapUsd")}
-              className="flex items-center cursor-pointer"
-            >
-              {getSortIcon("marketCapUsd")}
-              Kapitalizacja rynkowa
-            </span>
-          </th>
-          <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
-            <span
-              onClick={() => handleSort("volumeUsd24Hr")}
-              className="flex items-center cursor-pointer"
-            >
-              {getSortIcon("volumeUsd24Hr")}
-              Wolumen (24h)
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>{currencyList}</tbody>
-    </table>
+    <div className="overflow-x-auto">
+      <table className="border-t border-slate-200 dark:border-slate-700 table-auto w-full text-sm">
+        <thead>
+          <tr>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium py-4 text-slate-600 dark:text-slate-300 text-left"></th>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4text-slate-600 dark:text-slate-300 text-left">
+              <span
+                onClick={() => handleSort("rank")}
+                className="flex items-center cursor-pointer hover:underline"
+              >
+                {getSortIcon("rank")}#
+              </span>
+            </th>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
+              <span
+                onClick={() => handleSort("name")}
+                className="flex items-center cursor-pointer hover:underline"
+              >
+                {getSortIcon("name")}
+                Nazwa
+              </span>
+            </th>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
+              <span
+                onClick={() => handleSort("priceUsd")}
+                className="flex items-center cursor-pointer hover:underline"
+              >
+                {getSortIcon("priceUsd")}
+                Cena
+              </span>
+            </th>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
+              <span
+                onClick={() => handleSort("changePercent24Hr")}
+                className="flex items-center cursor-pointer hover:underline"
+              >
+                {getSortIcon("changePercent24Hr")}
+                24h %
+              </span>
+            </th>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
+              <span
+                onClick={() => handleSort("marketCapUsd")}
+                className="flex items-center cursor-pointer hover:underline"
+              >
+                {getSortIcon("marketCapUsd")}
+                Kapitalizacja rynkowa
+              </span>
+            </th>
+            <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
+              <span
+                onClick={() => handleSort("volumeUsd24Hr")}
+                className="flex items-center cursor-pointer hover:underline"
+              >
+                {getSortIcon("volumeUsd24Hr")}
+                Wolumen (24h)
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>{currencyList}</tbody>
+      </table>
+    </div>
   );
 });
 

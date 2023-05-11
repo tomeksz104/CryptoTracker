@@ -3,13 +3,14 @@ import DarkmodeContext from "../../context/darkmode-context";
 
 import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-dark.png";
+import PageContent from "./PageContent";
 
 const Footer = () => {
   const darkmodeCtx = useContext(DarkmodeContext);
 
   return (
     <footer className="relative z-10 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-500 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
-      <div className="container mx-auto">
+      <PageContent>
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
             <div className="mb-10 w-full">
@@ -227,7 +228,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+      </PageContent>
       <div>
         <span className="absolute left-0 bottom-0 z-[-1]">
           <svg

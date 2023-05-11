@@ -54,13 +54,14 @@ const Filters = () => {
         <span className="text-xs font-medium">Watchlist</span>
       </button>
       <div className="flex items-center">
-        <PerPageSelect classes="text-xs" />
+        <PerPageSelect classes="text-xs hidden sm:block" />
+
         <div className="relative ml-3">
           <input
             ref={inputRef}
             type="text"
-            className="pl-3 pr-10 py-2 text-sm font-medium bg-slate-400/10 border border-slate-200/10 hover:border-slate-300/20 rounded-md focus:outline-none focus:border-sky-500 dark:focus:border-sky-500 dark:placeholder-slate-200 dark:text-white transition-colors"
             placeholder="Search..."
+            className="w-full pl-3 py-2 pe-10 rounded-md border border-slate-200 shadow-sm focus:outline-none focus:border-sky-500 dark:border-slate-200/10 dark:bg-slate-400/10 dark:text-white sm:text-sm"
             value={enteredFilter}
             onChange={(event) => {
               setEnteredFilter(event.target.value);

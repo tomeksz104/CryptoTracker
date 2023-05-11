@@ -1,22 +1,73 @@
-import { useState } from "react";
+import { useEffect, useContext, useState } from "react";
+import CurrencyContext from "../../context/currecy-context";
 
+import { roundToDecimals } from "../../utils/cryptoUtils";
 import Chart from "./Chart";
 import PageContent from "../Layout/PageContent";
 import Markets from "./Markets";
 
 const Tabs = (props) => {
+  const currencyCtx = useContext(CurrencyContext);
   const [activeTab, setActiveTab] = useState("tab1");
+  const [historicalData, setHistoricalData] = useState([]);
+
+  const [marketsData, setMarketsData] = useState([]);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const fetchChartData = async () => {
+      const response = await fetch(
+        `https://api.coincap.io/v2/assets/${props.cryptocurrency.id.toLowerCase()}/history?interval=d1`
+      );
+      const { data } = await response.json();
+
+      const mappedData = data.map((item) => {
+        if (currencyCtx.currentCurrencyRate === 0) {
+          return [item.time, roundToDecimals(+item.priceUsd, 2)];
+        } else {
+          return [
+            item.time,
+            roundToDecimals(
+              +item.priceUsd / currencyCtx.currentCurrencyRate,
+              2
+            ),
+          ];
+        }
+      });
+
+      setHistoricalData(mappedData);
+    };
+    if (activeTab === "tab1") {
+      fetchChartData();
+    }
+  }, [currencyCtx.currentCurrencyRate]);
+
+  useEffect(() => {
+    const fetchMarketsData = async () => {
+      const response = await fetch(
+        `https://api.coincap.io/v2/assets/${props.cryptocurrency.name.toLowerCase()}/markets?offset=${offset}&limit=100`
+      );
+      const { data } = await response.json();
+
+      const marketsWithId = data.map((market, index) => ({
+        ...market,
+        marketId: (index + 1 + offset).toString(),
+      }));
+
+      setMarketsData((prevData) => [...prevData, ...marketsWithId]);
+    };
+
+    fetchMarketsData();
+  }, [offset]);
 
   const handleChangeTab = (tab) => () => {
     setActiveTab(tab);
   };
 
-  let tab;
-  if (activeTab === "tab1") {
-    tab = <Chart cryptocurrency={props.cryptocurrency} />;
-  } else if (activeTab === "tab2") {
-    tab = <Markets name={props.cryptocurrency.name} />;
-  }
+  const handleLoadMoreMarketsData = () => {
+    console.log("SIEMA 2");
+    setOffset((prevOffset) => prevOffset + 100);
+  };
 
   const activeTabClasses =
     "inline-block px-4 py-3 rounded-lg text-white bg-sky-500 cursor-pointer";
@@ -48,7 +99,21 @@ const Tabs = (props) => {
           </ul>
         </PageContent>
       </div>
-      <PageContent>{tab}</PageContent>
+      <PageContent>
+        {activeTab === "tab1" && (
+          <Chart
+            cryptocurrency={props.cryptocurrency}
+            historicalData={historicalData}
+          />
+        )}
+        {activeTab === "tab2" && (
+          <Markets
+            marketsData={marketsData}
+            name={props.cryptocurrency.name}
+            onHandleLoadMore={handleLoadMoreMarketsData}
+          />
+        )}
+      </PageContent>
     </>
   );
 };
