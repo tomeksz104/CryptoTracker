@@ -37,9 +37,7 @@ const Tabs = (props) => {
 
       setHistoricalData(mappedData);
     };
-    if (activeTab === "tab1") {
-      fetchChartData();
-    }
+    fetchChartData();
   }, [currencyCtx.currentCurrencyRate]);
 
   useEffect(() => {
@@ -47,6 +45,11 @@ const Tabs = (props) => {
       const response = await fetch(
         `https://api.coincap.io/v2/assets/${props.cryptocurrency.name.toLowerCase()}/markets?offset=${offset}&limit=100`
       );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch markets data!");
+      }
+
       const { data } = await response.json();
 
       const marketsWithId = data.map((market, index) => ({
@@ -65,7 +68,6 @@ const Tabs = (props) => {
   };
 
   const handleLoadMoreMarketsData = () => {
-    console.log("SIEMA 2");
     setOffset((prevOffset) => prevOffset + 100);
   };
 
@@ -108,6 +110,7 @@ const Tabs = (props) => {
         )}
         {activeTab === "tab2" && (
           <Markets
+            key={marketsData.length}
             marketsData={marketsData}
             name={props.cryptocurrency.name}
             onHandleLoadMore={handleLoadMoreMarketsData}
