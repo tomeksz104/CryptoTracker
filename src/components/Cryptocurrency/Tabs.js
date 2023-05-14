@@ -1,15 +1,20 @@
 import { useEffect, useContext, useState } from "react";
-import CurrencyContext from "../../context/currecy-context";
+import { useDispatch, useSelector } from "react-redux";
 
+import { uiActions } from "../../store/ui-slice";
+import CurrencyContext from "../../context/currecy-context";
 import { roundToDecimals } from "../../utils/cryptoUtils";
+
 import Chart from "./Chart";
 import PageContent from "../Layout/PageContent";
 import Markets from "./Markets";
 
 const Tabs = (props) => {
+  const dispatch = useDispatch();
   const currencyCtx = useContext(CurrencyContext);
   const [activeTab, setActiveTab] = useState("tab1");
   const [historicalData, setHistoricalData] = useState([]);
+  const notification = useSelector((state) => state.ui.notification);
 
   const [marketsData, setMarketsData] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -19,6 +24,11 @@ const Tabs = (props) => {
       const response = await fetch(
         `https://api.coincap.io/v2/assets/${props.cryptocurrency.id.toLowerCase()}/history?interval=d1`
       );
+
+      if (!response.ok) {
+        throw new Error("Could not fetch chart data!");
+      }
+
       const { data } = await response.json();
 
       const mappedData = data.map((item) => {
@@ -37,7 +47,15 @@ const Tabs = (props) => {
 
       setHistoricalData(mappedData);
     };
-    fetchChartData();
+
+    fetchChartData().catch((error) => {
+      dispatch(
+        uiActions.showNotification({
+          title: "Error!",
+          message: "Fetching chart data failed!",
+        })
+      );
+    });
   }, [currencyCtx.currentCurrencyRate]);
 
   useEffect(() => {
@@ -60,7 +78,15 @@ const Tabs = (props) => {
       setMarketsData((prevData) => [...prevData, ...marketsWithId]);
     };
 
-    fetchMarketsData();
+    fetchMarketsData().catch((error) => {
+      console.log("ERROR MARKETS");
+      dispatch(
+        uiActions.showNotification({
+          title: "Error!",
+          message: "Fetching markets data failed!",
+        })
+      );
+    });
   }, [offset]);
 
   const handleChangeTab = (tab) => () => {

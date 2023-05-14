@@ -121,7 +121,7 @@ const CurrencyList = React.memo(() => {
                 className="flex items-center cursor-pointer hover:underline"
               >
                 {getSortIcon("name")}
-                Nazwa
+                Name
               </span>
             </th>
             <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
@@ -130,7 +130,7 @@ const CurrencyList = React.memo(() => {
                 className="flex items-center cursor-pointer hover:underline"
               >
                 {getSortIcon("priceUsd")}
-                Cena
+                Price
               </span>
             </th>
             <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
@@ -148,7 +148,7 @@ const CurrencyList = React.memo(() => {
                 className="flex items-center cursor-pointer hover:underline"
               >
                 {getSortIcon("marketCapUsd")}
-                Kapitalizacja rynkowa
+                Market cap
               </span>
             </th>
             <th className="border-b border-slate-200 dark:border-slate-700 font-medium p-4 text-slate-600 dark:text-slate-300 text-left">
@@ -157,7 +157,7 @@ const CurrencyList = React.memo(() => {
                 className="flex items-center cursor-pointer hover:underline"
               >
                 {getSortIcon("volumeUsd24Hr")}
-                Wolumen (24h)
+                Volume (24h)
               </span>
             </th>
           </tr>

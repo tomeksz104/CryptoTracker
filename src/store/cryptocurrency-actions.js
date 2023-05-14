@@ -1,4 +1,5 @@
 import { cryptocurrencyActions } from "./cryptocurrency-slice";
+import { uiActions } from "./ui-slice";
 
 import { formatCryptocurrency } from "../utils/cryptoUtils";
 
@@ -38,14 +39,12 @@ export const fetchCryptocurrencyPrices = (
         })
       );
     } catch (error) {
-      return;
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "error",
-      //     title: "Error!",
-      //     message: "Fetching data failed!",
-      //   })
-      // );
+      dispatch(
+        uiActions.showNotification({
+          title: "Error!",
+          message: "Fetching cryptocurrencies data failed!",
+        })
+      );
     }
   };
 };

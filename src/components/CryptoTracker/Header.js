@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import CurrencyContext from "../../context/currecy-context";
-import { CSSTransition } from "react-transition-group";
 
 import { formatPrice } from "../../utils/cryptoUtils";
-import { ReactComponent as LoadingIndicatorSvg } from "../../assets/svg/loading-indicator.svg";
 
 import classes from "./Header.module.css";
 
@@ -120,8 +118,7 @@ const Header = React.memo(() => {
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="flex text-blue-900 font-medium dark:text-white">
-                {totalMarketCap ? totalMarketCap : <LoadingIndicatorSvg />}
-                &zwnj;
+                {totalMarketCap ? totalMarketCap : "-"}
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 Market Capitalization
@@ -135,7 +132,7 @@ const Header = React.memo(() => {
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="text-blue-900 font-medium dark:text-white">
-                {volume24Hr ? volume24Hr : <LoadingIndicatorSvg />}&zwnj;
+                {volume24Hr ? volume24Hr : "-"}
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 24h Trading Volume
@@ -149,12 +146,7 @@ const Header = React.memo(() => {
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="text-blue-900 font-medium dark:text-white">
-                {bitcoinDominance ? (
-                  bitcoinDominance.toFixed(2) + "%"
-                ) : (
-                  <LoadingIndicatorSvg />
-                )}
-                &zwnj;
+                {bitcoinDominance ? bitcoinDominance.toFixed(2) + "%" : "-"}
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 Bitcoin Dominance
@@ -168,12 +160,7 @@ const Header = React.memo(() => {
           <div className="relative space-y-8">
             <div className="sm:space-y-2">
               <h2 className="text-blue-900 font-medium dark:text-white">
-                {ethereumDominance ? (
-                  ethereumDominance.toFixed(2) + "%"
-                ) : (
-                  <LoadingIndicatorSvg />
-                )}
-                &zwnj;
+                {ethereumDominance ? ethereumDominance.toFixed(2) + "%" : "-"}
               </h2>
               <p className="text-slate-600 dark:text-slate-400">
                 Ethereum Dominance

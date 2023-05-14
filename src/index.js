@@ -3,23 +3,27 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
 
 import { DarkmodeContextProvider } from "./context/darkmode-context";
 import { CurrencyContextProvider } from "./context/currecy-context";
 import { WatchlistContextProvider } from "./context/watchlist-context";
+import store from "./store";
 
 import "@fontsource/inter";
 import "@fontsource/inter/500.css"; // Weight 500.
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <DarkmodeContextProvider>
-    <CurrencyContextProvider>
-      <WatchlistContextProvider>
-        <App />
-      </WatchlistContextProvider>
-    </CurrencyContextProvider>
-  </DarkmodeContextProvider>
+  <Provider store={store}>
+    <DarkmodeContextProvider>
+      <CurrencyContextProvider>
+        <WatchlistContextProvider>
+          <App />
+        </WatchlistContextProvider>
+      </CurrencyContextProvider>
+    </DarkmodeContextProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
