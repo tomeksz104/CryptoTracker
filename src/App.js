@@ -8,6 +8,7 @@ import CryptocurrencyDetailPage, {
   loader as cryptocurrencyLoader,
 } from "./pages/CryptocurrencyDetail";
 import ErrorPage from "./pages/Error";
+import HeatMapPage, { loader as cryptocurrenciesLoader } from "./pages/HeatMap";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         id: "cryptocurrency-detail",
         element: <CryptocurrencyDetailPage />,
         loader: cryptocurrencyLoader,
+      },
+      {
+        path: "heat-map",
+        element: <HeatMapPage />,
+        loader: cryptocurrenciesLoader,
       },
     ],
   },

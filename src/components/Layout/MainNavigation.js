@@ -16,18 +16,18 @@ const MainNavigation = () => {
     <nav className="border-b border-slate-100 dark:border-slate-800">
       <div className="container mx-auto flex justify-between py-4 z-10">
         <div className="flex items-center">
-          <a className="mr-5 cursor-pointer">
+          <NavLink to="/" className="mr-5 cursor-pointer">
             <img
               className="h-10 object-cover"
               src={!darkmodeCtx.isDarkmode ? logo : logoDarkmode}
               alt="Crypto Currency App Logo"
             />
-          </a>
+          </NavLink>
 
           <div className="items-center hidden space-x-8 lg:flex text-base	font-medium">
             <NavLink
               to="/"
-              className={(isActive) =>
+              className={({ isActive }) =>
                 `flex hover:text-sky-500 cursor-pointer transition-colors duration-300 ${
                   isActive
                     ? "text-sky-500"
@@ -35,43 +35,21 @@ const MainNavigation = () => {
                 }`
               }
             >
-              Cryptocurrency rates
+              Cryptocurrencies
             </NavLink>
 
-            <a
-              className="flex text-slate-600 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-500
-                    cursor-pointer transition-colors duration-300"
+            <NavLink
+              to="/heat-map"
+              className={({ isActive }) =>
+                `flex hover:text-sky-500 cursor-pointer transition-colors duration-300 ${
+                  isActive
+                    ? "text-sky-500"
+                    : "text-slate-600 dark:text-slate-200"
+                }`
+              }
             >
-              Themes
-            </a>
-
-            <a
-              className="flex text-slate-600 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-500
-                    cursor-pointer transition-colors duration-300"
-            >
-              Developers
-            </a>
-
-            <a
-              className="flex text-slate-600 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-500
-                    cursor-pointer transition-colors duration-300"
-            >
-              Pricing
-            </a>
-
-            <a
-              className="flex text-slate-600 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-500
-                    cursor-pointer transition-colors duration-300"
-            >
-              Blog
-            </a>
-
-            <a
-              className="flex text-slate-600 dark:text-slate-200 hover:text-sky-500 dark:hover:text-sky-500
-                    cursor-pointer transition-colors duration-300"
-            >
-              About Us
-            </a>
+              Heat map
+            </NavLink>
           </div>
         </div>
 
