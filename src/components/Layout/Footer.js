@@ -4,6 +4,7 @@ import DarkmodeContext from "../../context/darkmode-context";
 import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-dark.png";
 import PageContent from "./PageContent";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const darkmodeCtx = useContext(DarkmodeContext);
@@ -14,13 +15,13 @@ const Footer = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
             <div className="mb-10 w-full">
-              <a href="#" className="mb-6 inline-block">
+              <Link to="/" className="mb-6 inline-block">
                 <img
                   className="h-10 object-cover"
                   src={!darkmodeCtx.isDarkmode ? logo : logoDark}
                   alt="Crypto Currency App Logo"
                 />
-              </a>
+              </Link>
               <p className="mb-7 text-base">
                 What are the current cryptocurrency prices? Access all your
                 favorite live crypto charts, quotes, and market caps!
