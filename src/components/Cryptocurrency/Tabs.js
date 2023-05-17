@@ -8,13 +8,14 @@ import { roundToDecimals } from "../../utils/cryptoUtils";
 import Chart from "./Chart";
 import PageContent from "../Layout/PageContent";
 import Markets from "./Markets";
+import { CHART_INTERVALS } from "./Chart";
 
 const Tabs = (props) => {
   const dispatch = useDispatch();
   const currencyCtx = useContext(CurrencyContext);
   const [activeTab, setActiveTab] = useState("tab1");
   const [historicalData, setHistoricalData] = useState([]);
-  const notification = useSelector((state) => state.ui.notification);
+  const [chartInterval, setChartInterval] = useState(CHART_INTERVALS[4]);
 
   const [marketsData, setMarketsData] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -22,7 +23,9 @@ const Tabs = (props) => {
   useEffect(() => {
     const fetchChartData = async () => {
       const response = await fetch(
-        `https://api.coincap.io/v2/assets/${props.cryptocurrency.id.toLowerCase()}/history?interval=d1`
+        `https://api.coincap.io/v2/assets/${props.cryptocurrency.id.toLowerCase()}/history?interval=${
+          chartInterval.value
+        }&start=${chartInterval.start}&end=${chartInterval.end}`
       );
 
       if (!response.ok) {
@@ -56,7 +59,7 @@ const Tabs = (props) => {
         })
       );
     });
-  }, [currencyCtx.currentCurrencyRate]);
+  }, [currencyCtx.currentCurrencyRate, chartInterval]);
 
   useEffect(() => {
     const fetchMarketsData = async () => {
@@ -97,6 +100,10 @@ const Tabs = (props) => {
     setOffset((prevOffset) => prevOffset + 100);
   };
 
+  const handleChangeChartInterval = (interval) => {
+    setChartInterval(interval);
+  };
+
   const activeTabClasses =
     "inline-block px-4 py-3 rounded-lg text-white bg-sky-500 cursor-pointer";
   const tabClasses =
@@ -104,7 +111,7 @@ const Tabs = (props) => {
 
   return (
     <>
-      <div className="border-y border-gray-100 dark:border-gray-700">
+      <div className="border-y border-slate-200 dark:border-slate-700">
         <PageContent classes="my-3">
           <ul className="flex flex-wrap text-sm font-medium text-center text-slate-500 dark:text-slate-400">
             <li className="mr-2">
@@ -132,6 +139,8 @@ const Tabs = (props) => {
           <Chart
             cryptocurrency={props.cryptocurrency}
             historicalData={historicalData}
+            chartInterval={chartInterval}
+            onChangeChartInterval={handleChangeChartInterval}
           />
         )}
         {activeTab === "tab2" && (
