@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { WatchlistContext } from "../../context/watchlist-context";
 
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
-import PerPageSelect from "../UI/PerPageSelect";
+import DropdownSelect from "../UI/DropdownSelect";
 
 const Filters = () => {
-  const watchlistCtx = useContext(WatchlistContext);
   const dispatch = useDispatch();
-  const [enteredFilter, setEnteredFilter] = useState("");
-  const showWatchlist = useSelector(
-    (state) => state.cryptocurrency.showWatchlist
+  const watchlistCtx = useContext(WatchlistContext);
+  const { perPage, showWatchlist } = useSelector(
+    (state) => state.cryptocurrency
   );
+  const [enteredFilter, setEnteredFilter] = useState("");
   const inputRef = useRef();
 
   useEffect(() => {
@@ -27,6 +27,14 @@ const Filters = () => {
 
   const handleToggleShowWatchlist = () => {
     dispatch(cryptocurrencyActions.toggleWatchlist(watchlistCtx.watchlist));
+  };
+
+  const handleChangeRowsPerPage = (number) => {
+    dispatch(
+      cryptocurrencyActions.changeRowsPerPage({
+        perPage: number,
+      })
+    );
   };
 
   return (
@@ -54,8 +62,12 @@ const Filters = () => {
         <span className="text-xs font-medium">Watchlist</span>
       </button>
       <div className="flex items-center">
-        <PerPageSelect classes="text-xs hidden sm:block" />
-
+        <DropdownSelect
+          value={`Show rows: ${perPage}`}
+          options={[100, 50, 20]}
+          onChange={handleChangeRowsPerPage}
+          classes="text-xs"
+        />
         <div className="relative ml-3">
           <input
             ref={inputRef}

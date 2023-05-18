@@ -12,7 +12,7 @@ function ToggleDarkModeButton() {
     <button
       onClick={toggleDarkMode}
       aria-label="switch theme"
-      className="group relative flex h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full  hover:before:bg-slate-400/10 before:bg-gradient-to-b before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700"
+      className="group relative flex h-9 w-9 rounded-full hidden sm:block before:absolute before:inset-0 before:rounded-full hover:before:bg-slate-400/10 before:bg-gradient-to-b before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -8,7 +8,7 @@ import HighchartsExporting from "highcharts/modules/exporting";
 import Converter from "./Converter";
 import DarkmodeContext from "../../context/darkmode-context";
 
-import "./chart.css";
+import "./Chart.css";
 import { formatPrice } from "../../utils/cryptoUtils";
 
 require("highcharts/modules/accessibility")(Highcharts);
@@ -47,7 +47,7 @@ export const CHART_INTERVALS = [
   {
     title: "ALL",
     value: "d1",
-    start: timestampNow - 1500 * 24 * 60 * 60 * 1000,
+    start: timestampNow - 3000 * 24 * 60 * 60 * 1000,
     end: timestampNow,
   },
 ];
@@ -57,6 +57,7 @@ const Chart = ({
   historicalData,
   chartInterval,
   onChangeChartInterval,
+  timestampOfLastUpdate,
 }) => {
   const darkmodeCtx = useContext(DarkmodeContext);
   const currencyCtx = useContext(CurrencyContext);
@@ -136,7 +137,6 @@ const Chart = ({
       backgroundColor: darkmodeCtx.isDarkmode ? "rgb(30 41 59)" : "#FFF",
       borderColor: "#AAAAAA",
       borderRadius: 5,
-      shadow: true,
       useHTML: true,
       shadow: false,
       padding: 0,
@@ -165,6 +165,11 @@ const Chart = ({
             </div>
           </div>
             `;
+      },
+    },
+    plotOptions: {
+      series: {
+        animation: false,
       },
     },
     chart: {
@@ -365,9 +370,9 @@ const Chart = ({
     <>
       <div className="mt-5 grid grid-cols-1 gap-y-6 lg:gap-x-6 lg:w-full lg:grid-cols-4">
         <div className="col-span-3">
-          <div class="flex justify-between">
+          <div className="flex justify-between">
             <div>
-              <ul class="grid grid-flow-col text-center text-neutral-800 dark:text-neutral-300 bg-slate-400/10 rounded-lg p-1 space-x-1 text-xs font-medium">
+              <ul className="grid grid-flow-col text-center text-neutral-800 dark:text-neutral-300 bg-slate-400/10 rounded-lg p-1 space-x-1 text-xs font-medium">
                 {listChartIntervals}
               </ul>
             </div>
@@ -425,7 +430,10 @@ const Chart = ({
           )}
         </div>
         <div>
-          <Converter cryptocurrency={cryptocurrency} />
+          <Converter
+            cryptocurrency={cryptocurrency}
+            timestampOfLastUpdate={timestampOfLastUpdate}
+          />
         </div>
       </div>
     </>

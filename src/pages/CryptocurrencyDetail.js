@@ -11,13 +11,15 @@ import { formatCryptocurrency } from "../utils/cryptoUtils";
 
 const CryptocurrencyDetailPage = () => {
   const currencyCtx = useContext(CurrencyContext);
-  const { cryptocurrency } = useLoaderData("cryptocurrency-detail");
+  const data = useLoaderData("cryptocurrency-detail");
 
   const updatedCryptocurrency = formatCryptocurrency(
-    cryptocurrency,
+    data.cryptocurrency.data,
     currencyCtx.currentCurrency,
     currencyCtx.currentCurrencyRate
   );
+
+  const timestampOfLastUpdate = data.cryptocurrency.timestamp;
 
   return (
     <Provider store={store}>
@@ -49,7 +51,7 @@ const CryptocurrencyDetailPage = () => {
                   ></path>
                 </svg>
                 <span className="ml-1 text-sm font-medium text-slate-500 md:ml-2 dark:text-slate-400">
-                  {cryptocurrency.name}
+                  {data.cryptocurrency.data.name}
                 </span>
               </div>
             </li>
@@ -57,7 +59,10 @@ const CryptocurrencyDetailPage = () => {
         </nav>
         <CryptocurrencyItem cryptocurrency={updatedCryptocurrency} />
       </PageContent>
-      <Tabs cryptocurrency={updatedCryptocurrency} />
+      <Tabs
+        cryptocurrency={updatedCryptocurrency}
+        timestampOfLastUpdate={timestampOfLastUpdate}
+      />
     </Provider>
   );
 };
@@ -67,7 +72,7 @@ export default CryptocurrencyDetailPage;
 const loadCryptocurrency = async (id) => {
   const response = await fetch("https://api.coincap.io/v2/assets/" + id);
 
-  const { data } = await response.json();
+  const data = await response.json();
 
   return data;
 };

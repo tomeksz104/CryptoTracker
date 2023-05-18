@@ -3,15 +3,13 @@ import { useDispatch } from "react-redux";
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import CurrencyContext from "../../context/currecy-context";
 
-import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import Modal from "../UI/Modal";
 import CurrencyFlag from "react-currency-flags";
 
-const CurrencyPicker = () => {
+const CurrencyPicker = ({ modalIsOpen, onClose }) => {
   const dispatch = useDispatch();
   const currencyCtx = useContext(CurrencyContext);
   const [enteredFilter, setEnteredFilter] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currenciesData, setCurrenciesData] = useState([]);
   const [filteredCurrencies, setFilteredCurrencies] = useState([]);
   const inputRef = useRef();
@@ -63,12 +61,8 @@ const CurrencyPicker = () => {
     };
   }, [enteredFilter, inputRef, currenciesData, modalIsOpen]);
 
-  const showModal = () => {
-    setModalIsOpen(true);
-  };
-
   const closeModal = () => {
-    setModalIsOpen(false);
+    onClose();
   };
 
   const selectCurrencyHandler = (symbol, rate) => {
@@ -84,17 +78,6 @@ const CurrencyPicker = () => {
 
   return (
     <>
-      <div
-        onClick={showModal}
-        className="flex items-center bg-slate-400/10 hover:bg-slate-400/20 dark:text-slate-200 rounded-md cursor-pointer"
-        style={{ padding: "5px 8px" }}
-      >
-        <span className="text-xs font-medium">
-          {currencyCtx.currentCurrency}
-        </span>
-        <CaretDown className="w-3 h-3 ml-1 dark:fill-slate-200" />
-      </div>
-
       <Modal show={modalIsOpen} onClose={closeModal}>
         <div className="flex items-start justify-between dark:border-gray-600">
           <h3 className="text-2xl font-medium text-gray-900 dark:text-white">

@@ -56,9 +56,9 @@ const Markets = (props) => {
   const getSortIcon = (field) => {
     if (sortField === field) {
       return sortOrder === "asc" ? (
-        <CaretUp className="w-3 h-3 mr-1 dark:fill-slate-200" />
+        <CaretUp className="w-3 h-3 mr-1 1 fill-black dark:fill-slate-200" />
       ) : (
-        <CaretDown className="w-3 h-3 mr-1 dark:fill-slate-200" />
+        <CaretDown className="w-3 h-3 mr-1 1 fill-black dark:fill-slate-200" />
       );
     }
     return null;

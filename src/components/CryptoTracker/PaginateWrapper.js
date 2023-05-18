@@ -1,26 +1,26 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 
-import PerPageSelect from "../UI/PerPageSelect";
 import Paginate from "./Paginate";
 import "./PaginateWrapper.css";
+import DropdownSelect from "../UI/DropdownSelect";
 
 const PaginateWrapper = React.memo(() => {
   const dispatch = useDispatch();
-  const pageCount = useSelector((state) => state.cryptocurrency.totalPages);
-  const currentPage = useSelector((state) => state.cryptocurrency.currentPage);
-  const perPage = useSelector((state) => state.cryptocurrency.perPage);
-  const totalItems = useSelector((state) => state.cryptocurrency.totalItems);
+  const { totalPages, currentPage, perPage, totalItems } = useSelector(
+    (state) => state.cryptocurrency
+  );
 
   const pagesVisited = currentPage * perPage;
 
-  const changePageHandler = useCallback(
-    ({ selected }) => {
-      dispatch(cryptocurrencyActions.changePage({ page: selected }));
-    },
-    [dispatch]
-  );
+  const handleChangeRowsPerPage = (number) => {
+    dispatch(
+      cryptocurrencyActions.changeRowsPerPage({
+        perPage: number,
+      })
+    );
+  };
 
   return (
     <>
@@ -31,13 +31,18 @@ const PaginateWrapper = React.memo(() => {
         </span>
         <Paginate
           classes="hidden md:flex items-center justify-center space-x-1 table-paginate"
-          pageCount={pageCount}
+          pageCount={totalPages}
         />
-        <PerPageSelect classes="text-sm" />
+        <DropdownSelect
+          value={`Show rows: ${perPage}`}
+          options={[100, 50, 20]}
+          onChange={handleChangeRowsPerPage}
+          classes="text-xs"
+        />
       </div>
       <Paginate
         classes="flex items-center justify-center space-x-1 table-paginate md:hidden"
-        pageCount={pageCount}
+        pageCount={totalPages}
       />
     </>
   );

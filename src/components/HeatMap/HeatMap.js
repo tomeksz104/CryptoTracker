@@ -72,6 +72,7 @@ const HeatMap = () => {
   const options = {
     title: false,
     tooltip: {
+      followPointer: true,
       useHTML: true,
       backgroundColor: "#FFF",
       borderColor: "black",
@@ -153,6 +154,11 @@ const HeatMap = () => {
     navigation: {
       buttonOptions: {
         enabled: false,
+      },
+    },
+    plotOptions: {
+      series: {
+        animation: false,
       },
     },
   };

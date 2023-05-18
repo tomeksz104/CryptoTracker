@@ -105,7 +105,7 @@ const Tabs = (props) => {
   };
 
   const activeTabClasses =
-    "inline-block px-4 py-3 rounded-lg text-white bg-sky-500 cursor-pointer";
+    "inline-block px-4 py-3 rounded-lg text-white dark:text-slate-900 bg-sky-500 cursor-pointer";
   const tabClasses =
     "inline-block px-4 py-3 rounded-lg hover:text-slate-900 hover:bg-slate-400/20 dark:hover:text-white cursor-pointer";
 
@@ -141,6 +141,7 @@ const Tabs = (props) => {
             historicalData={historicalData}
             chartInterval={chartInterval}
             onChangeChartInterval={handleChangeChartInterval}
+            timestampOfLastUpdate={props.timestampOfLastUpdate}
           />
         )}
         {activeTab === "tab2" && (

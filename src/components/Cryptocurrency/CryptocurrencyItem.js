@@ -143,8 +143,8 @@ const CryptocurrencyItem = (props) => {
         </Link>
       </div>
 
-      <div className="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 lg:border-t border-gray-100 dark:border-gray-700 py-5">
-        <div className="lg:border-r border-gray-100 dark:border-gray-700">
+      <div className="mt-5 grid gap-6 lg:w-full lg:grid-cols-4 lg:border-t border-slate-100 dark:border-slate-800 py-5">
+        <div className="lg:border-r border-slate-100 dark:border-slate-800">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">
             {props.cryptocurrency.name} Price ({props.cryptocurrency.symbol})
           </h3>
@@ -153,7 +153,7 @@ const CryptocurrencyItem = (props) => {
             {changePercent24hButton}
           </span>
         </div>
-        <div className="lg:border-r border-gray-100 dark:border-gray-700">
+        <div className="lg:border-r border-slate-100 dark:border-slate-800">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">
             Market Cap
           </h3>
@@ -161,7 +161,7 @@ const CryptocurrencyItem = (props) => {
             {props.cryptocurrency.marketCap}
           </span>
         </div>
-        <div className="lg:border-r border-gray-100 dark:border-gray-700">
+        <div className="lg:border-r border-slate-100 dark:border-slate-800">
           <h3 className="text-sm text-slate-500 dark:text-slate-400">Volume</h3>
           <span className="text-sm font-semibold text-slate-700 dark:text-white">
             {props.cryptocurrency.volume24Hr}
