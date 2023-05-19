@@ -1,24 +1,28 @@
-import { formatCurrency } from "@coingecko/cryptoformat";
+export function getNonZeroDecimalPlace(number) {
+  if (number > 1) return 1;
+  const log10 = number ? Math.floor(Math.log10(number)) : 0;
 
-export function formatPrice(price, currentCurrencySymbol, currentCurrencyRate) {
-  let formattedPrice = parseFloat(price.replace(/[$,]/g, ""));
+  if (log10 > 0 || isNaN(log10)) return 1;
 
-  if (currentCurrencyRate === 0) {
-    return formatCurrency(formattedPrice, currentCurrencySymbol, "en", false, {
-      decimalPlaces: 2,
-    });
-  } else {
-    return formatCurrency(
-      formattedPrice / currentCurrencyRate,
-      currentCurrencySymbol,
-      "en",
-      false,
-      {
-        decimalPlaces: 2,
-      }
-    );
-  }
+  return Math.abs(log10);
 }
+
+export const formatPrice = (
+  price,
+  currentCurrencySymbol,
+  currentCurrencyRate
+) => {
+  const convertedPrice =
+    currentCurrencyRate === 0 ? +price : +price / currentCurrencyRate;
+
+  const formattedPrice = new Intl.NumberFormat("en-EN", {
+    style: "currency",
+    currency: currentCurrencySymbol,
+    minimumFractionDigits: getNonZeroDecimalPlace(convertedPrice) + 1,
+  }).format(convertedPrice);
+
+  return formattedPrice;
+};
 
 export function formatCryptocurrency(
   cryptocurrency,
@@ -31,6 +35,7 @@ export function formatCryptocurrency(
     currentCurrencyRate
   );
   const priceWithoutSymbol = cryptocurrency.priceUsd / currentCurrencyRate;
+
   const marketCap = formatPrice(
     cryptocurrency.marketCapUsd,
     currentCurrencySymbol,
@@ -60,18 +65,13 @@ export function formatCryptocurrency(
     price,
     priceWithoutSymbol,
     marketCap,
-    //marketCapWithoutSymbol,
     volume24Hr,
-    //volume24HrWithoutSymbol,
     changePercent24Hr,
     supply,
     maxSupply,
   };
 
   if (currentCurrencyRate === 0) {
-    updatedCryptocurrency.priceUsd = cryptocurrency.priceUsd;
-    updatedCryptocurrency.marketCapUsd = marketCap;
-    updatedCryptocurrency.volumeUsd24Hr = volume24Hr;
     updatedCryptocurrency.priceWithoutSymbol = cryptocurrency.priceUsd;
   }
 

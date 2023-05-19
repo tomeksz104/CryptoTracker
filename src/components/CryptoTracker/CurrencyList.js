@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useCallback, useContext } from "react";
 import useWebSocket from "react-use-websocket";
 import { useSelector, useDispatch } from "react-redux";
-import { formatCurrency } from "@coingecko/cryptoformat";
 import CurrencyContext from "../../context/currecy-context";
 
 import CurrencyItem from "./CurrencyItem";
@@ -49,9 +48,7 @@ const CurrencyList = React.memo(() => {
           const updatedPrice = JSON.parse(lastMessage.data)[currency.id];
           return {
             ...currency,
-            priceUsd: formatCurrency(updatedPrice, "USD", "en", false, {
-              decimalPlaces: 2,
-            }),
+            priceUsd: updatedPrice,
           };
         });
 
