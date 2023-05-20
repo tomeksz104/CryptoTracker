@@ -7,7 +7,7 @@ import HighchartsExporting from "highcharts/modules/exporting";
 
 import Converter from "./Converter";
 import DarkmodeContext from "../../context/darkmode-context";
-
+import { getNonZeroDecimalPlace } from "../../utils/cryptoUtils";
 import "./Chart.css";
 
 require("highcharts/modules/accessibility")(Highcharts);
@@ -50,14 +50,6 @@ export const CHART_INTERVALS = [
     end: timestampNow,
   },
 ];
-
-function getNonZeroDecimalPlace(number) {
-  const log10 = number ? Math.floor(Math.log10(number)) : 0;
-
-  if (log10 > 0) return 1;
-
-  return Math.abs(log10);
-}
 
 const Chart = ({
   cryptocurrency,
@@ -148,21 +140,15 @@ const Chart = ({
       shadow: false,
       padding: 0,
       formatter: function () {
+        const price = this.y;
+
         const formattedDate = Highcharts.dateFormat("%d/%m/%Y", this.x);
         const formattedTime = Highcharts.dateFormat("%H:%M:%S", this.x);
-
-        // console.log(this.y); // return 275396.49
-
-        // const price =
-        //   currencyCtx.currentCurrencyRate === 0
-        //     ? this.y.toString()
-        //     : this.y.toString() / currencyCtx.currentCurrencyRate;
-
-        // const formattedPrice = new Intl.NumberFormat("en-EN", {
-        //   style: "currency",
-        //   currency: currencyCtx.currentCurrency,
-        //   minimumFractionDigits: getNonZeroDecimalPlace(price) + 1,
-        // }).format(price);
+        const formattedPrice = new Intl.NumberFormat("en-EN", {
+          style: "currency",
+          currency: currencyCtx.currentCurrency,
+          minimumFractionDigits: getNonZeroDecimalPlace(price) + 1,
+        }).format(price);
 
         return `
           <div class="w-48 flex flex-col px-3 py-2 space-y-2 text-xs rounded-md p-3 leading-4 shadow-[rgba(88,102,126,0.08)_0px_1px_1px,rgba(88,102,126,0.1)_0px_8px_16px]">
@@ -177,9 +163,7 @@ const Chart = ({
                   : "background-color: rgb(34 197 94)"
               }" class="inline-block w-3.5 h-3.5 content-[''] shadow-[rgba(88,102,126,0.08)_0px_1px_1px,rgba(88,102,126,0.1)_0px_8px_16px] translate-y-0.5 mr-2 rounded-full border-2 border-solid border-white"></span>
               <span class="text-slate-500 dark:text-slate-400">Price: </span>
-              <span class="text-slate-700 dark:text-white font-medium">${
-                this.y
-              }</span>
+              <span class="text-slate-700 dark:text-white font-medium">${formattedPrice}</span>
             </div>
           </div>
             `;
