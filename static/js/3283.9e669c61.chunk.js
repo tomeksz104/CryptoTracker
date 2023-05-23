@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[3283],{23283:function(c,p,e){c.exports=e.p+"static/media/aywa.4338c6f20252eadf8f24.svg"}}]);

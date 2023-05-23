@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[4631],{24631:function(c,p,a){c.exports=a.p+"static/media/taas.4498e245d77a815525a0.svg"}}]);

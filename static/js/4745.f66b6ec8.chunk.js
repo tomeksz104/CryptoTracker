@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[4745],{64745:function(c,e,p){c.exports=p.p+"static/media/ethos.026334858bccb4ae756b.svg"}}]);
