@@ -1,3 +1,4 @@
+![cryptotracker-gif](https://github.com/tomeksz104/CryptoTracker/assets/48735947/f53bc7a8-7ada-4e06-a85c-30068e90362f)
 ## Live 💻
 
 ⭐ [CryptoTracker](https://tomeksz104.github.io/CryptoTracker) ⭐
