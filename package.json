@@ -2,6 +2,7 @@
   "name": "crypto-currency-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tomeksz104.github.io/CryptoTracker/",
   "dependencies": {
     "@fontsource/inter": "^4.5.15",
     "@reduxjs/toolkit": "^1.9.3",
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tippyjs/react": "^4.2.6",
     "cryptocurrency-icons": "^0.18.1",
+    "gh-pages": "^5.0.0",
     "highcharts": "^11.0.0",
     "highcharts-react-official": "^3.2.0",
     "highcharts-tree": "^0.1.5-alpha.7",
@@ -31,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

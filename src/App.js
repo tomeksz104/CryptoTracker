@@ -1,4 +1,9 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import React from "react";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createHashRouter,
+} from "react-router-dom";
 
 import RootLayout from "./pages/Root";
 
@@ -10,7 +15,7 @@ import CryptocurrencyDetailPage, {
 import ErrorPage from "./pages/Error";
 import HeatMapPage, { loader as cryptocurrenciesLoader } from "./pages/HeatMap";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <RootLayout />,
@@ -33,7 +38,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  );
 }
 
 export default App;
