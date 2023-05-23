@@ -62,7 +62,7 @@ const Sidebar = (props) => {
             className={`fixed inset-y-0 z-20 w-full max-w-sm bg-[#0b2948] dark:bg-darker dark:text-light focus:outline-none ease-in-out duration-300
             ${showSidebar ? "translate-x-0 " : "-translate-x-full"}`}
           >
-            <div class="flex flex-col justify-between h-screen">
+            <div className="flex flex-col justify-between h-screen">
               <div className="flex flex-col">
                 <div className="flex items-center justify-between h-14 px-5 py-8">
                   <NavLink to="/" className="mr-5 cursor-pointer">
@@ -128,22 +128,22 @@ const Sidebar = (props) => {
               <div className="flex items-center p-5 space-x-5">
                 <button
                   onClick={handleOpenCurrentCurrencyModal}
-                  class="w-full flex justify-center items-center text-slate-400 bg-slate-400/10 hover:bg-slate-400/20 rounded-md py-2"
+                  className="w-full flex justify-center items-center text-slate-400 bg-slate-400/10 hover:bg-slate-400/20 rounded-md py-2"
                 >
-                  <span class="text-xs font-medium">
+                  <span className="text-xs font-medium">
                     {currencyCtx.currentCurrency}
                   </span>
                 </button>
                 <button
                   onClick={toggleDarkMode}
-                  class="w-full flex justify-center items-center text-slate-400 bg-slate-400/10 hover:bg-slate-400/20 rounded-md py-2"
+                  className="w-full flex justify-center items-center text-slate-400 bg-slate-400/10 hover:bg-slate-400/20 rounded-md py-2"
                 >
-                  <span class="flex text-xs font-medium">
+                  <span className="flex text-xs font-medium">
                     {darkmodeCtx.isDarkmode ? "Light" : "Dark"}
                     {darkmodeCtx.isDarkmode ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="ml-2 h-4 w-4"
+                        className="ml-2 h-4 w-4"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -156,7 +156,7 @@ const Sidebar = (props) => {
                     ) : (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="ml-2 h-4 w-4"
+                        className="ml-2 h-4 w-4"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >

@@ -66,7 +66,7 @@ const CurrencyList = React.memo(() => {
     let timerId = setTimeout(() => {
       handleUpdateCurrencies();
       timerId = null;
-    }, 100);
+    }, 300);
     return () => clearTimeout(timerId);
   }, [handleUpdateCurrencies]);
 

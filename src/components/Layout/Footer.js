@@ -1,290 +1,107 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import DarkmodeContext from "../../context/darkmode-context";
 
 import logo from "../../assets/logo.png";
 import logoDark from "../../assets/logo-dark.png";
-import PageContent from "./PageContent";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   const darkmodeCtx = useContext(DarkmodeContext);
 
   return (
-    <footer className="relative z-10 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-500 pt-20 pb-10 lg:pt-[120px] lg:pb-20">
-      <PageContent>
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4 sm:w-2/3 lg:w-3/12">
-            <div className="mb-10 w-full">
-              <Link to="/" className="mb-6 inline-block">
-                <img
-                  className="h-10 object-cover"
-                  src={!darkmodeCtx.isDarkmode ? logo : logoDark}
-                  alt="Crypto Currency App Logo"
-                />
-              </Link>
-              <p className="mb-7 text-base">
-                What are the current cryptocurrency prices? Access all your
-                favorite live crypto charts, quotes, and market caps!
-              </p>
-              <p className="flex items-center text-sm font-medium">
-                <span className="text-blue-500 mr-3">
-                  <svg
-                    width="19"
-                    height="21"
-                    viewBox="0 0 19 21"
-                    className="fill-current"
-                  >
-                    <path d="M17.8076 11.8129C17.741 11.0475 17.1088 10.5151 16.3434 10.5151H2.16795C1.40261 10.5151 0.803643 11.0808 0.703816 11.8129L0.00502514 18.8008C-0.0282506 19.2001 0.104853 19.6327 0.371059 19.9322C0.637265 20.2317 1.03657 20.398 1.46916 20.398H17.0755C17.4748 20.398 17.8741 20.2317 18.1736 19.9322C18.4398 19.6327 18.5729 19.2334 18.5396 18.8008L17.8076 11.8129ZM17.2751 19.1668C17.2419 19.2001 17.1753 19.2667 17.0422 19.2667H1.46916C1.36933 19.2667 1.2695 19.2001 1.23623 19.1668C1.20295 19.1336 1.1364 19.067 1.16968 18.9339L1.86847 11.9127C1.86847 11.7463 2.00157 11.6465 2.16795 11.6465H16.3767C16.5431 11.6465 16.6429 11.7463 16.6762 11.9127L17.375 18.9339C17.3417 19.0337 17.3084 19.1336 17.2751 19.1668Z" />
-                    <path d="M9.25704 13.1106C7.95928 13.1106 6.92773 14.1422 6.92773 15.4399C6.92773 16.7377 7.95928 17.7693 9.25704 17.7693C10.5548 17.7693 11.5863 16.7377 11.5863 15.4399C11.5863 14.1422 10.5548 13.1106 9.25704 13.1106ZM9.25704 16.6046C8.6248 16.6046 8.09239 16.0722 8.09239 15.4399C8.09239 14.8077 8.6248 14.2753 9.25704 14.2753C9.88928 14.2753 10.4217 14.8077 10.4217 15.4399C10.4217 16.0722 9.88928 16.6046 9.25704 16.6046Z" />
-                    <path d="M0.802807 6.05619C0.869358 7.52032 2.16711 8.11928 2.83263 8.11928H5.16193C5.19521 8.11928 5.19521 8.11928 5.19521 8.11928C6.19348 8.05273 7.19175 7.38722 7.19175 6.05619V5.25757C8.28985 5.25757 10.8188 5.25757 11.9169 5.25757V6.05619C11.9169 7.38722 12.9152 8.05273 13.9135 8.11928H13.9467H16.2428C16.9083 8.11928 18.206 7.52032 18.2726 6.05619C18.2726 5.95636 18.2726 5.59033 18.2726 5.25757C18.2726 4.99136 18.2726 4.75843 18.2726 4.72516C18.2726 4.69188 18.2726 4.6586 18.2726 4.6586C18.1727 3.72688 17.84 2.96154 17.2743 2.36258L17.241 2.3293C16.4091 1.56396 15.4109 1.13138 14.6455 0.865169C12.416 0 9.62088 0 9.48778 0C7.52451 0.0332757 6.26003 0.199654 4.36331 0.865169C3.63125 1.0981 2.63297 1.53068 1.80108 2.29603L1.7678 2.3293C1.20212 2.92827 0.869359 3.69361 0.769531 4.62533C0.769531 4.6586 0.769531 4.69188 0.769531 4.69188C0.769531 4.75843 0.769531 4.95809 0.769531 5.22429C0.802807 5.52377 0.802807 5.92308 0.802807 6.05619ZM2.5997 3.12792C3.26521 2.52896 4.09711 2.16292 4.7959 1.89672C6.52624 1.26448 7.65761 1.13138 9.55433 1.0981C9.68743 1.0981 12.2829 1.13138 14.2795 1.89672C14.9783 2.16292 15.8102 2.49568 16.4757 3.12792C16.8417 3.52723 17.0746 4.05964 17.1412 4.69188C17.1412 4.79171 17.1412 4.95809 17.1412 5.22429C17.1412 5.55705 17.1412 5.92308 17.1412 6.02291C17.1079 6.78825 16.3759 6.95463 16.276 6.95463H13.98C13.6472 6.92135 13.1148 6.78825 13.1148 6.05619V4.69188C13.1148 4.42567 12.9485 4.22602 12.7155 4.12619C12.5159 4.05964 6.69262 4.05964 6.49296 4.12619C6.26003 4.19274 6.09365 4.42567 6.09365 4.69188V6.05619C6.09365 6.78825 5.56124 6.92135 5.22848 6.95463H2.93246C2.83263 6.95463 2.10056 6.78825 2.06729 6.02291C2.06729 5.92308 2.06729 5.55705 2.06729 5.22429C2.06729 4.95809 2.06729 4.82498 2.06729 4.72516C2.00073 4.05964 2.23366 3.52723 2.5997 3.12792Z" />
-                  </svg>
-                </span>
-                <span>+012 (345) 678 99</span>
-              </p>
-            </div>
-          </div>
-          <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
-            <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
-                Resources
-              </h4>
-              <ul>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    SaaS Development
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Our Products
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    User Flow
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    User Strategy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
-            <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
-                Company
-              </h4>
-              <ul>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    About TailGrids
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Contact & Support
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Success History
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Setting & Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="w-full px-4 sm:w-1/2 lg:w-2/12">
-            <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
-                Quick Links
-              </h4>
-              <ul>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Premium Support
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Our Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Know Our Team
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="hover:text-slate-600 dark:hover:text-slate-300 mb-2 inline-block text-base leading-loose"
-                  >
-                    Download App
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="w-full px-4 sm:w-1/2 lg:w-3/12">
-            <div className="mb-10 w-full">
-              <h4 className="mb-9 text-lg font-medium text-slate-700 dark:text-white">
-                Follow Us On
-              </h4>
-              <div className="mb-6 flex items-center">
-                <a
-                  href="#"
-                  className="hover:bg-[#1877f2] hover:border-[#1877f2] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
-                >
-                  <svg
-                    width="8"
-                    height="16"
-                    viewBox="0 0 8 16"
-                    className="fill-current"
-                  >
-                    <path d="M7.43902 6.4H6.19918H5.75639V5.88387V4.28387V3.76774H6.19918H7.12906C7.3726 3.76774 7.57186 3.56129 7.57186 3.25161V0.516129C7.57186 0.232258 7.39474 0 7.12906 0H5.51285C3.76379 0 2.54609 1.44516 2.54609 3.5871V5.83226V6.34839H2.10329H0.597778C0.287819 6.34839 0 6.63226 0 7.04516V8.90323C0 9.26452 0.243539 9.6 0.597778 9.6H2.05902H2.50181V10.1161V15.3032C2.50181 15.6645 2.74535 16 3.09959 16H5.18075C5.31359 16 5.42429 15.9226 5.51285 15.8194C5.60141 15.7161 5.66783 15.5355 5.66783 15.3806V10.1419V9.62581H6.13276H7.12906C7.41688 9.62581 7.63828 9.41935 7.68256 9.10968V9.08387V9.05806L7.99252 7.27742C8.01466 7.09677 7.99252 6.89032 7.85968 6.68387C7.8154 6.55484 7.61614 6.42581 7.43902 6.4Z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="hover:bg-[#1da1f2] hover:border-[#1da1f2] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
-                >
-                  <svg
-                    width="16"
-                    height="12"
-                    viewBox="0 0 16 12"
-                    className="fill-current"
-                  >
-                    <path d="M14.2194 2.06654L15.2 0.939335C15.4839 0.634051 15.5613 0.399217 15.5871 0.2818C14.8129 0.704501 14.0903 0.845401 13.6258 0.845401H13.4452L13.3419 0.751468C12.7226 0.258317 11.9484 0 11.1226 0C9.31613 0 7.89677 1.36204 7.89677 2.93542C7.89677 3.02935 7.89677 3.17025 7.92258 3.26419L8 3.73386L7.45806 3.71037C4.15484 3.61644 1.44516 1.03327 1.00645 0.587084C0.283871 1.76125 0.696774 2.88845 1.13548 3.59296L2.0129 4.90802L0.619355 4.20352C0.645161 5.18982 1.05806 5.96477 1.85806 6.52838L2.55484 6.99804L1.85806 7.25636C2.29677 8.45401 3.27742 8.94716 4 9.13503L4.95484 9.36986L4.05161 9.93346C2.60645 10.8728 0.8 10.8024 0 10.7319C1.62581 11.7652 3.56129 12 4.90323 12C5.90968 12 6.65806 11.9061 6.83871 11.8356C14.0645 10.2857 14.4 4.41487 14.4 3.2407V3.07632L14.5548 2.98239C15.4323 2.23092 15.7935 1.8317 16 1.59687C15.9226 1.62035 15.8194 1.66732 15.7161 1.6908L14.2194 2.06654Z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="hover:bg-[#FF0000] hover:border-[#FF0000] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
-                >
-                  <svg
-                    width="16"
-                    height="12"
-                    viewBox="0 0 16 12"
-                    className="fill-current"
-                  >
-                    <path d="M15.6645 1.88018C15.4839 1.13364 14.9419 0.552995 14.2452 0.359447C13.0065 6.59222e-08 8 0 8 0C8 0 2.99355 6.59222e-08 1.75484 0.359447C1.05806 0.552995 0.516129 1.13364 0.335484 1.88018C0 3.23502 0 6 0 6C0 6 0 8.79263 0.335484 10.1198C0.516129 10.8664 1.05806 11.447 1.75484 11.6406C2.99355 12 8 12 8 12C8 12 13.0065 12 14.2452 11.6406C14.9419 11.447 15.4839 10.8664 15.6645 10.1198C16 8.79263 16 6 16 6C16 6 16 3.23502 15.6645 1.88018ZM6.4 8.57143V3.42857L10.5548 6L6.4 8.57143Z" />
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="hover:bg-[#c13584] hover:border-[#c13584] mr-3 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 hover:text-white sm:mr-4 lg:mr-3 xl:mr-4"
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 256 256"
-                    className="fill-current"
-                  >
-                    <path d="M160,128a32,32,0,1,1-32-32A32.03667,32.03667,0,0,1,160,128Zm68-44v88a56.06353,56.06353,0,0,1-56,56H84a56.06353,56.06353,0,0,1-56-56V84A56.06353,56.06353,0,0,1,84,28h88A56.06353,56.06353,0,0,1,228,84Zm-52,44a48,48,0,1,0-48,48A48.05436,48.05436,0,0,0,176,128Zm16-52a12,12,0,1,0-12,12A12,12,0,0,0,192,76Z" />
-                  </svg>
-                </a>
-              </div>
-              <p className="text-sm">&copy; 2023 CryptoPriceApp</p>
-            </div>
-          </div>
-        </div>
-      </PageContent>
-      <div>
-        <span className="absolute left-0 bottom-0 z-[-1]">
-          <svg
-            width="217"
-            height="229"
-            viewBox="0 0 217 229"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+    <footer className="text-slate-500 dark:text-slate-500 pt-10 pb-3 mt-10">
+      <div className="text-center space-y-8">
+        <Link to="/" className="flex justify-center">
+          <img
+            className="h-10 object-cover"
+            src={!darkmodeCtx.isDarkmode ? logo : logoDark}
+            alt="Crypto Currency App Logo"
+          />
+        </Link>
+        <p className="font-medium uppercase space-x-3">
+          <Link
+            to="/"
+            className="hover:text-slate-600 dark:hover:text-slate-300"
           >
-            <path
-              d="M-64 140.5C-64 62.904 -1.096 1.90666e-05 76.5 1.22829e-05C154.096 5.49924e-06 217 62.904 217 140.5C217 218.096 154.096 281 76.5 281C-1.09598 281 -64 218.096 -64 140.5Z"
-              fill="url(#paint0_linear_1179_5)"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_1179_5"
-                x1="76.5"
-                y1="281"
-                x2="76.5"
-                y2="1.22829e-05"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#0ea5e9" stopOpacity="0.08" />
-                <stop offset="1" stopColor="#C4C4C4" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </span>
-        <span className="absolute top-10 right-10 z-[-1]">
-          <svg
-            width="75"
-            height="75"
-            viewBox="0 0 75 75"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            Cryptocurrencies
+          </Link>
+          <Link
+            to="/heat-map"
+            className="hover:text-slate-600 dark:hover:text-slate-300"
           >
-            <path
-              d="M37.5 -1.63918e-06C58.2107 -2.54447e-06 75 16.7893 75 37.5C75 58.2107 58.2107 75 37.5 75C16.7893 75 -7.33885e-07 58.2107 -1.63918e-06 37.5C-2.54447e-06 16.7893 16.7893 -7.33885e-07 37.5 -1.63918e-06Z"
-              fill="url(#paint0_linear_1179_4)"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_1179_4"
-                x1="-1.63917e-06"
-                y1="37.5"
-                x2="75"
-                y2="37.5"
-                gradientUnits="userSpaceOnUse"
+            Heat map
+          </Link>
+        </p>
+        <ul className="flex flex-wrap items-center justify-center gap-4 mt-16">
+          <li>
+            <a
+              className="inline-flex items-center gap-2 px-4 py-2 font-medium transition rounded-md hover:bg-slate-400/10 hover:text-slate-700 dark:hover:text-slate-300"
+              href="/"
+            >
+              <svg
+                className="w-5 h-5 text-[#FF0000]"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
               >
-                <stop stopColor="#0ea5e9" stopOpacity="0.31" />
-                <stop offset="1" stopColor="#C4C4C4" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </span>
+                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"></path>
+              </svg>
+              <span>YouTube</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="inline-flex items-center gap-2 px-4 py-2 font-medium transition rounded-md hover:bg-slate-400/10 hover:text-slate-700 dark:hover:text-slate-300"
+              href="/"
+            >
+              <svg
+                className="w-5 h-5 text-[#1DA1F2]"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
+              </svg>
+              <span>Twitter</span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              className="inline-flex items-center gap-2 px-4 py-2 font-medium transition rounded-md hover:bg-slate-400/10 hover:text-slate-700 dark:hover:text-slate-300"
+              href="https://github.com/tomeksz104"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg
+                className="w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+        <p className="pt-10">
+          Copyright ©2023 All rights reserved | This application was created by{" "}
+          <Link
+            to="https://github.com/tomeksz104"
+            target="_blank"
+            className="text-sky-500 hover:underline"
+          >
+            tomeksz104
+          </Link>
+        </p>
       </div>
     </footer>
   );

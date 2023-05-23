@@ -63,7 +63,8 @@ const Filters = () => {
       </button>
       <div className="flex items-center">
         <DropdownSelect
-          value={`Show rows: ${perPage}`}
+          value={perPage}
+          title="Show rows: "
           options={[100, 50, 20]}
           onChange={handleChangeRowsPerPage}
           classes="text-xs"
@@ -73,7 +74,7 @@ const Filters = () => {
             ref={inputRef}
             type="text"
             placeholder="Search..."
-            className="w-full pl-3 py-2 pe-10 rounded-md border border-slate-200 shadow-sm focus:outline-none focus:border-sky-500 dark:border-slate-200/10 dark:bg-slate-400/10 dark:text-white sm:text-sm"
+            className="w-full pl-3 py-2 pe-10 text-xs rounded-md border border-slate-200 shadow-sm focus:outline-none focus:border-sky-500 dark:border-slate-200/10 dark:bg-slate-400/10 dark:text-white"
             value={enteredFilter}
             onChange={(event) => {
               setEnteredFilter(event.target.value);

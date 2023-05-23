@@ -34,7 +34,8 @@ const PaginateWrapper = React.memo(() => {
           pageCount={totalPages}
         />
         <DropdownSelect
-          value={`Show rows: ${perPage}`}
+          value={perPage}
+          title="Show rows: "
           options={[100, 50, 20]}
           onChange={handleChangeRowsPerPage}
           classes="text-xs"

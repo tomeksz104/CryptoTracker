@@ -46,10 +46,10 @@ const Converter = ({ cryptocurrency, timestampOfLastUpdate }) => {
   };
 
   return (
-    <div class="bg-slate-400/10 text-slate-700 dark:text-white w-full max-w-md flex flex-col rounded-xl px-4 py-5 space-y-5">
-      <div class="flex items-center space-x-3">
-        <div class="rounded-full w-4 h-4 border border-amber-500"></div>
-        <div class="text-md font-bold">
+    <div className="bg-slate-400/10 text-slate-700 dark:text-white w-full max-w-md flex flex-col rounded-xl px-4 py-5 space-y-5">
+      <div className="flex items-center space-x-3">
+        <div className="rounded-full w-4 h-4 border border-amber-500"></div>
+        <div className="text-md font-bold">
           {cryptocurrency.symbol} to {currencyCtx.currentCurrency} converter
         </div>
       </div>
@@ -77,20 +77,20 @@ const Converter = ({ cryptocurrency, timestampOfLastUpdate }) => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M7 23.75a.75.75 0 0 1-.75-.75V1a.75.75 0 0 1 1.5 0v22a.75.75 0 0 1-.75.75Z"
             fill="#1199FA"
           ></path>
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M2.47 5.53a.75.75 0 0 1 0-1.06l4-4a.75.75 0 0 1 1.06 0l4 4a.75.75 0 0 1-1.06 1.06L7 2.06 3.53 5.53a.75.75 0 0 1-1.06 0ZM17 23.75a.75.75 0 0 1-.75-.75V1a.75.75 0 0 1 1.5 0v22a.75.75 0 0 1-.75.75Z"
             fill="#1199FA"
           ></path>
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M12.47 18.47a.75.75 0 0 1 1.06 0L17 21.94l3.47-3.47a.75.75 0 1 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 0-1.06Z"
             fill="#1199FA"
           ></path>
@@ -111,7 +111,7 @@ const Converter = ({ cryptocurrency, timestampOfLastUpdate }) => {
         </span>
       </div>
 
-      <div class="flex justify-end mt-4 text-slate-500 text-xs space-x-2">
+      <div className="flex justify-end mt-4 text-slate-500 text-xs space-x-2">
         <span>Last update: </span>
         <span className="font-semibold">{lastUpdatePriceDate}</span>
       </div>

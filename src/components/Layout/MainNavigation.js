@@ -42,7 +42,7 @@ const MainNavigation = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `flex hover:text-sky-500 cursor-pointer transition-colors duration-300 ${
+                `flex hover:text-sky-500 dark:hover:text-sky-500 cursor-pointer transition-colors duration-300 ${
                   isActive
                     ? "text-sky-500"
                     : "text-slate-600 dark:text-slate-200"
@@ -55,7 +55,7 @@ const MainNavigation = () => {
             <NavLink
               to="/heat-map"
               className={({ isActive }) =>
-                `flex hover:text-sky-500 cursor-pointer transition-colors duration-300 ${
+                `flex hover:text-sky-500 dark:hover:text-sky-500 cursor-pointer transition-colors duration-300 ${
                   isActive
                     ? "text-sky-500"
                     : "text-slate-600 dark:text-slate-200"
@@ -86,19 +86,8 @@ const MainNavigation = () => {
           </Provider>
           <ToggleDarkModeButton />
           <Sidebar onOpenCurrentCurrencyModal={onOpenCurrentCurrencyModal} />
-          {/* <a className="flex text-sky-500 hover:text-sky-400 font-medium cursor-pointer transition-colors duration-300">
-            Login
-          </a>
-          <a
-            className="flex text-white dark:text-slate-900 font-medium bg-sky-500 hover:bg-sky-400 rounded-md py-2 px-5
-                    cursor-pointer transition-colors duration-300"
-          >
-            Get Started
-          </a> */}
         </div>
       </div>
-
-      {/* <Sidebar onOpenCurrentCurrencyModal={onOpenCurrentCurrencyModal} /> */}
     </nav>
   );
 };

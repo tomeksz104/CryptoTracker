@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { useLoaderData } from "react-router";
-import ReactDOMServer from "react-dom/server";
+
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsTreeChart from "highcharts/modules/treemap";
@@ -18,8 +18,6 @@ if (typeof Highcharts === "object") {
   HighchartsTreeChart(Highcharts);
   HighchartsExporting(Highcharts);
 }
-
-const TOTAL_ITEMS_OPTIONS = [100, 50, 20];
 
 const MARKET_CAP = "Market Cap";
 const VOLUME_24H = "Volume 24h";
@@ -82,24 +80,20 @@ const HeatMap = () => {
       formatter: function () {
         const changePercentIcon =
           this.point.changePercent24Hr > 0
-            ? ReactDOMServer.renderToString(
-                <span
-                  className="text-white bg-green-500 font-medium rounded-md text-xs text-center inline-flex items-center ml-3"
-                  style={{ padding: "2px 5px" }}
-                >
-                  <img className="fill-white w-3 h-3" src={caretUp} />
-                  {roundToDecimals(this.point.changePercent24Hr, 2)}%
-                </span>
-              )
-            : ReactDOMServer.renderToString(
-                <span
-                  className="text-white bg-red-500 font-medium rounded-md text-xs text-center inline-flex items-center ml-3"
-                  style={{ padding: "2px 5px" }}
-                >
-                  <img className="fill-white w-3 h-3" src={caretDown} />
-                  {roundToDecimals(this.point.changePercent24Hr, 2)}%
-                </span>
-              );
+            ? '<span class="text-white bg-green-500 font-medium rounded-md text-xs text-center inline-flex items-center ml-3" style="padding: 2px 5px;">' +
+              '<img class="fill-white w-3 h-3" src="' +
+              caretUp +
+              '" alt="Caret up icon" />' +
+              roundToDecimals(this.point.changePercent24Hr, 2) +
+              "%" +
+              "</span>"
+            : '<span class="text-white bg-red-500 font-medium rounded-md text-xs text-center inline-flex items-center ml-3" style="padding: 2px 5px;">' +
+              '<img class="fill-white w-3 h-3" src="' +
+              caretDown +
+              '" alt="Caret down icon" />' +
+              roundToDecimals(this.point.changePercent24Hr, 2) +
+              "%" +
+              "</span>";
 
         return `
             <div class="flex flex-col px-3 py-2 space-y-2">
@@ -119,7 +113,7 @@ const HeatMap = () => {
                 <span>Volume:</span>
                 <span class="text-black font-semibold">${this.point.volume}</span>
               </div>
-             
+
             </div>
         `;
       },
@@ -184,7 +178,7 @@ const HeatMap = () => {
         <div className="flex space-x-2">
           <DropdownSelect
             value={`Crypto: ${totalItems}`}
-            options={TOTAL_ITEMS_OPTIONS}
+            options={[100, 50, 20]}
             onChange={handleChangeTotalItems}
             classes="text-xs"
           />

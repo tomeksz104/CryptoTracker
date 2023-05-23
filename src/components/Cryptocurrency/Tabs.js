@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { uiActions } from "../../store/ui-slice";
 import CurrencyContext from "../../context/currecy-context";
@@ -82,7 +82,6 @@ const Tabs = (props) => {
     };
 
     fetchMarketsData().catch((error) => {
-      console.log("ERROR MARKETS");
       dispatch(
         uiActions.showNotification({
           title: "Error!",
