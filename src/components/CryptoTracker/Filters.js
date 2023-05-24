@@ -67,7 +67,7 @@ const Filters = () => {
           title="Show rows: "
           options={[100, 50, 20]}
           onChange={handleChangeRowsPerPage}
-          classes="text-xs"
+          classes="hidden sm:block text-xs"
         />
         <div className="relative ml-3">
           <input
