@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { formatCryptocurrency } from "../utils/cryptoUtils";
+import { sortData } from "../utils/sort";
 
 const cryptocurrencySlice = createSlice({
   name: "cryptocurrency",
@@ -108,28 +109,10 @@ const cryptocurrencySlice = createSlice({
         updatedSortOrder = "desc";
       }
 
-      const sortedCurrencies = [...state.filteredCryptocurrencies].sort(
-        (a, b) => {
-          let fieldA = a[sortField].replace(/[$%"',[\]\s]/g, "");
-          let fieldB = b[sortField].replace(/[$%"',[\]\s]/g, "");
-          if (typeof fieldA === "string") {
-            fieldA = fieldA.toLowerCase();
-            fieldB = fieldB.toLowerCase();
-          }
-
-          if (!isNaN(fieldA) && !isNaN(fieldB)) {
-            fieldA = Number(fieldA);
-            fieldB = Number(fieldB);
-          }
-
-          if (fieldA < fieldB) {
-            return updatedSortOrder === "asc" ? -1 : 1;
-          }
-          if (fieldA > fieldB) {
-            return updatedSortOrder === "asc" ? 1 : -1;
-          }
-          return 0;
-        }
+      const sortedCurrencies = sortData(
+        [...state.filteredCryptocurrencies],
+        sortField,
+        updatedSortOrder
       );
 
       return {

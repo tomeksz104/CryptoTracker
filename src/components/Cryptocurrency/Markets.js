@@ -1,7 +1,8 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import CurrencyContext from "../../context/currecy-context";
 
 import { formatPrice } from "../../utils/cryptoUtils";
+import { sortData } from "../../utils/sort";
 
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
@@ -26,27 +27,11 @@ const Markets = (props) => {
       updatedSortOrder = "desc";
     }
 
-    const sortedCurrencies = [...marketsData].sort((a, b) => {
-      let fieldA = a[field].replace(/[$%"',[\]\s]/g, "");
-      let fieldB = b[field].replace(/[$%"',[\]\s]/g, "");
-      if (typeof fieldA === "string") {
-        fieldA = fieldA.toLowerCase();
-        fieldB = fieldB.toLowerCase();
-      }
-
-      if (!isNaN(fieldA) && !isNaN(fieldB)) {
-        fieldA = Number(fieldA);
-        fieldB = Number(fieldB);
-      }
-
-      if (fieldA < fieldB) {
-        return updatedSortOrder === "asc" ? -1 : 1;
-      }
-      if (fieldA > fieldB) {
-        return updatedSortOrder === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
+    const sortedCurrencies = sortData(
+      [...marketsData],
+      field,
+      updatedSortOrder
+    );
 
     setSortField(field);
     setSortOrder(updatedSortOrder);
