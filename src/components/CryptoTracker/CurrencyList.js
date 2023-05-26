@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo, useCallback, useContext } from "react";
-import useWebSocket from "react-use-websocket";
+import React, { useEffect, useMemo, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CurrencyContext from "../../context/currecy-context";
 
@@ -8,22 +7,21 @@ import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import { fetchCryptocurrencyPrices } from "../../store/cryptocurrency-actions";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
+import useWebSocketUpdates from "../../hooks/useWebSocketUpdates";
 
 const SOCKET_URL = "wss://ws.coincap.io/prices?assets=ALL";
 
 const CurrencyList = React.memo(() => {
   const dispatch = useDispatch();
+  useWebSocketUpdates(SOCKET_URL);
   const currencyCtx = useContext(CurrencyContext);
   const {
-    cryptocurrencies,
     filteredCryptocurrencies,
     currentPage,
     perPage,
     sortField,
     sortOrder,
   } = useSelector((state) => state.cryptocurrency);
-
-  const { lastMessage } = useWebSocket(SOCKET_URL);
 
   useEffect(() => {
     if (filteredCryptocurrencies.length === 0) {
@@ -37,38 +35,6 @@ const CurrencyList = React.memo(() => {
   }, [dispatch]);
 
   const pagesVisited = currentPage * perPage;
-
-  const handleUpdateCurrencies = useCallback(() => {
-    if (lastMessage !== null) {
-      const updatedCurrencies = cryptocurrencies
-        .filter((currency) =>
-          JSON.parse(lastMessage.data).hasOwnProperty(currency.id)
-        )
-        .map((currency) => {
-          const updatedPrice = JSON.parse(lastMessage.data)[currency.id];
-          return {
-            ...currency,
-            priceUsd: updatedPrice,
-          };
-        });
-
-      dispatch(
-        cryptocurrencyActions.updateCurrencyList({
-          items: updatedCurrencies,
-          currentCurrency: currencyCtx.currentCurrency,
-          currentCurrencyRate: currencyCtx.currentCurrencyRate,
-        })
-      );
-    }
-  }, [dispatch, lastMessage, cryptocurrencies, currencyCtx]);
-
-  useEffect(() => {
-    let timerId = setTimeout(() => {
-      handleUpdateCurrencies();
-      timerId = null;
-    }, 300);
-    return () => clearTimeout(timerId);
-  }, [handleUpdateCurrencies]);
 
   const handleSort = (field) => {
     dispatch(cryptocurrencyActions.sortCurrencies(field));
