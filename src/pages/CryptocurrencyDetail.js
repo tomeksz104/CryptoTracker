@@ -1,4 +1,4 @@
-import { defer, useLoaderData, Link } from "react-router-dom";
+import { defer, Link, useParams } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "../store";
@@ -8,18 +8,22 @@ import Tabs from "../components/Cryptocurrency/Tabs";
 import { useContext } from "react";
 import CurrencyContext from "../context/currecy-context";
 import { formatCryptocurrency } from "../utils/cryptoUtils";
+import { useGetCryptocurrencyQuery } from "../store/services/cryptoApi";
 
 const CryptocurrencyDetailPage = () => {
   const currencyCtx = useContext(CurrencyContext);
-  const data = useLoaderData("cryptocurrency-detail");
+  let { currencyId } = useParams();
+  const { data: cryptocurrencyData } = useGetCryptocurrencyQuery(currencyId);
+
+  if (!cryptocurrencyData) return;
 
   const updatedCryptocurrency = formatCryptocurrency(
-    data.cryptocurrency.data,
+    cryptocurrencyData.data,
     currencyCtx.currentCurrency,
     currencyCtx.currentCurrencyRate
   );
 
-  const timestampOfLastUpdate = data.cryptocurrency.timestamp;
+  const timestampOfLastUpdate = cryptocurrencyData.timestamp;
 
   return (
     <Provider store={store}>
@@ -51,7 +55,7 @@ const CryptocurrencyDetailPage = () => {
                   ></path>
                 </svg>
                 <span className="ml-1 text-sm font-medium text-slate-500 md:ml-2 dark:text-slate-400">
-                  {data.cryptocurrency.data.name}
+                  {cryptocurrencyData.data.name}
                 </span>
               </div>
             </li>

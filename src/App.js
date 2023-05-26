@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createHashRouter,
-} from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 
 import RootLayout from "./pages/Root";
 
@@ -38,11 +34,7 @@ const router = createHashRouter([
 ]);
 
 function App() {
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

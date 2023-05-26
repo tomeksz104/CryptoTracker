@@ -1,20 +1,24 @@
-import React, { useEffect, useMemo, useContext } from "react";
+import React, { useMemo, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CurrencyContext from "../../context/currecy-context";
 
 import CurrencyItem from "./CurrencyItem";
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
-import { fetchCryptocurrencyPrices } from "../../store/cryptocurrency-actions";
 import { ReactComponent as CaretDown } from "../../assets/svg/caret-down.svg";
 import { ReactComponent as CaretUp } from "../../assets/svg/caret-up.svg";
 import useWebSocketUpdates from "../../hooks/useWebSocketUpdates";
+import { useGetCryptocurrenciesQuery } from "../../store/services/cryptoApi";
 
 const SOCKET_URL = "wss://ws.coincap.io/prices?assets=ALL";
 
 const CurrencyList = React.memo(() => {
   const dispatch = useDispatch();
-  useWebSocketUpdates(SOCKET_URL);
   const currencyCtx = useContext(CurrencyContext);
+  useWebSocketUpdates(SOCKET_URL);
+  useGetCryptocurrenciesQuery({
+    currentCurrency: currencyCtx.currentCurrency,
+    currentCurrencyRate: currencyCtx.currentCurrencyRate,
+  });
   const {
     filteredCryptocurrencies,
     currentPage,
@@ -22,17 +26,6 @@ const CurrencyList = React.memo(() => {
     sortField,
     sortOrder,
   } = useSelector((state) => state.cryptocurrency);
-
-  useEffect(() => {
-    if (filteredCryptocurrencies.length === 0) {
-      dispatch(
-        fetchCryptocurrencyPrices(
-          currencyCtx.currentCurrency,
-          currencyCtx.currentCurrencyRate
-        )
-      );
-    }
-  }, [dispatch]);
 
   const pagesVisited = currentPage * perPage;
 
