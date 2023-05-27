@@ -1,10 +1,9 @@
-import { defer, Link, useParams } from "react-router-dom";
-import { Provider } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
-import store from "../store";
 import PageContent from "../components/Layout/PageContent";
-import CryptocurrencyItem from "../components/Cryptocurrency/CryptocurrencyItem";
-import Tabs from "../components/Cryptocurrency/Tabs";
+import CryptocurrencyItem from "../features/CryptocurrencyDetail/CryptocurrencyItem";
+
+import Tabs from "../features/CryptocurrencyDetail/Tabs";
 import { useContext } from "react";
 import CurrencyContext from "../context/currecy-context";
 import { formatCryptocurrency } from "../utils/cryptoUtils";
@@ -26,7 +25,7 @@ const CryptocurrencyDetailPage = () => {
   const timestampOfLastUpdate = cryptocurrencyData.timestamp;
 
   return (
-    <Provider store={store}>
+    <>
       <PageContent classes="mt-8">
         <nav to={"/"} className="flex" aria-label="Breadcrumb">
           <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -67,24 +66,8 @@ const CryptocurrencyDetailPage = () => {
         cryptocurrency={updatedCryptocurrency}
         timestampOfLastUpdate={timestampOfLastUpdate}
       />
-    </Provider>
+    </>
   );
 };
 
 export default CryptocurrencyDetailPage;
-
-const loadCryptocurrency = async (id) => {
-  const response = await fetch("https://api.coincap.io/v2/assets/" + id);
-
-  const data = await response.json();
-
-  return data;
-};
-
-export async function loader({ request, params }) {
-  const id = params.currencyId;
-
-  return defer({
-    cryptocurrency: await loadCryptocurrency(id),
-  });
-}

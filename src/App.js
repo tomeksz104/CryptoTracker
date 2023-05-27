@@ -1,13 +1,11 @@
 import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
-import RootLayout from "./pages/Root";
+import RootLayout from "./components/Layout/Root";
 
 import "./App.css";
-import CurrenciesPage from "./pages/Currencies";
-import CryptocurrencyDetailPage, {
-  loader as cryptocurrencyLoader,
-} from "./pages/CryptocurrencyDetail";
+import CryptoTrackerPage from "./pages/CryptoTracker";
+import CryptocurrencyDetailPage from "./pages/CryptocurrencyDetail";
 import ErrorPage from "./pages/Error";
 import HeatMapPage, { loader as cryptocurrenciesLoader } from "./pages/HeatMap";
 
@@ -17,12 +15,11 @@ const router = createHashRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <CurrenciesPage /> },
+      { index: true, element: <CryptoTrackerPage /> },
       {
         path: "cryptocurrency/:currencyId",
         id: "cryptocurrency-detail",
         element: <CryptocurrencyDetailPage />,
-        loader: cryptocurrencyLoader,
       },
       {
         path: "heat-map",

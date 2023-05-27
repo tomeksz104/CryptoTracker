@@ -1,7 +1,7 @@
 import { defer } from "react-router";
-import HeatMap from "../components/HeatMap/HeatMap";
+import HeatMap from "../features/HeatMap/HeatMap";
 import PageContent from "../components/Layout/PageContent";
-import Header from "../components/HeatMap/Header";
+import Header from "../features/HeatMap/Header";
 
 const HeatMapPage = () => {
   return (
