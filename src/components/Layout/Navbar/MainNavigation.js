@@ -28,7 +28,7 @@ const MainNavigation = () => {
 
   return (
     <nav className="border-b border-slate-100 dark:border-slate-800">
-      <div className="container mx-auto px-3 md:px-0 flex justify-between py-4 z-10">
+      <div className="container mx-auto px-3 flex justify-between py-4 z-10">
         <div className="flex items-center">
           <NavLink to="/" className="mr-5 cursor-pointer">
             <img
