@@ -1,95 +1,34 @@
-import { useEffect, useContext, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useState } from "react";
 
-import { uiActions } from "../../store/ui-slice";
 import CurrencyContext from "../../context/currecy-context";
-import { roundToDecimals } from "../../utils/cryptoUtils";
 
 import Chart from "./Chart";
 import PageContent from "../../components/Layout/PageContent";
 import Markets from "./Markets";
 import { CHART_INTERVALS } from "./Chart";
+import {
+  useGetChartDataQuery,
+  useGetMarketsQuery,
+} from "../../store/services/cryptoApi";
 
 const Tabs = (props) => {
-  const dispatch = useDispatch();
   const currencyCtx = useContext(CurrencyContext);
   const [activeTab, setActiveTab] = useState("Overview");
-  const [historicalData, setHistoricalData] = useState([]);
   const [chartInterval, setChartInterval] = useState(CHART_INTERVALS[4]);
-
-  const [marketsData, setMarketsData] = useState([]);
   const [offset, setOffset] = useState(0);
 
-  useEffect(() => {
-    const fetchChartData = async () => {
-      const response = await fetch(
-        `https://api.coincap.io/v2/assets/${props.cryptocurrency.id.toLowerCase()}/history?interval=${
-          chartInterval.value
-        }&start=${chartInterval.start}&end=${chartInterval.end}`
-      );
+  const { data: marketsData = [] } = useGetMarketsQuery({
+    id: props.cryptocurrency.id,
+    offset,
+  });
 
-      if (!response.ok) {
-        throw new Error("Could not fetch chart data!");
-      }
-
-      const { data } = await response.json();
-
-      const mappedData = data.map((item) => {
-        if (currencyCtx.currentCurrencyRate === 0) {
-          return [item.time, roundToDecimals(+item.priceUsd, 2)];
-        } else {
-          return [
-            item.time,
-            roundToDecimals(
-              +item.priceUsd / currencyCtx.currentCurrencyRate,
-              2
-            ),
-          ];
-        }
-      });
-
-      setHistoricalData(mappedData);
-    };
-
-    fetchChartData().catch((error) => {
-      dispatch(
-        uiActions.showNotification({
-          title: "Error!",
-          message: "Fetching chart data failed!",
-        })
-      );
-    });
-  }, [currencyCtx.currentCurrencyRate, chartInterval]);
-
-  useEffect(() => {
-    const fetchMarketsData = async () => {
-      const response = await fetch(
-        `https://api.coincap.io/v2/assets/${props.cryptocurrency.name.toLowerCase()}/markets?offset=${offset}&limit=100`
-      );
-
-      if (!response.ok) {
-        throw new Error("Could not fetch markets data!");
-      }
-
-      const { data } = await response.json();
-
-      const marketsWithId = data.map((market, index) => ({
-        ...market,
-        marketId: (index + 1 + offset).toString(),
-      }));
-
-      setMarketsData((prevData) => [...prevData, ...marketsWithId]);
-    };
-
-    fetchMarketsData().catch((error) => {
-      dispatch(
-        uiActions.showNotification({
-          title: "Error!",
-          message: "Fetching markets data failed!",
-        })
-      );
-    });
-  }, [offset]);
+  const { data: chartData = [] } = useGetChartDataQuery({
+    id: props.cryptocurrency.id,
+    chartInterval: chartInterval.value,
+    start: chartInterval.start,
+    end: chartInterval.end,
+    currentCurrencyRate: currencyCtx.currentCurrencyRate,
+  });
 
   const handleChangeTab = (tab) => () => {
     setActiveTab(tab);
@@ -141,7 +80,7 @@ const Tabs = (props) => {
         {activeTab === "Overview" && (
           <Chart
             cryptocurrency={props.cryptocurrency}
-            historicalData={historicalData}
+            historicalData={chartData}
             chartInterval={chartInterval}
             onChangeChartInterval={handleChangeChartInterval}
             timestampOfLastUpdate={props.timestampOfLastUpdate}

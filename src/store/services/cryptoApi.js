@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { cryptocurrencyActions } from "../cryptocurrency-slice";
 import { uiActions } from "../ui-slice";
 
-import { formatCryptocurrency } from "../../utils/cryptoUtils";
+import { formatCryptocurrency, roundToDecimals } from "../../utils/cryptoUtils";
 
 export const cryptoApi = createApi({
   reducerPath: "cryptoApi",
@@ -42,8 +42,59 @@ export const cryptoApi = createApi({
     getCryptocurrency: builder.query({
       query: (id) => `assets/${id}`,
     }),
+    getMarkets: builder.query({
+      query: ({ id, offset }) =>
+        `assets/${id}/markets?offset=${offset}&limit=100`,
+      transformResponse: (response, queryApi, options) => {
+        const { data } = response;
+
+        const { offset } = options;
+
+        const marketsWithId = data.map((market, index) => ({
+          ...market,
+          marketId: (index + 1 + offset).toString(),
+        }));
+
+        return Promise.all(marketsWithId);
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        currentCache.push(...newItems);
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+    }),
+    getChartData: builder.query({
+      query: ({ id, chartInterval, start, end }) =>
+        `assets/${id}/history?interval=${chartInterval}&start=${start}&end=${end}`,
+      transformResponse: (response, queryApi, options) => {
+        const { data } = response;
+
+        const { currentCurrencyRate } = options;
+
+        const chartData = data.map((item) => {
+          if (currentCurrencyRate === 0) {
+            return [item.time, roundToDecimals(+item.priceUsd, 2)];
+          } else {
+            return [
+              item.time,
+              roundToDecimals(+item.priceUsd / currentCurrencyRate, 2),
+            ];
+          }
+        });
+
+        return Promise.all(chartData);
+      },
+    }),
   }),
 });
 
-export const { useGetCryptocurrenciesQuery, useGetCryptocurrencyQuery } =
-  cryptoApi;
+export const {
+  useGetCryptocurrenciesQuery,
+  useGetCryptocurrencyQuery,
+  useGetMarketsQuery,
+  useGetChartDataQuery,
+} = cryptoApi;
