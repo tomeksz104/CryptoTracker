@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/CryptoTracker/static/css/main.72e48483.css",
-    "main.js": "/CryptoTracker/static/js/main.e98ab444.js",
+    "main.css": "/CryptoTracker/static/css/main.e187640a.css",
+    "main.js": "/CryptoTracker/static/js/main.d4c37362.js",
     "static/js/4638.1ae21781.chunk.js": "/CryptoTracker/static/js/4638.1ae21781.chunk.js",
     "static/js/2526.549646e8.chunk.js": "/CryptoTracker/static/js/2526.549646e8.chunk.js",
     "static/js/2601.77994d0a.chunk.js": "/CryptoTracker/static/js/2601.77994d0a.chunk.js",
@@ -709,7 +709,7 @@
     "static/media/poe.svg": "/CryptoTracker/static/media/poe.90807e657c0581870ff2.svg",
     "static/media/bq.svg": "/CryptoTracker/static/media/bq.1f0bba933af0e90041c7.svg",
     "static/media/btc.svg": "/CryptoTracker/static/media/btc.0a74ea3b5676029550b7.svg",
-    "static/media/empty.svg": "/CryptoTracker/static/media/empty.917c1a3f34337d127efb89fd9073a7c5.svg",
+    "static/media/crypto-empty.svg": "/CryptoTracker/static/media/crypto-empty.917c1a3f34337d127efb89fd9073a7c5.svg",
     "static/media/x.svg": "/CryptoTracker/static/media/x.aba130a6ac5baa43dc39.svg",
     "static/media/dat.svg": "/CryptoTracker/static/media/dat.c28325dbd022d3ac80ca.svg",
     "static/media/$pac.svg": "/CryptoTracker/static/media/$pac.16d59c29001aceab2e1e.svg",
@@ -993,12 +993,12 @@
     "static/media/mtl.svg": "/CryptoTracker/static/media/mtl.ca19fdf113bed89fe81c.svg",
     "static/media/vib.svg": "/CryptoTracker/static/media/vib.df6b08c7ba872bd6a027.svg",
     "static/media/waves.svg": "/CryptoTracker/static/media/waves.2c95a006c407ae1604b4.svg",
-    "main.72e48483.css.map": "/CryptoTracker/static/css/main.72e48483.css.map",
-    "main.e98ab444.js.map": "/CryptoTracker/static/js/main.e98ab444.js.map",
+    "main.e187640a.css.map": "/CryptoTracker/static/css/main.e187640a.css.map",
+    "main.d4c37362.js.map": "/CryptoTracker/static/js/main.d4c37362.js.map",
     "787.f41d85a0.chunk.js.map": "/CryptoTracker/static/js/787.f41d85a0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72e48483.css",
-    "static/js/main.e98ab444.js"
+    "static/css/main.e187640a.css",
+    "static/js/main.d4c37362.js"
   ]
 }
