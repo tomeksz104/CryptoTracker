@@ -39,7 +39,7 @@ const ErrorPage = () => {
             </div>
             <Link
               to="/"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate("/")}
               title="Back to safe page"
               aria-label="go back home"
               className="relative mx-auto flex h-11 w-11 items-center justify-center before:absolute before:inset-0 before:rounded-full before:bg-white before:shadow-2xl before:shadow-primary dark:shadow-none dark:before:bg-gray-700 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95"

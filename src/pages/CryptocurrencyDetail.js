@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import PageContent from "../components/Layout/PageContent";
 import CryptocurrencyItem from "../features/CryptocurrencyDetail/CryptocurrencyItem";
@@ -10,10 +10,13 @@ import { formatCryptocurrency } from "../utils/cryptoUtils";
 import { useGetCryptocurrencyQuery } from "../store/services/cryptoApi";
 
 const CryptocurrencyDetailPage = () => {
+  const navigate = useNavigate();
   const currencyCtx = useContext(CurrencyContext);
   let { currencyId } = useParams();
-  const { data: cryptocurrencyData } = useGetCryptocurrencyQuery(currencyId);
+  const { data: cryptocurrencyData, error } =
+    useGetCryptocurrencyQuery(currencyId);
 
+  if (error) navigate("/404");
   if (!cryptocurrencyData) return;
 
   const updatedCryptocurrency = formatCryptocurrency(

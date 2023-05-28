@@ -41,6 +41,16 @@ export const cryptoApi = createApi({
     }),
     getCryptocurrency: builder.query({
       query: (id) => `assets/${id}`,
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        queryFulfilled.catch((error) => {
+          dispatch(
+            uiActions.showNotification({
+              title: "Error!",
+              message: "Fetching cryptocurrency detail data failed!",
+            })
+          );
+        });
+      },
     }),
     getMarkets: builder.query({
       query: ({ id, offset }) =>
@@ -66,6 +76,16 @@ export const cryptoApi = createApi({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        queryFulfilled.catch((error) => {
+          dispatch(
+            uiActions.showNotification({
+              title: "Error!",
+              message: "Fetching markets data failed!",
+            })
+          );
+        });
+      },
     }),
     getChartData: builder.query({
       query: ({ id, chartInterval, start, end }) =>
@@ -87,6 +107,16 @@ export const cryptoApi = createApi({
         });
 
         return Promise.all(chartData);
+      },
+      async onQueryStarted(id, { dispatch, queryFulfilled }) {
+        queryFulfilled.catch((error) => {
+          dispatch(
+            uiActions.showNotification({
+              title: "Error!",
+              message: "Fetching chart data failed!",
+            })
+          );
+        });
       },
     }),
   }),
