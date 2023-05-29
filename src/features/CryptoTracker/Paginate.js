@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { cryptocurrencyActions } from "../../store/cryptocurrency-slice";
 import ReactPaginate from "react-paginate";
 
@@ -8,6 +8,7 @@ import { ReactComponent as ChevronRight } from "../../assets/svg/chevron-right.s
 
 const Paginate = ({ classes, pageCount }) => {
   const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.cryptocurrency.currentPage);
 
   const changePageHandler = useCallback(
     ({ selected }) => {
@@ -20,6 +21,7 @@ const Paginate = ({ classes, pageCount }) => {
     <ReactPaginate
       breakLabel={<span className="mx-2">...</span>}
       className={classes}
+      forcePage={currentPage}
       activeClassName="selected text-white dark:text-slate-900"
       previousLabel={
         <span className="w-2 h-2 flex items-center justify-center mr-8 fill-slate-600 dark:fill-slate-300">
