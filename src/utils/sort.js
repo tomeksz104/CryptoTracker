@@ -14,8 +14,10 @@ export function sortData(data, sortField, sortOrder) {
   //   });
 
   const sortedData = data.sort((a, b) => {
-    let fieldA = a[sortField].replace(/[$%"',[\]\s]/g, "");
-    let fieldB = b[sortField].replace(/[$%"',[\]\s]/g, "");
+    let fieldA =
+      a[sortField] !== null ? a[sortField].replace(/[$%"',[\]\s]/g, "") : "";
+    let fieldB =
+      b[sortField] !== null ? b[sortField].replace(/[$%"',[\]\s]/g, "") : "";
     if (typeof fieldA === "string") {
       fieldA = fieldA.toLowerCase();
       fieldB = fieldB.toLowerCase();
