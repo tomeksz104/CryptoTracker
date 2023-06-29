@@ -23,7 +23,7 @@ const Header = React.memo(() => {
     if (cryptocurrencies.length > 0) {
       const totalMarketCap = cryptocurrencies.reduce(
         (sum, currency) =>
-          sum + parseFloat(currency.marketCapUsd.replace(/[$,]/g, "")),
+          sum + parseFloat(currency.marketCapUsd?.replace(/[$,]/g, "") ?? 0),
         0
       );
       setTotalMarketCap(
@@ -36,7 +36,7 @@ const Header = React.memo(() => {
 
       const volume24Hr = cryptocurrencies.reduce(
         (sum, currency) =>
-          sum + parseFloat(currency.volumeUsd24Hr.replace(/[$,]/g, "")),
+          sum + parseFloat(currency.volumeUsd24Hr?.replace(/[$,]/g, "") ?? 0),
         0
       );
       setVolume24Hr(
