@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CryptoTracker/static/css/main.599cf0a8.css",
-    "main.js": "/CryptoTracker/static/js/main.81a23e01.js",
+    "main.js": "/CryptoTracker/static/js/main.fed85cf1.js",
     "static/js/6277.ce65e756.chunk.js": "/CryptoTracker/static/js/6277.ce65e756.chunk.js",
     "static/js/1842.71e8198c.chunk.js": "/CryptoTracker/static/js/1842.71e8198c.chunk.js",
     "static/js/5106.01f08f50.chunk.js": "/CryptoTracker/static/js/5106.01f08f50.chunk.js",
@@ -994,11 +994,11 @@
     "static/media/vib.svg": "/CryptoTracker/static/media/vib.df6b08c7ba872bd6a027.svg",
     "static/media/waves.svg": "/CryptoTracker/static/media/waves.2c95a006c407ae1604b4.svg",
     "main.599cf0a8.css.map": "/CryptoTracker/static/css/main.599cf0a8.css.map",
-    "main.81a23e01.js.map": "/CryptoTracker/static/js/main.81a23e01.js.map",
+    "main.fed85cf1.js.map": "/CryptoTracker/static/js/main.fed85cf1.js.map",
     "6453.42a99916.chunk.js.map": "/CryptoTracker/static/js/6453.42a99916.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.599cf0a8.css",
-    "static/js/main.81a23e01.js"
+    "static/js/main.fed85cf1.js"
   ]
 }
