@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[2506],{22506:function(c,p,e){c.exports=e.p+"static/media/miota.3509dfd91052b6026031.svg"}}]);

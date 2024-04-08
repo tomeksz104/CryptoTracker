@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[9687],{89687:(a,c,p)=>{a.exports=p.p+"static/media/fida.d95ea352caa292695ab9.svg"}}]);

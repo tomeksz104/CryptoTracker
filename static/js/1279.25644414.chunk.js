@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[1279],{31279:(c,e,p)=>{c.exports=p.p+"static/media/bela.b2c624d9175e80b85907.svg"}}]);

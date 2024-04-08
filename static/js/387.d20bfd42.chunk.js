@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[387],{80387:(c,e,p)=>{c.exports=p.p+"static/media/theta.21475b4ce023750aa436.svg"}}]);

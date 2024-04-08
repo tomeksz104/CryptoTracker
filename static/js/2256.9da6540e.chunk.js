@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[2256],{82256:function(c,p,a){c.exports=a.p+"static/media/ignis.403a33aaa9771dc57e45.svg"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[856],{80856:(c,e,p)=>{c.exports=p.p+"static/media/elf.e0447215571b8cf1fdcb.svg"}}]);

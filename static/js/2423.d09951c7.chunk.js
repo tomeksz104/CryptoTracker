@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[2423],{82423:(c,p,e)=>{c.exports=e.p+"static/media/cloak.28c21b1769459b7398c9.svg"}}]);

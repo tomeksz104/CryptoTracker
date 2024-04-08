@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[9725],{59725:(c,a,e)=>{c.exports=e.p+"static/media/safemoon.a4ea7a54f346118c5ac2.svg"}}]);

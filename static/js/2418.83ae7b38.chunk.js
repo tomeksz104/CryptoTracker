@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[2418],{62418:(c,p,e)=>{c.exports=e.p+"static/media/tomo.cadc89759c769e32511c.svg"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[616],{10616:function(c,p,e){c.exports=e.p+"static/media/sberbank.f245b10799cfcaa8d404.svg"}}]);

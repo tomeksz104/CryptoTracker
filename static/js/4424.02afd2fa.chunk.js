@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[4424],{54424:(c,p,e)=>{c.exports=e.p+"static/media/qtum.398da1c35b2528f570b1.svg"}}]);

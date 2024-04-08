@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[4562],{14562:(p,c,e)=>{p.exports=e.p+"static/media/atlas.18d9391e8b382f470215.svg"}}]);

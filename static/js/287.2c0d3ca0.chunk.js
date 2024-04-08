@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[287],{60287:function(c,p,e){c.exports=e.p+"static/media/klown.b5601fc742c1be00ac60.svg"}}]);

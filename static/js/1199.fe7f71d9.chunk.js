@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[1199],{71199:(c,e,p)=>{c.exports=p.p+"static/media/vivo.55f9eed69ff980ad0c85.svg"}}]);

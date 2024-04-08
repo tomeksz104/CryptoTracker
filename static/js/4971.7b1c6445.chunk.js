@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[4971],{34971:function(c,p,e){c.exports=e.p+"static/media/zest.1bc0c098dcd0a3a73b97.svg"}}]);

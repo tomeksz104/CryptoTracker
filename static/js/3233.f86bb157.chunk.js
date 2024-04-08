@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[3233],{53233:(e,c,p)=>{e.exports=p.p+"static/media/vibe.f46e82cafdc3949d7ee9.svg"}}]);

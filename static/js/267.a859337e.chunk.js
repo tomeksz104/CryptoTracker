@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[267],{10267:(p,c,e)=>{p.exports=e.p+"static/media/poe.90807e657c0581870ff2.svg"}}]);

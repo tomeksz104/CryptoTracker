@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[8092],{58092:(e,c,p)=>{e.exports=p.p+"static/media/meetone.ef2cafdfd3fb76603562.svg"}}]);

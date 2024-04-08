@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcrypto_currency_app=self.webpackChunkcrypto_currency_app||[]).push([[5344],{45344:(c,e,p)=>{c.exports=p.p+"static/media/ncash.c066b7e3318b404beba0.svg"}}]);
