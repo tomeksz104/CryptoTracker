@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CryptoTracker/static/css/main.599cf0a8.css",
-    "main.js": "/CryptoTracker/static/js/main.12e1b860.js",
+    "main.js": "/CryptoTracker/static/js/main.6b474d83.js",
     "static/js/6277.ce65e756.chunk.js": "/CryptoTracker/static/js/6277.ce65e756.chunk.js",
     "static/js/1842.71e8198c.chunk.js": "/CryptoTracker/static/js/1842.71e8198c.chunk.js",
     "static/js/5106.01f08f50.chunk.js": "/CryptoTracker/static/js/5106.01f08f50.chunk.js",
@@ -494,8 +494,6 @@
     "static/media/inter-latin-ext-400-normal.woff2": "/CryptoTracker/static/media/inter-latin-ext-400-normal.3a7a76525d98d25962eb.woff2",
     "static/media/inter-latin-500-normal.woff2": "/CryptoTracker/static/media/inter-latin-500-normal.c72c72b70c82b1f4bacf.woff2",
     "static/media/inter-latin-400-normal.woff2": "/CryptoTracker/static/media/inter-latin-400-normal.be7cb18dc7caf47cf7e9.woff2",
-    "static/media/logo.png": "/CryptoTracker/static/media/logo.8c3c64b8b7ed56c6cbe1.png",
-    "static/media/logo-dark.png": "/CryptoTracker/static/media/logo-dark.f40772a8f535475fecf3.png",
     "static/media/inter-cyrillic-ext-500-normal.woff2": "/CryptoTracker/static/media/inter-cyrillic-ext-500-normal.a93857ed8d0b316d3572.woff2",
     "static/media/klown.svg": "/CryptoTracker/static/media/klown.b5601fc742c1be00ac60.svg",
     "static/media/inter-cyrillic-ext-400-normal.woff2": "/CryptoTracker/static/media/inter-cyrillic-ext-400-normal.fcc125c4fef4b94c8b13.woff2",
@@ -532,6 +530,8 @@
     "static/media/gzr.svg": "/CryptoTracker/static/media/gzr.60a07ba8fbebf4162f6f.svg",
     "static/media/1inch.svg": "/CryptoTracker/static/media/1inch.1d8588c6c29abfe4397f.svg",
     "static/media/qrl.svg": "/CryptoTracker/static/media/qrl.809b85a12cdfbbd8dbe3.svg",
+    "static/media/logo-dark.webp": "/CryptoTracker/static/media/logo-dark.31e1253987c5c8cf2fed.webp",
+    "static/media/logo.webp": "/CryptoTracker/static/media/logo.d051d9d29afc75cc268d.webp",
     "static/media/zilla.svg": "/CryptoTracker/static/media/zilla.dce6b094dfdc3944897b.svg",
     "static/media/mith.svg": "/CryptoTracker/static/media/mith.56065d97991dcc3db0e5.svg",
     "static/media/amp.svg": "/CryptoTracker/static/media/amp.7ee834b928d2e1a2800f.svg",
@@ -994,11 +994,11 @@
     "static/media/vib.svg": "/CryptoTracker/static/media/vib.df6b08c7ba872bd6a027.svg",
     "static/media/waves.svg": "/CryptoTracker/static/media/waves.2c95a006c407ae1604b4.svg",
     "main.599cf0a8.css.map": "/CryptoTracker/static/css/main.599cf0a8.css.map",
-    "main.12e1b860.js.map": "/CryptoTracker/static/js/main.12e1b860.js.map",
+    "main.6b474d83.js.map": "/CryptoTracker/static/js/main.6b474d83.js.map",
     "6453.42a99916.chunk.js.map": "/CryptoTracker/static/js/6453.42a99916.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.599cf0a8.css",
-    "static/js/main.12e1b860.js"
+    "static/js/main.6b474d83.js"
   ]
 }
