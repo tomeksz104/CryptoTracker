@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import DarkmodeContext from "../../context/darkmode-context";
 
-import logo from "../../assets/logo.png";
-import logoDark from "../../assets/logo-dark.png";
+import logo from "../../assets/logo.webp";
+import logoDark from "../../assets/logo-dark.webp";
 
 const Footer = () => {
   const darkmodeCtx = useContext(DarkmodeContext);

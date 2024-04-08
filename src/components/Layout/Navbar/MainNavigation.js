@@ -9,8 +9,8 @@ import Sidebar from "../Sidebar";
 import CurrencyPicker from "./CurrencyPicker";
 import ToggleDarkModeButton from "../../UI/ToggleDarkModeButton";
 
-import logo from "../../../assets/logo.png";
-import logoDarkmode from "../../../assets/logo-dark.png";
+import logo from "../../../assets/logo.webp";
+import logoDarkmode from "../../../assets/logo-dark.webp";
 import { ReactComponent as CaretDown } from "../../../assets/svg/caret-down.svg";
 
 const MainNavigation = () => {
@@ -32,6 +32,7 @@ const MainNavigation = () => {
         <div className="flex items-center">
           <NavLink to="/" className="mr-5 cursor-pointer">
             <img
+              fetchpriority="high"
               className="h-10 object-cover"
               src={!darkmodeCtx.isDarkmode ? logo : logoDarkmode}
               alt="Crypto Currency App Logo"

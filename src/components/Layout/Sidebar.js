@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import CurrencyContext from "../../context/currecy-context";
 import DarkmodeContext from "../../context/darkmode-context";
 
-import logoDarkmode from "../../assets/logo-dark.png";
+import logoDarkmode from "../../assets/logo-dark.webp";
 
 const portalElement = document.getElementById("sidebar");
 
