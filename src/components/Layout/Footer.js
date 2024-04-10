@@ -13,6 +13,9 @@ const Footer = () => {
       <div className="text-center space-y-8">
         <Link to="/" className="flex justify-center">
           <img
+            width={200}
+            height={40}
+            loading="lazy"
             className="h-10 object-cover"
             src={!darkmodeCtx.isDarkmode ? logo : logoDark}
             alt="Crypto Currency App Logo"

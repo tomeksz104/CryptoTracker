@@ -67,6 +67,9 @@ const Sidebar = (props) => {
                 <div className="flex items-center justify-between h-14 px-5 py-8">
                   <NavLink to="/" className="mr-5 cursor-pointer">
                     <img
+                      width={200}
+                      height={40}
+                      loading="lazy"
                       className="h-8 object-cover"
                       src={logoDarkmode}
                       alt="Crypto Currency App Logo"
