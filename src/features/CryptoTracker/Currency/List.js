@@ -57,6 +57,8 @@ const List = React.memo(() => {
     return null;
   };
 
+  if (currencyList.length === 0) return <div className="h-[3304px]"></div>;
+
   return (
     <div className="overflow-x-auto">
       <table className="border-t border-slate-200 dark:border-slate-700 table-auto w-full text-sm">
