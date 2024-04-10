@@ -1,13 +1,17 @@
 import { defer } from "react-router";
-import HeatMap from "../features/HeatMap/HeatMap";
+//import HeatMap from "../features/HeatMap/HeatMap";
 import PageContent from "../components/Layout/PageContent";
 import Header from "../features/HeatMap/Header";
+import { Suspense, lazy } from "react";
 
+const HeatMap = lazy(() => import("../features/HeatMap/HeatMap"));
 const HeatMapPage = () => {
   return (
     <PageContent>
       <Header />
-      <HeatMap />
+      <Suspense fallback="">
+        <HeatMap />
+      </Suspense>
     </PageContent>
   );
 };

@@ -1,13 +1,19 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
 import RootLayout from "./components/Layout/Root";
 
 import "./App.css";
 import CryptoTrackerPage from "./pages/CryptoTracker";
-import CryptocurrencyDetailPage from "./pages/CryptocurrencyDetail";
+//import CryptocurrencyDetailPage from "./pages/CryptocurrencyDetail";
+
 import ErrorPage from "./pages/Error";
 import HeatMapPage, { loader as cryptocurrenciesLoader } from "./pages/HeatMap";
+
+// const HeatMapPage = lazy(() => import("./pages/HeatMap"));
+const CryptocurrencyDetailPage = lazy(() =>
+  import("./pages/CryptocurrencyDetail")
+);
 
 const router = createHashRouter([
   {
@@ -19,7 +25,11 @@ const router = createHashRouter([
       {
         path: "cryptocurrency/:currencyId",
         id: "cryptocurrency-detail",
-        element: <CryptocurrencyDetailPage />,
+        element: (
+          <Suspense fallback="">
+            <CryptocurrencyDetailPage />
+          </Suspense>
+        ),
       },
       {
         path: "heat-map",
