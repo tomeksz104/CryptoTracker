@@ -10,7 +10,7 @@ const cryptocurrencySlice = createSlice({
     filteredCryptocurrencies: [],
     totalItems: 0,
     currentPage: 0,
-    perPage: 50,
+    perPage: 20,
     totalPages: 0,
     sortField: "",
     sortOrder: "asc",
