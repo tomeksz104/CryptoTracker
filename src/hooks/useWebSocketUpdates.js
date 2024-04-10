@@ -11,7 +11,9 @@ const useWebSocketUpdates = (socketUrl) => {
     (state) => state.cryptocurrency.cryptocurrencies
   );
   const currencyCtx = useContext(CurrencyContext);
-  const { lastMessage } = useWebSocket(socketUrl);
+  const { lastMessage, getWebSocket } = useWebSocket(socketUrl, {
+    shouldReconnect: () => true,
+  });
 
   const handleUpdateCurrencies = useCallback(() => {
     if (lastMessage !== null) {
@@ -42,8 +44,16 @@ const useWebSocketUpdates = (socketUrl) => {
       handleUpdateCurrencies();
       timerId = null;
     }, 300);
-    return () => clearTimeout(timerId);
-  }, [handleUpdateCurrencies]);
+
+    return () => {
+      clearTimeout(timerId);
+      // Closing WebSocket when a component is unmounted
+      const socket = getWebSocket();
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.close(1000, "Component unmounting");
+      }
+    };
+  }, [handleUpdateCurrencies, getWebSocket]);
 
   return null;
 };
