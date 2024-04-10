@@ -32,9 +32,15 @@ const MainNavigation = () => {
         <div className="flex items-center">
           <NavLink to="/" className="mr-5 cursor-pointer">
             <img
+              width={200}
+              height={40}
               fetchpriority="high"
               className="h-10 object-cover"
-              src={!darkmodeCtx.isDarkmode ? logo : logoDarkmode}
+              src={
+                !darkmodeCtx.isDarkmode
+                  ? "/CryptoTracker/logo.webp"
+                  : logoDarkmode
+              }
               alt="Crypto Currency App Logo"
             />
           </NavLink>
