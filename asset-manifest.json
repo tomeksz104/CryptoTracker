@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/CryptoTracker/static/css/main.88d55faa.css",
-    "main.js": "/CryptoTracker/static/js/main.be01ec84.js",
-    "static/js/2375.7bf910af.chunk.js": "/CryptoTracker/static/js/2375.7bf910af.chunk.js",
+    "main.js": "/CryptoTracker/static/js/main.e3842f52.js",
+    "static/js/2375.530e188f.chunk.js": "/CryptoTracker/static/js/2375.530e188f.chunk.js",
     "static/js/6277.ce65e756.chunk.js": "/CryptoTracker/static/js/6277.ce65e756.chunk.js",
     "static/js/1842.71e8198c.chunk.js": "/CryptoTracker/static/js/1842.71e8198c.chunk.js",
     "static/js/5106.01f08f50.chunk.js": "/CryptoTracker/static/js/5106.01f08f50.chunk.js",
@@ -486,9 +486,11 @@
     "static/js/5630.7f248978.chunk.js": "/CryptoTracker/static/js/5630.7f248978.chunk.js",
     "static/js/7864.da7fa209.chunk.js": "/CryptoTracker/static/js/7864.da7fa209.chunk.js",
     "static/js/303.295e7fd6.chunk.js": "/CryptoTracker/static/js/303.295e7fd6.chunk.js",
+    "static/js/7993.aaee10c7.chunk.js": "/CryptoTracker/static/js/7993.aaee10c7.chunk.js",
     "static/js/6453.42a99916.chunk.js": "/CryptoTracker/static/js/6453.42a99916.chunk.js",
     "static/css/2980.a3d3359c.chunk.css": "/CryptoTracker/static/css/2980.a3d3359c.chunk.css",
     "static/js/2980.ab69f2d1.chunk.js": "/CryptoTracker/static/js/2980.ab69f2d1.chunk.js",
+    "static/js/6057.5372c6f5.chunk.js": "/CryptoTracker/static/js/6057.5372c6f5.chunk.js",
     "static/js/7459.a886fa76.chunk.js": "/CryptoTracker/static/js/7459.a886fa76.chunk.js",
     "static/media/inter-all-500-normal.woff": "/CryptoTracker/static/media/inter-all-500-normal.83e7a0ab5dc3177d4723.woff",
     "static/media/inter-all-400-normal.woff": "/CryptoTracker/static/media/inter-all-400-normal.8c804432e8c67741aac0.woff",
@@ -998,15 +1000,17 @@
     "static/media/vib.svg": "/CryptoTracker/static/media/vib.df6b08c7ba872bd6a027.svg",
     "static/media/waves.svg": "/CryptoTracker/static/media/waves.2c95a006c407ae1604b4.svg",
     "main.88d55faa.css.map": "/CryptoTracker/static/css/main.88d55faa.css.map",
-    "main.be01ec84.js.map": "/CryptoTracker/static/js/main.be01ec84.js.map",
-    "2375.7bf910af.chunk.js.map": "/CryptoTracker/static/js/2375.7bf910af.chunk.js.map",
+    "main.e3842f52.js.map": "/CryptoTracker/static/js/main.e3842f52.js.map",
+    "2375.530e188f.chunk.js.map": "/CryptoTracker/static/js/2375.530e188f.chunk.js.map",
+    "7993.aaee10c7.chunk.js.map": "/CryptoTracker/static/js/7993.aaee10c7.chunk.js.map",
     "6453.42a99916.chunk.js.map": "/CryptoTracker/static/js/6453.42a99916.chunk.js.map",
     "2980.a3d3359c.chunk.css.map": "/CryptoTracker/static/css/2980.a3d3359c.chunk.css.map",
     "2980.ab69f2d1.chunk.js.map": "/CryptoTracker/static/js/2980.ab69f2d1.chunk.js.map",
+    "6057.5372c6f5.chunk.js.map": "/CryptoTracker/static/js/6057.5372c6f5.chunk.js.map",
     "7459.a886fa76.chunk.js.map": "/CryptoTracker/static/js/7459.a886fa76.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.88d55faa.css",
-    "static/js/main.be01ec84.js"
+    "static/js/main.e3842f52.js"
   ]
 }
