@@ -33,6 +33,7 @@ const Sidebar = (props) => {
       <button
         onClick={handleToggleSidebar}
         className="p-2 bg-slate-400/10 hover:bg-slate-400/20 dark:text-slate-200 rounded-md sm:hidden"
+        aria-label="Toggle sidebar"
       >
         <svg
           className="h-6 w-6 transition duration-200 ease-in-out"
@@ -78,6 +79,7 @@ const Sidebar = (props) => {
                   <button
                     onClick={handleToggleSidebar}
                     className="p-2 text-slate-500 hover:text-slate-400 hover:bg-slate-400/10 rounded-full"
+                    aria-label="Toggle sidebar"
                   >
                     <svg
                       className="w-5 h-5"
