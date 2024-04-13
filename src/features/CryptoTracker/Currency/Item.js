@@ -135,7 +135,7 @@ const Item = React.memo((props) => {
                   className="mr-2"
                 />
                 {props.cryptocurrency.name}
-                <span className="text-slate-300 dark:text-slate-600">
+                <span className="text-slate-500 dark:text-slate-600">
                   {" "}
                   {props.cryptocurrency.symbol}{" "}
                 </span>

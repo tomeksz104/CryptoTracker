@@ -100,7 +100,7 @@ const Footer = () => {
           <Link
             to="https://github.com/tomeksz104"
             target="_blank"
-            className="text-sky-500 hover:underline"
+            className="text-sky-800 hover:underline underline font-medium"
           >
             tomeksz104
           </Link>
